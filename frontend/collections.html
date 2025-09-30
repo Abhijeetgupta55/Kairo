@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kairo Collections</title>
+    <!-- Google Fonts: Montserrat for headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            background-image: 
+                linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+                linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background-color: #000000;
+            padding: 5px 10px;
+            border-radius: 15px;
+            padding-left: 25px;
+            text-align: center;
+        }
+
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            font-size: 1em;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .head{
+          padding-left: 20px;
+          margin: 10px;
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        .title-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .add-button {
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .collections {
+            display: flex;
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin-bottom: 10px;
+        }
+
+        .left-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .right-parallel {
+            display: flex;
+            gap: 20px;
+            flex: 2;
+        }
+
+        .collection-a, .collection-b, .collection-c, .collection-d {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: left;
+            flex: 1;
+        }
+
+        .collection-a, .collection-b {
+            height: 100px;
+        }
+
+        .collection-c, .collection-d {
+            height: 430px;
+        }
+
+        .collection-a:hover {
+            background-color: rgba(0, 126, 184, 0.267);
+            border-radius: 20px;
+            transform: scale(1.01);
+            border: 2px solid #57caff;
+        }
+        .collection-b:hover {
+            background-color: rgba(239, 155, 30, 0.267);
+            border-radius: 20px;
+            transform: scale(1.01);
+            border: 2px solid #ff9e49;
+        }
+        .collection-c:hover {
+            background-color: rgba(99, 230, 29, 0.267);
+            border-radius: 20px;
+            transform: scale(1.01);
+            border: 2px solid #87ff57;
+        }
+        .collection-d:hover {
+            background-color: rgba(199, 24, 161, 0.267);
+            border-radius: 20px;
+            transform: scale(1.01);
+            border: 2px solid #ff64ea;
+        }
+
+        .collection-title {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        .collection-a:hover .collection-title,
+        .collection-b:hover .collection-title,
+        .collection-c:hover .collection-title,
+        .collection-d:hover .collection-title {
+            transform: rotate(-5deg) translateY(-20px);
+        }
+
+        .collection-list {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .collection-list li {
+            padding: 5px 0;
+            font-size: 0.9em;
+            color: #666;
+            padding-left: 10px;
+        }
+
+        footer {
+            background-color: #f0f0f0;
+            padding: 5px;
+            text-align: center;
+            color: #666;
+            margin-top: 10px;
+            height: 50px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.9em;
+        }
+
+        .copyright {
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+        footer {
+            background-color: #000000;
+            padding: 10px;
+            text-align: center;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+         <div class="logo">kairo.</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Discover</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1 class="head">COLLECTIONS</h1>
+    <section class="collections">
+        <div class="left-stack">
+            <div class="collection-a">
+                    <div class="collection-title">books</div>
+                    <ul class="collection-list">
+                        <li>Books Collection</li>
+                        <li>“Clean Code” by Robert C. Martin</li>
+                        <li>“The Pragmatic Programmer” by Andrew Hunt</li>
+                        <li>Atomic Habits” by James Clear</li>
+                        <li>“Deep Work” by Cal Newport</li>
+                    </ul>
+            </div>
+            <div class="collection-b">
+                <div class="collection-title">art designs</div>
+                <ul class="collection-list">
+                    <li>Art Designs Collection</li>
+                    <li>Adobe Illustrator tutorials</li>
+                    <li>Figma design templates</li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-parallel">
+            <div class="collection-c">
+                <div class="collection-title">articles</div>
+                <ul class="collection-list">
+                    <li>Articles Collection</li>
+                    <li>TechCrunch: latest tech news</li>
+                    <li>Medium: productivity tips</li>
+                    <li>Hacker News top stories</li>
+                    <li>Smashing Magazine UX articles</li>
+                    <li>Wired: AI & tech updates</li>
+                    <li>Towards Data Science tutorials</li>
+                    <li>Lifehacker guides & hacks</li>
+                    <li>Forbes: startup stories</li>
+                    <li>Psychology Today articles on habits</li>
+                    <li>New York Times opinion pieces</li>
+                </ul>
+            </div>
+            <div class="collection-d">
+                <div class="collection-title">coding</div>
+                <ul class="collection-list">
+                    <li>Coding Collection</li>
+                    <li>GitHub repository</li>
+                    <li>JavaScript documentation</li>
+                    <li>Python tutorials</li>
+                    <li>FreeCodeCamp curriculum</li>
+                    <li>Stack Overflow bookmarked threads</li>
+                    <li>React.js official docs</li>
+                    <li>VS Code extensions page</li>
+                    <li>CSS Tricks guides</li>
+                    <li>Codepen examples</li>
+                    <li>LeetCode problem set links</li>
+                </ul>
+            </div>
+            
+        </div>
+    </section>
+    <footer>
+       <p>©2025 Kairo. All rights reserved.</p>
+    </footer>
+</body>
+</html>
