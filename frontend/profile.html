@@ -31,39 +31,50 @@
       align-items: center;
     }
 
-    .logo {
-      font-size: 1.5em;
-      font-weight: bold;
-      background-color: #000000;
-      padding: 5px 10px;
-      border-radius: 15px;
-      padding-left: 25px;
-      text-align: center;
-    }
+nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000000;
+            /* dark navbar */
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
 
-    nav {
-      flex-grow: 1;
-      display: flex;
-      justify-content: flex-end;
-    }
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            padding-right: 600px;
+        }
 
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
 
-    nav ul li {
-      margin-left: 20px;
-      font-size: 1em;
-    }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: lowercase;
+            transition: color 0.3s;
+        }
 
-    nav ul li a {
-      color: #ffffff;
-      text-decoration: none;
-    }
+        .nav-links a:hover {
+            color: #e3f2fd;
+            /* accent hover */
+        }
 
+        @media(max-width:768px) {
+            .nav-links {
+                display: none;
+            }
+        }
     main.profile-container {
       margin: 10px auto 20px auto; 
       padding: 10px;
@@ -125,12 +136,6 @@
       border-radius: 20px;
       transform: scale(1.01);
     }
-    .logout:hover{
-      background-color:#7d7d7d9c;
-      border-radius: 90px;
-      transform: scale(1.01);
-
-    }
 
     .section h3 {
       padding-top: 5px;
@@ -151,23 +156,6 @@
       transform: scale(1.2);
     }
 
-
-    
-    .logout button {
-      padding: 5px 5px;
-      margin-top: 5px;
-      background-color: #000000;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      border: 1px solid #000000;
-    }
-    .logout{
-      border-radius: 140px;
-      height: 95px;
-      padding: 10px;
-    }
     footer {
       background-color: #000000;
       padding: 5px;
@@ -175,10 +163,6 @@
       color: #ffffff;
       bottom: 0;
     }
-    .logout {
-  flex: 1 1 100%; 
-  max-width: 20%; 
-}
     .rotate{
   display: block;
   margin: 10px auto;   
@@ -256,19 +240,18 @@
 </head>
 <body>
   <header>
-    <div class="logo">kairo.</div>
-    <nav>
-    <a href="dashboard.html" class="nav-logo">kairo.</a>
-    <div class="nav-links">
-      <a href="dashboard.html">dashboard</a>
-      <a href="recent.html">recents</a>
-      <a href="notes.html">notes</a>
-      <a href="favorites.html">favorites</a>
-      <a href="collections.html">collections</a>
-      <a href="profile.html">profile</a>
-      <a href="#">logout</a>
-    </div>
-  </nav>
+       <nav>
+        <a href="dashboard.html" class="nav-logo">kairo.</a>
+        <div class="nav-links">
+            <a href="dashboard.html">dashboard</a>
+            <a href="recent.html">recents</a>
+            <a href="notes.html">notes</a>
+            <a href="favorites.html">favorites</a>
+            <a href="collections.html">collections</a>
+            <a href="profile.html">profile</a>
+            <a href="landing.html">logout</a>
+        </div>
+    </nav>
   </header>
 
   <main class="profile-container">
@@ -324,15 +307,10 @@
 
   <div class="form-group">
     <label>Bio</label>
-    <p class="field">Love building products and exploring new tech </p>
+    <p class="field">Loves exploring new tech, organizing workflows, and a big fan of coffee powered productivity. </p>
   </div>
   <button>Update Profile</button>
-</div>
-      <div class="section logout">
-        <p>Click below to <b>sign out.</b></p>
-        <a href="file:///C:/Users/Abhi/Downloads/site.html"><button>Logout</button></a>
-      </div>
-    </div>
+
   </main>
 
   <footer>

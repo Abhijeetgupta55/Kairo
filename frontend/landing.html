@@ -1,557 +1,617 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kairo - Organize Your Web. Your Way.</title>
-    <style>
- 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            line-height: 1.6;
-            background-image: 
-                linear-gradient(to right, #f0f0f0 1px, transparent 1px),
-                linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kairo - Organize Your Web. Your Way.</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      line-height: 1.6;
+      background-image:
+        linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        button {
-            cursor: pointer;
-        }
+    button {
+      cursor: pointer;
+    }
 
-        header {
-            background-color: #000000;
-            color: #ffffff;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-        }
+    header {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
 
-        .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-            background-color: #000000;
-            padding: 5px 10px;
-            border-radius: 15px;
-            padding-left: 25px;
-            text-align: center;
-        }
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      background-color: #000000;
+      padding: 5px 10px;
+      border-radius: 15px;
+      padding-left: 25px;
+      text-align: center;
+    }
 
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
 
-        nav ul li {
-            margin-left: 20px;
-            font-size: 1em;
-        }
-
-
-        .hero {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .hero-content {
-          padding: 30px;
-          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        }
-
-        .hero h1 {
-            font-size: 2.9em;
-            margin-bottom: 10px;
-            margin-top: 30px;
-        }
-
-        .hero p {
-            font-size: 1.3em;
-            margin-bottom: 20px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            padding: 10px;
-        }
-
-        .hero-buttons button {
-            padding: 10px 20px;
-            margin-right: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-
-        .hero-buttons .get-started {
-  background-color: #000;       /* Black background */
-  color: #fff;                  /* White text */
-  padding: 12px 28px;           /* Breathing room */
-  border: none;                 /* Remove ugly border */
-  border-radius: 6px;           /* Slightly rounded corners */
-  font-size: 16px;              /* Bigger, readable text */
-  font-weight: 600;             /* Bold for emphasis */
-  cursor: pointer;              /* Pointer cursor */
-  transition: all 0.3s ease;    /* Smooth hover effect */
-}
-
-.get-started:hover {
-  background-color: #696969;       /* Dark grey hover */
-  transform: translateY(-2px);  /* Subtle lift */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Shadow on hover */
-}
-
-        .hero-buttons .learn-more {
-  background-color: transparent;       /* Transparent background */
-  color: #000;                         /* Black text */
-  padding: 12px 28px;                  /* Same spacing as Get Started */
-  border: 2px solid #000;              /* Black outline */
-  border-radius: 6px;                  /* Rounded corners */
-  font-size: 16px;                     /* Readable text */
-  font-weight: 600;                    /* Bold */
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-left: 12px;                   /* Space between buttons */
-}
-
-.learn-more:hover {
-  background-color: #000;              /* Fill on hover */
-  color: #fff;                         /* Invert text color */
-  transform: translateY(-2px);         /* Subtle lift */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-        
-        .hero-illustration {
-            height: 500px; 
-            padding-right: 50px;
-        }
-
-        .hero-illustration img {
-            height: 100%;
-            width: auto;
-            object-fit: contain;
-            padding-top: 20px;
-        }
-
-        .discover {
-            background-color: #ffffff;
-            padding: 50px;
-            text-align: center;
-            border-top: 1px solid #dddddd;
-            border-bottom: 1px solid #dddddd;
-            display: flex;
-             border-bottom: 2px solid rgb(199, 199, 199);
-             border-top: 2px solid rgb(235, 235, 235);
-             margin: 50px;
-             border-radius: 30px;
-              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.527);
-        }
-
-        .discover-illustration img{
-            height: auto;
-            margin-right: 20px;
-            border-radius: 70px;
-            height: 450px;
-            clip-path: inset(2px);
-            width: 350px;   
-            height: 350px;  
-            object-fit: contain;
-            
-        }
-
-        .discover-content {
-            text-align: left;
-            padding-left: 25px;
-            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        }
-
-        .discover h2 {
-            font-size: 2.3em;
-            margin-bottom: 5px;
-        }
-
-        .discover p {
-            font-size: 1.3em;
-            margin-top: 20px;
-            margin-right: 200px;
-           
-        }
-
-        .clarity {
-            padding-top: 10px;
-            text-align: center;
-            margin: 40px;
-            margin-bottom: 20px;
-            margin-top: 40px;
-         
-           
-            
-        }
-
-        .clarity h2 {
-            font-size: 2.7em;
-            margin-bottom: 30px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-
-        .cards {
-            display: flex;
-            justify-content: space-around;
-            padding-bottom: 70px;
-             display: flex;
-            gap: 20px;
-            overflow-x: auto;          
-            scroll-behavior: smooth;
-        }
-        .cards::-webkit-scrollbar {
-            display: none;}
-        .cards-wrapper {
-            overflow: hidden;
-            width: 100%;
-            padding-bottom: 30px;}
-
-        .card {
-            background-color: #ffffff;
-            border: 1px solid #d1d1d1;
-            border-radius: 5px;
-            padding: 10px;
-            text-align: center;
-            padding-bottom: 30px;
-             transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: scale(1.05);    
-            border-radius: 5%;        
-            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.591);
-          }
-
-        .card-illustration img {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 270px;
-            border-radius: 30px;
-            clip-path: inset(2px);
-        }
-
-        .card p {
-            font-size: 1.2em;
-            font-weight: bold;
-            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            padding-bottom: 30px;
-        }
-
-        .about {
-            padding: 10px 10px;
-            height: 300px;
-            text-align: center;
-            position: relative;
-            background: rgba(128,128,128,0.6)
-                url("img1.jpg") no-repeat center center;
-            background-size: cover;
-            margin-bottom: 100px;
-            padding-bottom: 50px;
-            color: white; 
-            border-bottom: 2px solid white;
-            border-top: 2px solid black;
-             transition: transform 0.5s ease, box-shadow 0.3s ease;
-        }
-        .about:hover{
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-            transform: scale(1.01);
-           
-        }
-
-        .about h2 {
-            font-size: 2.7em;
-            margin-bottom: 5px;
-            margin-left: 10px;
-            text-align: left;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    
-        }
-
-        .about p {
-            font-size: 1.4em;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            padding: 1px;
-            margin: 20px;
-            text-align: right;
-        }
-        .connect {
-            padding: 10px 10px;
-            text-align: center;
-            background-color: #000000;
-            color: white;
-            
-  
-        }
-
-        .connect h3 {
-            font-size: 1.7em;
-            margin-bottom: 20px;
-        }
-
-        .connect form {
-            margin: 0 auto;
-        }
-
-        .connect input[type="email"] {
-            padding: 5px;
-            width: 50%;
-            border: 1px solid #dddddd;
-            border-radius: 5px 0 0 5px;
-        }
-         .connect input[type="text"] {
-            padding: 5px;
-            width: 50%;
-            height: 30px;
-            border: 1px solid #dddddd;
-            border-radius: 5px 0 0 5px;
-            text-align: left;
-            margin-top: 5px;
-
-        }
-
-        .connect button {
-            padding: 10px 20px;
-            background-color: #434343;
-            color: #ffffff;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            display: flex;
-            flex: column;
-            margin-left: 600px;
-            margin-top: 5px;
-        }
+    nav ul li {
+      margin-left: 20px;
+      font-size: 1em;
+    }
 
 
-        footer {
-            background-color: #000000;
-            padding: 5px;
-            text-align: center;
-            color: white;
-        }
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
 
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin-top: 5px;
-        }
+    .hero-content {
+      padding: 30px;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
 
-        .footer-links li {
-            margin: 0 10px;
-        }
-        .modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
-  padding: 50px 0;
-}
+    .hero h1 {
+      font-size: 2.9em;
+      margin-bottom: 10px;
+      margin-top: 30px;
+    }
 
-/* Show modal when targeted */
-.modal:target {
-  display: block;
-}
+    .hero p {
+      font-size: 1.3em;
+      margin-bottom: 20px;
+    }
 
-/* Modal content box */
-.modal-content {
-  background-color: #fff;
-  margin: auto;
-  padding: 25px;
-  border-radius: 12px;
-  width: 80%;
-  max-width: 700px;
-  position: relative;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  overflow-y: auto;
-  max-height: 80vh;
-}
+    .hero-buttons {
+      display: flex;
+      padding: 10px;
+    }
 
-/* Close button */
-.modal-content .close {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
-}
+    .hero-buttons button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
 
-.modal-content .close:hover {
-  color: #555;
-}
+    .hero-buttons .get-started {
+      background-color: #000;
+      /* Black background */
+      color: #fff;
+      /* White text */
+      padding: 12px 28px;
+      /* Breathing room */
+      border: none;
+      /* Remove ugly border */
+      border-radius: 6px;
+      /* Slightly rounded corners */
+      font-size: 16px;
+      /* Bigger, readable text */
+      font-weight: 600;
+      /* Bold for emphasis */
+      cursor: pointer;
+      /* Pointer cursor */
+      transition: all 0.3s ease;
+      /* Smooth hover effect */
+    }
 
-    </style>
+    .get-started:hover {
+      background-color: #696969;
+      /* Dark grey hover */
+      transform: translateY(-2px);
+      /* Subtle lift */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      /* Shadow on hover */
+    }
+
+    .hero-buttons .learn-more {
+      background-color: transparent;
+      /* Transparent background */
+      color: #000;
+      /* Black text */
+      padding: 12px 28px;
+      /* Same spacing as Get Started */
+      border: 2px solid #000;
+      /* Black outline */
+      border-radius: 6px;
+      /* Rounded corners */
+      font-size: 16px;
+      /* Readable text */
+      font-weight: 600;
+      /* Bold */
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-left: 12px;
+      /* Space between buttons */
+    }
+
+    .learn-more:hover {
+      background-color: #000;
+      /* Fill on hover */
+      color: #fff;
+      /* Invert text color */
+      transform: translateY(-2px);
+      /* Subtle lift */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-illustration {
+      height: 500px;
+      padding-right: 50px;
+    }
+
+    .hero-illustration img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      padding-top: 20px;
+    }
+
+    .discover {
+      background-color: #ffffff;
+      padding: 50px;
+      text-align: center;
+      border-top: 1px solid #dddddd;
+      border-bottom: 1px solid #dddddd;
+      display: flex;
+      border-bottom: 2px solid rgb(199, 199, 199);
+      border-top: 2px solid rgb(235, 235, 235);
+      margin: 50px;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.527);
+    }
+
+    .discover-illustration img {
+      height: auto;
+      margin-right: 20px;
+      border-radius: 70px;
+      height: 450px;
+      clip-path: inset(2px);
+      width: 350px;
+      height: 350px;
+      object-fit: contain;
+
+    }
+
+    .discover-content {
+      text-align: left;
+      padding-left: 25px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    .discover h2 {
+      font-size: 2.3em;
+      margin-bottom: 5px;
+    }
+
+    .discover p {
+      font-size: 1.3em;
+      margin-top: 20px;
+      margin-right: 200px;
+
+    }
+
+    .clarity {
+      padding-top: 10px;
+      text-align: center;
+      margin: 40px;
+      margin-bottom: 20px;
+      margin-top: 40px;
+
+
+
+    }
+
+    .clarity h2 {
+      font-size: 2.7em;
+      margin-bottom: 30px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: space-around;
+      padding-bottom: 70px;
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+
+    .cards::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cards-wrapper {
+      overflow: hidden;
+      width: 100%;
+      padding-bottom: 30px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border: 1px solid #d1d1d1;
+      border-radius: 5px;
+      padding: 10px;
+      text-align: center;
+      padding-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      border-radius: 5%;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.591);
+    }
+
+    .card-illustration img {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 270px;
+      border-radius: 30px;
+      clip-path: inset(2px);
+    }
+
+    .card p {
+      font-size: 1.2em;
+      font-weight: bold;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      padding-bottom: 30px;
+    }
+
+    .about {
+      padding: 10px 10px;
+      height: 300px;
+      text-align: center;
+      position: relative;
+      background: rgba(128, 128, 128, 0.6) url("img1.jpg") no-repeat center center;
+      background-size: cover;
+      margin-bottom: 100px;
+      padding-bottom: 50px;
+      color: white;
+      border-bottom: 2px solid white;
+      border-top: 2px solid black;
+      transition: transform 0.5s ease, box-shadow 0.3s ease;
+    }
+
+    .about:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+      transform: scale(1.01);
+
+    }
+
+    .about h2 {
+      font-size: 2.7em;
+      margin-bottom: 5px;
+      margin-left: 10px;
+      text-align: left;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    }
+
+    .about p {
+      font-size: 1.4em;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      padding: 1px;
+      margin: 20px;
+      text-align: right;
+    }
+
+    .connect {
+      padding: 10px 10px;
+      text-align: center;
+      background-color: #000000;
+      color: white;
+
+
+    }
+
+    .connect h3 {
+      font-size: 1.7em;
+      margin-bottom: 20px;
+    }
+
+    .connect form {
+      margin: 0 auto;
+    }
+
+    .connect input[type="email"] {
+      padding: 5px;
+      width: 50%;
+      border: 1px solid #dddddd;
+      border-radius: 5px 0 0 5px;
+    }
+
+    .connect input[type="text"] {
+      padding: 5px;
+      width: 50%;
+      height: 30px;
+      border: 1px solid #dddddd;
+      border-radius: 5px 0 0 5px;
+      text-align: left;
+      margin-top: 5px;
+
+    }
+
+    .connect button {
+      padding: 10px 20px;
+      background-color: #434343;
+      color: #ffffff;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      display: flex;
+      flex: column;
+      margin-left: 600px;
+      margin-top: 5px;
+    }
+
+
+    footer {
+      background-color: #000000;
+      padding: 5px;
+      text-align: center;
+      color: white;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      margin-top: 5px;
+    }
+
+    .footer-links li {
+      margin: 0 10px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 50px 0;
+    }
+
+    /* Show modal when targeted */
+    .modal:target {
+      display: block;
+    }
+
+    /* Modal content box */
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      padding: 25px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 700px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+
+    /* Close button */
+    .modal-content .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .modal-content .close:hover {
+      color: #555;
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <div class="logo">kairo.    </div>
-        <nav>
-            <ul>
-                <li><a href="#">home</a></li>
-                <li><a href="#discover">discover</a></li>
-                <li><a href="#clarity">blog</a></li>
-                <li><a href="#about">about us</a></li>
-                <li><a href="#connect">contact</a></li>
-                <li><a href="login.html">login</a></li>
+  <header>
+    <div class="logo">kairo. </div>
+    <nav>
+      <ul>
+        <li><a href="#">home</a></li>
+        <li><a href="#discover">discover</a></li>
+        <li><a href="#clarity">blog</a></li>
+        <li><a href="#about">about us</a></li>
+        <li><a href="#connect">contact</a></li>
+        <li><a href="login.html">login</a></li>
 
-            </ul>
-        </nav>
-    </header>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Organize Your Web, Your Way.</h1>
-            <p>A clean dashboard to collect, track, and manage all your tabs in one place.</p>
-            <div class="hero-buttons">
-                <a href="login.html" button class="get-started">Get Started</button></a>
-                <button class="learn-more">Learn More</button>
-            </div>
+      </ul>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Organize Your Web, Your Way.</h1>
+      <p>A clean dashboard to collect, track, and manage all your tabs in one place.</p>
+      <div class="hero-buttons">
+        <a href="login.html" button class="get-started">Get Started</button></a>
+        <button class="learn-more">Learn More</button>
+      </div>
+    </div>
+    <div class="hero-illustration">
+      <img src="C:\Users\Abhi\Downloads\Adobe Express - file (1).png" alt="Hero Illustration">
+    </div>
+  </section>
+  <section class="discover" id="discover">
+    <div class="discover-illustration">
+      <img id="myImage" src="C:\Users\Abhi\OneDrive\Desktop\Screenshot 2025-09-29 151047.png"
+        alt="Discover Illustration"> <!-- Replace with actual image URL -->
+    </div>
+    <div class="discover-content">
+      <h2>Discover a Smarter Way to Browse.</h2>
+      <p>Drowning in tabs? KAIRO brings order to the chaos.
+        With intelligent grouping, collections, favorites, and quick access to your most recent pages</p>
+      <p> KAIRO makes browsing smoother, faster, and smarter. Add notes to your collections, save what matters, and skip
+        the endless hunt for “that one tab.</p>
+    </div>
+  </section>
+  <section class="clarity" id="clarity">
+    <h2>From Chaos to Clarity</h2>
+    <div class="cards-wrapper">
+      <div class="cards">
+        <div class="card">
+          <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png">
+          </div>
+          <a href="https://elegantsi.com/blog/digital-decluttering?utm_source=chatgpt.com" target="_blank"
+            rel="noopener noreferrer" class="recent-url">Why Digital Decluttering Is Important</a>
         </div>
-        <div class="hero-illustration">
-            <img src="C:\Users\Abhi\Downloads\Adobe Express - file (1).png" alt="Hero Illustration">
+        <div class="card">
+          <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png">
+          </div>
+          <a href="https://deskcove.com/boost-productivity-how-to-declutter-your-digital-space-fast/?utm_source=chatgpt.com"
+            target="_blank" rel="noopener noreferrer" class="recent-url">Boost Productivity: How to Declutter Your
+            Digital Space Fast</a>
         </div>
-    </section>
-    <section class="discover" id="discover">
-        <div class="discover-illustration">
-            <img id="myImage" src="C:\Users\Abhi\OneDrive\Desktop\Screenshot 2025-09-29 151047.png" alt="Discover Illustration"> <!-- Replace with actual image URL -->
+        <div class="card">
+          <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png">
+          </div>
+          <a href="https://medium.com/%40partizion/why-you-should-use-a-tab-manager-bd508850a49a" target="_blank"
+            rel="noopener noreferrer" class="recent-url">Why You Should Use a Tab Manager</a>
         </div>
-        <div class="discover-content">
-            <h2>Discover a Smarter Way to Browse.</h2>
-            <p>Drowning in tabs? KAIRO brings order to the chaos.
-With intelligent grouping, collections, favorites, and quick access to your most recent pages</p>
-<p> KAIRO makes browsing smoother, faster, and smarter. Add notes to your collections, save what matters, and skip the endless hunt for “that one tab.</p>
+        <div class="card">
+          <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png">
+          </div>
+          <a href="https://www.skipper.co/post/the-psychology-behind-tab-overload?utm_source=chatgpt.com"
+            target="_blank" rel="noopener noreferrer" class="recent-url">The Psychology Behind Tab Overload
+          </a>
         </div>
-    </section>
-    <section class="clarity" id="clarity">
-        <h2>From Chaos to Clarity</h2>
-         <div class="cards-wrapper">
-        <div class="cards">
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png"></div>
-        <a href="https://elegantsi.com/blog/digital-decluttering?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">Why Digital Decluttering Is Important</a>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png"></div>
-        <a href="https://deskcove.com/boost-productivity-how-to-declutter-your-digital-space-fast/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">Boost Productivity: How to Declutter Your Digital Space Fast</a>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png"></div>
-        <a href="https://medium.com/%40partizion/why-you-should-use-a-tab-manager-bd508850a49a" target="_blank" rel="noopener noreferrer" class="recent-url">Why You Should Use a Tab Manager</a>
-            </div>
-             <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png"></div>
-        <a href="https://www.skipper.co/post/the-psychology-behind-tab-overload?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">The Psychology Behind Tab Overload
-</a>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png"></div>
-        <a href="https://www.wired.com/story/how-to-organize-browser-tabs/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">You Have a Million Tabs Open. Here's How to Manage Them
-</a>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png"></div>
-        <a href="https://tidymalism.com/organising-browser-tabs/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">Organising Browser Tabs with an Extension for Less Clutter</a>
-            </div>
-               
-        
+        <div class="card">
+          <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png">
+          </div>
+          <a href="https://www.wired.com/story/how-to-organize-browser-tabs/?utm_source=chatgpt.com" target="_blank"
+            rel="noopener noreferrer" class="recent-url">You Have a Million Tabs Open. Here's How to Manage Them
+          </a>
         </div>
-    </section>
+        <div class="card">
+          <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png">
+          </div>
+          <a href="https://tidymalism.com/organising-browser-tabs/?utm_source=chatgpt.com" target="_blank"
+            rel="noopener noreferrer" class="recent-url">Organising Browser Tabs with an Extension for Less Clutter</a>
+        </div>
 
-    <section class="about" id="about">
-        <h2>About Kairo.</h2>
-        <p>At Kairo, we make browsing calm, not chaotic.</p>
-        <p>KAIRO is built on a simple idea: the internet should work for you, not against you.
-Instead of juggling dozens of open tabs, KAIRO lets you create personalized collections, manage favorites, and keep your recent pages within reach. You can even attach notes to your groups, making it easy to track ideas, research, or projects.</p>
-    </section>
 
-    <section class="connect" id ="connect">
-      <hr>
-        <h3>Connect with us</h3>
-        <p>Want to hear our thoughts, feedback, or ideas to make Kairo even better?</p>
-        <form>
-            <input type="email" placeholder="Your email">
-            
-            <input type="text" placeholder="your feedback">
-            <button type="submit">Submit</button>
-        </form>
-    </section>
+      </div>
+  </section>
 
-    <footer>
-        <!-- Footer links -->
-<ul class="footer-links">
-  <li><a href="#privacyModal">Privacy Policy</a></li> 
-  <li><a href="#termsModal">Terms of Service</a></li> 
-  <li><a href="#clarity">Blog</a></li>
-</ul>
-</footer>
-<!-- Privacy Policy Modal -->
-<div id="privacyModal" class="modal">
-  <div class="modal-content">
-    <a href="#connect" class="close">&times;</a>
-    <h2>Privacy Policy</h2>
-    <p>At Kairo, your privacy is our top priority. We collect minimal personal information necessary to provide a seamless experience. This includes your account credentials, browsing history within the app, and your saved collections or favorites.</p>
-    <p>We never sell or share your data with third parties. All stored information is encrypted and handled securely. Cookies are used solely to enhance functionality, remember preferences, and improve performance.</p>
-    <p>By using Kairo, you consent to this Privacy Policy. You have the right to request data export or deletion at any time. We may update this policy occasionally, and any major changes will be communicated via email.</p>
-    <p>Our commitment is to keep your digital life organized without compromising your personal data. For questions, you can reach out to support@kairo.com.</p>
+  <section class="about" id="about">
+    <h2>About Kairo.</h2>
+    <p>At Kairo, we make browsing calm, not chaotic.</p>
+    <p>KAIRO is built on a simple idea: the internet should work for you, not against you.
+      Instead of juggling dozens of open tabs, KAIRO lets you create personalized collections, manage favorites, and
+      keep your recent pages within reach. You can even attach notes to your groups, making it easy to track ideas,
+      research, or projects.</p>
+  </section>
+
+  <section class="connect" id="connect">
+    <hr>
+    <h3>Connect with us</h3>
+    <p>Want to hear our thoughts, feedback, or ideas to make Kairo even better?</p>
+    <form>
+      <input type="email" placeholder="Your email">
+
+      <input type="text" placeholder="your feedback">
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <footer>
+    <!-- Footer links -->
+    <ul class="footer-links">
+      <li><a href="#privacyModal">Privacy Policy</a></li>
+      <li><a href="#termsModal">Terms of Service</a></li>
+      <li><a href="#clarity">Blog</a></li>
+    </ul>
+  </footer>
+  <!-- Privacy Policy Modal -->
+  <div id="privacyModal" class="modal">
+    <div class="modal-content">
+      <a href="#connect" class="close">&times;</a>
+      <h2>Privacy Policy</h2>
+      <p>At Kairo, your privacy is our top priority. We collect minimal personal information necessary to provide a
+        seamless experience. This includes your account credentials, browsing history within the app, and your saved
+        collections or favorites.</p>
+      <p>We never sell or share your data with third parties. All stored information is encrypted and handled securely.
+        Cookies are used solely to enhance functionality, remember preferences, and improve performance.</p>
+      <p>By using Kairo, you consent to this Privacy Policy. You have the right to request data export or deletion at
+        any time. We may update this policy occasionally, and any major changes will be communicated via email.</p>
+      <p>Our commitment is to keep your digital life organized without compromising your personal data. For questions,
+        you can reach out to support@kairo.com.</p>
+    </div>
   </div>
-</div>
 
-<!-- Terms of Service Modal -->
-<div id="termsModal" class="modal">
-  <div class="modal-content">
-    <a href="#connect" class="close">&times;</a>
-    <h2>Terms of Service</h2>
-    <p>Welcome to Kairo! By accessing or using our platform, you agree to comply with these terms. Kairo is designed to help you organize your web browsing efficiently. All content, services, and features are provided "as-is".</p>
-    <p>Users are responsible for maintaining the security of their own accounts and devices. Unauthorized use, sharing of credentials, or malicious activity is strictly prohibited.</p>
-    <p>Kairo reserves the right to suspend or terminate accounts violating these terms. While we strive for uninterrupted service, we are not liable for any temporary downtime or data loss.</p>
-    <p>You may not use Kairo for illegal or harmful purposes. Our platform should be used ethically and responsibly. Continued use implies agreement to these terms and any future updates. For further questions, contact support@kairo.com.</p>
-    <p>Thank you for trusting Kairo. We aim to make your browsing smoother, smarter, and safer.</p>
+  <!-- Terms of Service Modal -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <a href="#connect" class="close">&times;</a>
+      <h2>Terms of Service</h2>
+      <p>Welcome to Kairo! By accessing or using our platform, you agree to comply with these terms. Kairo is designed
+        to help you organize your web browsing efficiently. All content, services, and features are provided "as-is".
+      </p>
+      <p>Users are responsible for maintaining the security of their own accounts and devices. Unauthorized use, sharing
+        of credentials, or malicious activity is strictly prohibited.</p>
+      <p>Kairo reserves the right to suspend or terminate accounts violating these terms. While we strive for
+        uninterrupted service, we are not liable for any temporary downtime or data loss.</p>
+      <p>You may not use Kairo for illegal or harmful purposes. Our platform should be used ethically and responsibly.
+        Continued use implies agreement to these terms and any future updates. For further questions, contact
+        support@kairo.com.</p>
+      <p>Thank you for trusting Kairo. We aim to make your browsing smoother, smarter, and safer.</p>
+    </div>
   </div>
-</div>
 
-    </footer>
+  </footer>
   <script>
-const img = document.getElementById("myImage"),
+    const img = document.getElementById("myImage"),
       images = [
         "C:/Users/Abhi/OneDrive/Desktop/Screenshot 2025-09-29 152001.png",
         "C:/Users/Abhi/OneDrive/Desktop/Screenshot 2025-09-29 151047.png",
         "C:/Users/Abhi/OneDrive/Desktop/Screenshot 2025-09-29 153300.png"
       ];
-let i = 0;
-setInterval(() => {
-    i = (i + 1) % images.length; // cycles through 0 → 1 → 2 → 0 ...
-    img.src = images[i];
-}, 2000);
-</script>
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % images.length; // cycles through 0 → 1 → 2 → 0 ...
+      img.src = images[i];
+    }, 2000);
+  </script>
 
 </body>
+
 </html>
