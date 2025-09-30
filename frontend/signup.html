@@ -6,256 +6,57 @@
   <title>Kairo Sign Up</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      height: 100vh;
-      display: flex;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .container {
-      display: flex;
-      width: 100%;
-    }
-
-    .left{
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      background-size: 25px 25px;
-    }
-    .right {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      background-image: 
-        linear-gradient(to right, #e6e6e6 1px, transparent 1px),
-        linear-gradient(to bottom, #e6e6e6 1px, transparent 1px);
-      background-size: 25px 25px;
-    }
-
-    /* Left panel */
-    .left {
-      background-color: #000000;
-    }
-
-    .left h1 {
-      font-size: 60px;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    /* Back button */
-    .back-btn {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 40px;
-      height: 40px;
-      border: 1px solid #000;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      background: white;
-      transition: 0.3s;
-    }
-
-    .back-btn:hover {
-      background: #eee;
-    }
-
-    /* Divider */
-    .divider {
-      width: 1px;
-      background: #ccc;
-    }
-
-    /* Right panel */
-    /* Right panel adjustments */
-.right {
-  background-color: #ffffff;
-  justify-content: flex-start;      /* Align items from top instead of centered */
-  padding: 60px;                    /* Can reduce or keep for breathing room */
-  overflow-y: auto;                 /* Makes it scrollable if content exceeds viewport */
-  max-height: 100vh;                /* Restrict to viewport height */
-  width: 50%;                        /* Ensures right panel stays half */
-  display: flex;
-  flex-direction: column;
-  align-items: center;              /* Keep form centered horizontally */
-}
-
-/* Optional: adjust form container width for better spacing */
-.form-container {
-  width: 100%;
-  max-width: 500px; /* slightly wider than previous 480px */
-  margin: 0 auto;   /* keep horizontally centered */
-}
-
-    .right h2 {
-      font-size: 22px; /* smaller heading */
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      margin-bottom: 6px;
-      text-align: center;
-    }
-
-    .right p {
-      font-size: 13px; /* smaller text */
-      color: #555;
-      margin-bottom: 18px;
-      text-align: center;
-    }
-
-    .input-group {
-      width: 100%;
-      margin-bottom: 12px;
-    }
-
-    .input-group label {
-      font-size: 12px;
-      font-weight: 600;
-      display: block;
-      margin-bottom: 5px;
-      color: #333;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .input-group input {
-      width: 100%;
-      padding: 10px; /* smaller padding */
-      border: none;
-      background: #f0f4f8;
-      border-radius: 6px;
-      font-size: 13px;
-    }
-
-    .btn {
-  display: block;            /* ensure it behaves like a block */
-  margin: 20px auto 0 auto; /* top margin creates space above, auto left/right centers */
-  padding: 14px 0;           /* vertical padding, width is controlled by block */
-  width: 60%;               /* optional: smaller than full width for better spacing */
-  background: #000;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: center;        /* text inside button centered */
-}
-
-
-    .btn:hover {
-      opacity: 0.9;
-    }
-
-    .social-login {
-      text-align: center;
-      font-size: 12px;
-      color: #666;
-      margin-bottom: 12px;
-    }
-
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-
-    .social-icons i {
-      font-size: 18px;
-      border: 1px solid #ddd;
-      border-radius: 50%;
-      padding: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .social-icons i:hover {
-      background: #f5f5f5;
-    }
-
-    .signup {
-      margin-top: 14px;
-      font-size: 13px;
-      color: #444;
-      text-align: center;
-    }
-
-    .signup a {
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      font-family: 'Poppins', sans-serif;
-    }
-  </style>
+   <link rel="stylesheet" href="kairo.css">
 </head>
-<body>
+<body class="sign-body">
 
-  <div class="container">
+  <div class="sign-container">
     <!-- Left section with logo + back button -->
-    <div class="left">
-      <a href="login.html" class="back-btn">
+    <div class="sign-left">
+      <a href="login.html" class="sign-back-btn">
         <i class="fa-solid fa-arrow-left"></i>
       </a>
       <h1>kairo.</h1>
     </div>
 
     <!-- Divider -->
-    <div class="divider"></div>
+    <div class="sign-divider"></div>
 
     <!-- Right section with signup -->
-    <div class="right">
-      <div class="form-container">
+    <div class="sign-right">
+      <div class="sign-form-container">
         <h2>Create Account</h2>
         <p>Sign up to start organizing.</p>
 
-        <div class="input-group">
+        <div class="sign-input-group">
           <label for="name">Full Name</label>
           <input type="text" id="name" placeholder="Enter your full name">
         </div>
 
-        <div class="input-group">
+        <div class="sign-input-group">
           <label for="email">E-mail</label>
           <input type="email" id="email" placeholder="Enter your e-mail">
         </div>
 
-        <div class="input-group">
+        <div class="sign-input-group">
           <label for="password">Password</label>
           <input type="password" id="password" placeholder="Enter your password">
         </div>
 
-        <div class="input-group">
+        <div class="sign-input-group">
           <label for="confirm-password">Confirm Password</label>
           <input type="password" id="confirm-password" placeholder="Re-enter your password">
         </div>
 
-        <a href="dashboard.html" button class="btn">Sign Up</button></a>
+        <a href="dashboard.html" button class="sign-btn">Sign Up</button></a>
 
-        <div class="social-login">or sign up with</div>
-        <div class="social-icons">
+        <div class="sign-social-icons">
           <i class="fa-brands fa-google"></i>
           <i class="fa-brands fa-apple"></i>
           <i class="fa-brands fa-facebook-f"></i>
         </div>
 
-        <div class="signup">
+        <div class="sign-signup">
           Already have an account? <a href="login.html">Sign In</a>
         </div>
       </div>
