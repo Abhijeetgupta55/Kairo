@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kairo - Notes & Favorites</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to Google Fonts for the SF Pro font -->
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50 min-h-screen">
+    <!-- Header with back button at top left -->
+    <header class="bg-gray-100 p-4 flex items-center border-b">
+        <button class="mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <h1 class="text-2xl font-bold text-gray-800">kairo.</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6">
+        <!-- Tabs -->
+        <div class="flex space-x-4 mb-6">
+            <button class="px-4 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition">Notes</button>
+            <button class="px-4 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition">Favorites</button>
+        </div>
+
+        <!-- Content Area -->
+        <div class="space-y-6">
+            <!-- Notes Section (Default View) -->
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Notes</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Note Card 1 -->
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
+                        <p class="text-gray-600">remember to update the user interface mockups before the client meeting tomorrow. focus on the dashboard layout and navigation flow.</p>
+                        <a href="#" class="text-indigo-600 mt-2 inline-block hover:underline">Edit</a>
+                    </div>
+                    <!-- Note Card 2 -->
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
+                        <p class="text-gray-600">new feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk url import from bookmarks.</p>
+                        <a href="#" class="text-indigo-600 mt-2 inline-block hover:underline">Edit</a>
+                    </div>
+                </div>
+                <a href="#" class="text-indigo-600 mt-4 inline-block hover:underline">view all notes →</a>
+            </div>
+
+            <!-- Favorites Section (Hidden by default, toggle with JS if needed) -->
+            <div class="hidden">
+                <h2 class="text-xl font-semibold mb-4">Favorites</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Favorite Card 1 -->
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
+                        <p class="text-gray-600 flex items-center"><span class="mr-2">🌐</span> mdn web docs</p>
+                        <a href="#" class="text-indigo-600 mt-2 inline-block hover:underline">Open</a>
+                    </div>
+                    <!-- Favorite Card 2 -->
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
+                        <p class="text-gray-600 flex items-center"><span class="mr-2">🛠️</span> chrome devtools</p>
+                        <a href="#" class="text-indigo-600 mt-2 inline-block hover:underline">Open</a>
+                    </div>
+                </div>
+                <a href="#" class="text-indigo-600 mt-4 inline-block hover:underline">view all favorites →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 p-4 text-center border-t mt-auto">
+        <div class="space-x-4">
+            <a href="#" class="text-gray-600 hover:underline">Privacy Policy</a>
+            <a href="#" class="text-gray-600 hover:underline">Terms of Service</a>
+            <a href="#" class="text-gray-600 hover:underline">Support</a>
+            <a href="#" class="text-gray-600 hover:underline">Blog</a>
+        </div>
+        <p class="mt-2 text-gray-500">&copy; 2025 Kairo. All rights reserved.</p>
+    </footer>
+</body>
+</html>
