@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
             background-color: #ffffff;
             color: #000000;
             line-height: 1.6;
-            background-image: 
+            background-image:
                 linear-gradient(to right, #f0f0f0 1px, transparent 1px),
                 linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
             background-size: 20px 20px;
@@ -29,53 +30,55 @@
             cursor: pointer;
         }
 
-        header {
-            background-color: #000000;
-            color: #ffffff;
-            padding: 10px 20px;
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            background: #1a1a1a;
+            /* dark navbar */
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
-        .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-            background-color: #000000;
-            padding: 5px 10px;
-            border-radius: 15px;
-            padding-left: 25px;
-            text-align: center;
-        }
-
-        nav {
-            flex-grow: 1;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-left: 20px;
-            font-size: 1em;
-        }
-
-        nav ul li a {
-            color: #ffffff;
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #fff;
             text-decoration: none;
         }
-        .head{
-          padding-left: 20px;
-          margin: 10px;
-          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
         }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: lowercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #e3f2fd;
+            /* accent hover */
+        }
+
+        @media(max-width:768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .head {
+            padding-left: 20px;
+            margin: 10px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
         .title-section {
             display: flex;
             justify-content: space-between;
@@ -111,54 +114,64 @@
             flex: 2;
         }
 
-        .collection-a, .collection-b, .collection-c, .collection-d {
+        .collection-a,
+        .collection-b,
+        .collection-c,
+        .collection-d {
             background: #ffffff;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 10px;
             text-align: left;
             flex: 1;
+            transition: all 0.3s ease;
         }
 
-        .collection-a, .collection-b {
-            height: 100px;
-        }
-
-        .collection-c, .collection-d {
-            height: 430px;
-        }
-
-        .collection-a:hover {
-            background-color: rgba(0, 126, 184, 0.267);
-            border-radius: 20px;
-            transform: scale(1.01);
-            border: 2px solid #57caff;
-        }
-        .collection-b:hover {
-            background-color: rgba(239, 155, 30, 0.267);
-            border-radius: 20px;
-            transform: scale(1.01);
-            border: 2px solid #ff9e49;
-        }
-        .collection-c:hover {
-            background-color: rgba(99, 230, 29, 0.267);
-            border-radius: 20px;
-            transform: scale(1.01);
-            border: 2px solid #87ff57;
-        }
+        .collection-a:hover,
+        .collection-b:hover,
+        .collection-c:hover,
         .collection-d:hover {
             background-color: rgba(199, 24, 161, 0.267);
+            /* accent purple */
             border-radius: 20px;
             transform: scale(1.01);
-            border: 2px solid #ff64ea;
+
         }
+
+        .collections-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            margin: 10px 0;
+        }
+
+        .add-button {
+            font-size: 1.8em;
+            background-color: #1a1a1a;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .add-button:hover {
+            background-color: rgba(199, 24, 161, 0.8);
+            /* accent purple */
+            transform: scale(1.1);
+        }
+
+
 
         .collection-title {
             font-size: 1.2em;
             color: #333;
             margin-bottom: 10px;
             transition: transform 0.3s;
-            text-transform: uppercase;
+            text-transform: lowercase;
             font-weight: bold;
             font-family: 'Montserrat', Arial, sans-serif;
         }
@@ -205,6 +218,7 @@
             font-size: 0.8em;
             margin-top: 5px;
         }
+
         footer {
             background-color: #000000;
             padding: 10px;
@@ -213,34 +227,40 @@
         }
     </style>
 </head>
+
 <body>
-    <header>
-         <div class="logo">kairo.</div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Discover</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <h1 class="head">COLLECTIONS</h1>
+    <nav>
+        <a href="dashboard.html" class="nav-logo">kairo.</a>
+        <div class="nav-links">
+            <a href="dashboard.html">dashboard</a>
+            <a href="recent.html">recents</a>
+            <a href="notes.html">notes</a>
+            <a href="favorites.html">favorites</a>
+            <a href="collections.html">collections</a>
+            <a href="profile.html">profile</a>
+            <a href="#">logout</a>
+        </div>
+    </nav>
+
+    <div class="collections-header">
+        <h1 class="head">🗃️ collections</h1>
+        <button class="add-button" onclick="alert('Add new collection')">+</button>
+    </div>
+
     <section class="collections">
         <div class="left-stack">
             <div class="collection-a">
-                    <div class="collection-title">books</div>
-                    <ul class="collection-list">
-                        <li>Books Collection</li>
-                        <li>“Clean Code” by Robert C. Martin</li>
-                        <li>“The Pragmatic Programmer” by Andrew Hunt</li>
-                        <li>Atomic Habits” by James Clear</li>
-                        <li>“Deep Work” by Cal Newport</li>
-                    </ul>
+                <div class="collection-title" onclick="window.location.href='books.html'">books</div>
+                <ul class="collection-list">
+                    <li>Books Collection</li>
+                    <li>“Clean Code” by Robert C. Martin</li>
+                    <li>“The Pragmatic Programmer” by Andrew Hunt</li>
+                    <li>Atomic Habits” by James Clear</li>
+                    <li>“Deep Work” by Cal Newport</li>
+                </ul>
             </div>
             <div class="collection-b">
-                <div class="collection-title">art designs</div>
+                <div class="collection-title" onclick="window.location.href='art.html'">art designs</div>
                 <ul class="collection-list">
                     <li>Art Designs Collection</li>
                     <li>Adobe Illustrator tutorials</li>
@@ -250,7 +270,7 @@
         </div>
         <div class="right-parallel">
             <div class="collection-c">
-                <div class="collection-title">articles</div>
+                <div class="collection-title" onclick="window.location.href='articles.html'">articles</div>
                 <ul class="collection-list">
                     <li>Articles Collection</li>
                     <li>TechCrunch: latest tech news</li>
@@ -266,7 +286,7 @@
                 </ul>
             </div>
             <div class="collection-d">
-                <div class="collection-title">coding</div>
+                <div class="collection-title" onclick="window.location.href='coding.html'">coding</div>
                 <ul class="collection-list">
                     <li>Coding Collection</li>
                     <li>GitHub repository</li>
@@ -281,11 +301,12 @@
                     <li>LeetCode problem set links</li>
                 </ul>
             </div>
-            
+
         </div>
     </section>
     <footer>
-       <p>©2025 Kairo. All rights reserved.</p>
+        <p>©2025 kairo. All rights reserved.</p>
     </footer>
 </body>
+
 </html>
