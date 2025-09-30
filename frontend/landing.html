@@ -98,31 +98,42 @@
         }
 
         .hero-buttons .get-started {
-            background-color: #000000;
-            color: #ffffff;
-            transition: background-color 0.1s ease;
-        }
-         .get-started:hover {
-            background-color: #ffffff;
-            color: #000000;
-            border: 1px solid #000000;
-      
-        }
+  background-color: #000;       /* Black background */
+  color: #fff;                  /* White text */
+  padding: 12px 28px;           /* Breathing room */
+  border: none;                 /* Remove ugly border */
+  border-radius: 6px;           /* Slightly rounded corners */
+  font-size: 16px;              /* Bigger, readable text */
+  font-weight: 600;             /* Bold for emphasis */
+  cursor: pointer;              /* Pointer cursor */
+  transition: all 0.3s ease;    /* Smooth hover effect */
+}
+
+.get-started:hover {
+  background-color: #696969;       /* Dark grey hover */
+  transform: translateY(-2px);  /* Subtle lift */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Shadow on hover */
+}
 
         .hero-buttons .learn-more {
-            background-color: transparent;
-            border: 1px solid #000000;
-            color: #000000;
-            transition: background-color 0.2s ease;
+  background-color: transparent;       /* Transparent background */
+  color: #000;                         /* Black text */
+  padding: 12px 28px;                  /* Same spacing as Get Started */
+  border: 2px solid #000;              /* Black outline */
+  border-radius: 6px;                  /* Rounded corners */
+  font-size: 16px;                     /* Readable text */
+  font-weight: 600;                    /* Bold */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 12px;                   /* Space between buttons */
+}
 
-        }
-        
-        .learn-more:hover {
-            background-color: #000000;
-            color: #ffffff;
-            border: 1px solid #000000;
-   
-        }
+.learn-more:hover {
+  background-color: #000;              /* Fill on hover */
+  color: #fff;                         /* Invert text color */
+  transform: translateY(-2px);         /* Subtle lift */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
         
         .hero-illustration {
             height: 500px; 
@@ -252,7 +263,7 @@
             height: 300px;
             text-align: center;
             position: relative;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 29, 84, 0.4)),
+            background: rgba(128,128,128,0.6)
                 url("img1.jpg") no-repeat center center;
             background-size: cover;
             margin-bottom: 100px;
@@ -304,9 +315,19 @@
 
         .connect input[type="email"] {
             padding: 5px;
-            width: 70%;
+            width: 50%;
             border: 1px solid #dddddd;
             border-radius: 5px 0 0 5px;
+        }
+         .connect input[type="text"] {
+            padding: 5px;
+            width: 50%;
+            height: 30px;
+            border: 1px solid #dddddd;
+            border-radius: 5px 0 0 5px;
+            text-align: left;
+            margin-top: 5px;
+
         }
 
         .connect button {
@@ -315,6 +336,10 @@
             color: #ffffff;
             border: none;
             border-radius: 0 5px 5px 0;
+            display: flex;
+            flex: column;
+            margin-left: 600px;
+            margin-top: 5px;
         }
 
 
@@ -336,6 +361,55 @@
         .footer-links li {
             margin: 0 10px;
         }
+        .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  padding: 50px 0;
+}
+
+/* Show modal when targeted */
+.modal:target {
+  display: block;
+}
+
+/* Modal content box */
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 25px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 700px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+/* Close button */
+.modal-content .close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+}
+
+.modal-content .close:hover {
+  color: #555;
+}
+
     </style>
 </head>
 <body>
@@ -343,11 +417,13 @@
         <div class="logo">kairo.    </div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Discover</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">home</a></li>
+                <li><a href="#">discover</a></li>
+                <li><a href="#">blog</a></li>
+                <li><a href="#">about us</a></li>
+                <li><a href="#">contact</a></li>
+                <li><a href="login.html">login</a></li>
+
             </ul>
         </nav>
     </header>
@@ -356,7 +432,7 @@
             <h1>Organize Your Web, Your Way.</h1>
             <p>A clean dashboard to collect, track, and manage all your tabs in one place.</p>
             <div class="hero-buttons">
-                <button class="get-started">Get Started</button>
+                <a href="login.html" button class="get-started">Get Started</button></a>
                 <button class="learn-more">Learn More</button>
             </div>
         </div>
@@ -381,89 +457,32 @@ With intelligent grouping, collections, favorites, and quick access to your most
         <div class="cards">
             <div class="card">
                 <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png"></div>
-                <p>5 Ways to Declutter Your Digital Life</p>
+        <a href="https://elegantsi.com/blog/digital-decluttering?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">Why Digital Decluttering Is Important</a>
             </div>
             <div class="card">
                 <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png"></div>
-                <p>Minimalism in the Digital Age</p>
+        <a href="https://deskcove.com/boost-productivity-how-to-declutter-your-digital-space-fast/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">Boost Productivity: How to Declutter Your Digital Space Fast</a>
             </div>
             <div class="card">
                 <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png"></div>
-                <p>How to Stay Focused with Kairo</p>
+        <a href="https://medium.com/%40partizion/why-you-should-use-a-tab-manager-bd508850a49a" target="_blank" rel="noopener noreferrer" class="recent-url">Why You Should Use a Tab Manager</a>
             </div>
              <div class="card">
                 <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png"></div>
-                <p>5 Ways to Declutter Your Digital Life</p>
+        <a href="https://www.skipper.co/post/the-psychology-behind-tab-overload?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">The Psychology Behind Tab Overload
+</a>
             </div>
             <div class="card">
                 <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png"></div>
-                <p>Minimalism in the Digital Age</p>
+        <a href="https://www.wired.com/story/how-to-organize-browser-tabs/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">You Have a Million Tabs Open. Here's How to Manage Them
+</a>
             </div>
             <div class="card">
                 <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png"></div>
-                <p>How to Stay Focused with Kairo</p>
+        <a href="https://tidymalism.com/organising-browser-tabs/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="recent-url">Organising Browser Tabs with an Extension for Less Clutter</a>
             </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png"></div>
-                <p>5 Ways to Declutter Your Digital Life</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png"></div>
-                <p>Minimalism in the Digital Age</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png"></div>
-                <p>How to Stay Focused with Kairo</p>
-            </div>
-             <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png"></div>
-                <p>5 Ways to Declutter Your Digital Life</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png"></div>
-                <p>Minimalism in the Digital Age</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png"></div>
-                <p>How to Stay Focused with Kairo</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png"></div>
-                <p>5 Ways to Declutter Your Digital Life</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png"></div>
-                <p>Minimalism in the Digital Age</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png"></div>
-                <p>How to Stay Focused with Kairo</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png"></div>
-                <p>5 Ways to Declutter Your Digital Life</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png"></div>
-                <p>Minimalism in the Digital Age</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png"></div>
-                <p>How to Stay Focused with Kairo</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_d8drg3d8drg3d8dr.png"></div>
-                <p>5 Ways to Declutter Your Digital Life</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_siqc61siqc61siqc.png"></div>
-                <p>Minimalism in the Digital Age</p>
-            </div>
-            <div class="card">
-                <div class="card-illustration"><img src="C:\Users\Abhi\Downloads\Gemini_Generated_Image_hgnhkahgnhkahgnh.png"></div>
-                <p>How to Stay Focused with Kairo</p>
-            </div>
-        </div>
+               
+        
         </div>
     </section>
 
@@ -474,23 +493,51 @@ With intelligent grouping, collections, favorites, and quick access to your most
 Instead of juggling dozens of open tabs, KAIRO lets you create personalized collections, manage favorites, and keep your recent pages within reach. You can even attach notes to your groups, making it easy to track ideas, research, or projects.</p>
     </section>
 
-    <section class="connect">
+    <section class="connect" id ="connect">
       <hr>
         <h3>Connect with us</h3>
         <p>Want to hear our thoughts, feedback, or ideas to make Kairo even better?</p>
         <form>
             <input type="email" placeholder="Your email">
+            
+            <input type="text" placeholder="your feedback">
             <button type="submit">Submit</button>
         </form>
     </section>
 
     <footer>
-        <p>©2025 kairo. All rights reserved.</p>
-        <ul class="footer-links">
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">Blog</a></li>
-        </ul>
+        <!-- Footer links -->
+<ul class="footer-links">
+  <li><a href="#privacyModal">Privacy Policy</a></li> 
+  <li><a href="#termsModal">Terms of Service</a></li> 
+  <li><a href="#connect">Blog</a></li>
+</ul>
+</footer>
+<!-- Privacy Policy Modal -->
+<div id="privacyModal" class="modal">
+  <div class="modal-content">
+    <a href="#connect" class="close">&times;</a>
+    <h2>Privacy Policy</h2>
+    <p>At Kairo, your privacy is our top priority. We collect minimal personal information necessary to provide a seamless experience. This includes your account credentials, browsing history within the app, and your saved collections or favorites.</p>
+    <p>We never sell or share your data with third parties. All stored information is encrypted and handled securely. Cookies are used solely to enhance functionality, remember preferences, and improve performance.</p>
+    <p>By using Kairo, you consent to this Privacy Policy. You have the right to request data export or deletion at any time. We may update this policy occasionally, and any major changes will be communicated via email.</p>
+    <p>Our commitment is to keep your digital life organized without compromising your personal data. For questions, you can reach out to support@kairo.com.</p>
+  </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div id="termsModal" class="modal">
+  <div class="modal-content">
+    <a href="#connect" class="close">&times;</a>
+    <h2>Terms of Service</h2>
+    <p>Welcome to Kairo! By accessing or using our platform, you agree to comply with these terms. Kairo is designed to help you organize your web browsing efficiently. All content, services, and features are provided "as-is".</p>
+    <p>Users are responsible for maintaining the security of their own accounts and devices. Unauthorized use, sharing of credentials, or malicious activity is strictly prohibited.</p>
+    <p>Kairo reserves the right to suspend or terminate accounts violating these terms. While we strive for uninterrupted service, we are not liable for any temporary downtime or data loss.</p>
+    <p>You may not use Kairo for illegal or harmful purposes. Our platform should be used ethically and responsibly. Continued use implies agreement to these terms and any future updates. For further questions, contact support@kairo.com.</p>
+    <p>Thank you for trusting Kairo. We aim to make your browsing smoother, smarter, and safer.</p>
+  </div>
+</div>
+
     </footer>
   <script>
 const img = document.getElementById("myImage"),
