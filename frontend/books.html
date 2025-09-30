@@ -151,20 +151,64 @@
             color: #666;
             padding-left: 10px;
         }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000000;
+            /* dark navbar */
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: lowercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #e3f2fd;
+            /* accent hover */
+        }
+
+        @media(max-width:768px) {
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
    <header>
-        <div class="logo">kairo.</div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Discover</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+          <nav>
+        <a href="dashboard.html" class="nav-logo">kairo.</a>
+        <div class="nav-links">
+            <a href="dashboard.html">dashboard</a>
+            <a href="recent.html">recents</a>
+            <a href="notes.html">notes</a>
+            <a href="favorites.html">favorites</a>
+            <a href="collections.html">collections</a>
+            <a href="profile.html">profile</a>
+            <a href="#">logout</a>
+        </div>
+    </nav>
     </header>
 <h1 style="padding-left: 20px; margin: 5px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">BOOKS</h1>
     <main class="dashboard">
