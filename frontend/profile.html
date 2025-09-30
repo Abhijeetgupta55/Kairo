@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kairo Profile</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      line-height: 1.6;
+      background-image: 
+        linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    header {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      background-color: #000000;
+      padding: 5px 10px;
+      border-radius: 15px;
+      padding-left: 25px;
+      text-align: center;
+    }
+
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+      font-size: 1em;
+    }
+
+    nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    main.profile-container {
+      margin: 10px auto 20px auto; 
+      padding: 10px;
+    }
+
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.692);
+      padding: 5px;
+      margin: 0 auto 30px auto;
+      text-align: center;
+      max-width: 300px;
+      transition: transform 0.4s ease;
+      border-radius: 70px;
+      border: 1px solid #000000;
+    }
+
+    .profile-header:hover {
+      transform: scale(1.05); 
+    }
+
+    .profile-header img {
+      padding-top: 20px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      
+    }
+
+    .profile-header .info {
+      font-size: 1em;
+    }
+
+
+    .sections-row {
+      display: flex;
+      gap: 20px;              
+      flex-wrap: wrap;        
+      justify-content: center;
+    }
+
+
+    .section {
+      flex: 1 1 220px;        
+      max-width: 200px;
+      background: rgba(255, 254, 241, 0.689);;
+      padding: 15px;
+      border-radius: 20px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      align-items: center;
+      text-align: center;
+    }
+.followers:hover,.following:hover,.tabs:hover{
+      background-color:#ceff464e;
+      border-radius: 20px;
+      transform: scale(1.01);
+    }
+    .logout:hover{
+      background-color:#7d7d7d9c;
+      border-radius: 90px;
+      transform: scale(1.01);
+
+    }
+
+    .section h3 {
+      padding-top: 5px;
+      font-size: 1.5em;
+      color: #333;
+      font-family:Verdana, Geneva, Tahoma, sans-serif
+    }
+    .section h2 {
+      padding-top: 5px;
+      font-size: 2.5em;
+      color: #333;
+      font-family:Verdana, Geneva, Tahoma, sans-serif;
+      align-items: center;
+      text-align: center;
+       transition: transform 0.3s ease;
+    }
+    .section h2:hover{
+      transform: scale(1.2);
+    }
+
+
+    
+    .logout button {
+      padding: 5px 5px;
+      margin-top: 5px;
+      background-color: #000000;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      border: 1px solid #000000;
+    }
+    .logout{
+      border-radius: 140px;
+      height: 95px;
+      padding: 10px;
+    }
+    footer {
+      background-color: #000000;
+      padding: 5px;
+      text-align: center;
+      color: #ffffff;
+      bottom: 0;
+    }
+    .logout {
+  flex: 1 1 100%; 
+  max-width: 20%; 
+}
+    .rotate{
+  display: block;
+  margin: 10px auto;   
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  transition: transform 1s ease;
+}
+
+
+ .form-container {
+      width: 80%;
+      margin: 40px auto;
+      padding: 30px;
+      background: rgba(240, 240, 240, 0.9);
+      border-radius: 25px;
+      box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9em;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input, textarea {
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .row .form-group {
+      flex: 1;
+    }
+
+    button {
+      background: #000000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background: #333;
+    }
+    .field {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 8px 10px;
+  font-size: 1em;
+  margin-top: 5px;
+}
+.form-container button{
+  margin-left: 430px;
+
+}
+
+    
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">kairo.</div>
+    <nav>
+    <a href="dashboard.html" class="nav-logo">kairo.</a>
+    <div class="nav-links">
+      <a href="dashboard.html">dashboard</a>
+      <a href="recent.html">recents</a>
+      <a href="notes.html">notes</a>
+      <a href="favorites.html">favorites</a>
+      <a href="collections.html">collections</a>
+      <a href="profile.html">profile</a>
+      <a href="#">logout</a>
+    </div>
+  </nav>
+  </header>
+
+  <main class="profile-container">
+
+    <div class="profile-header">
+      <img src="C:\Users\Abhi\OneDrive\Desktop\download.jpg" >
+      <div class="info">
+        <h2>Bob</h2>
+        <p>Member since June 2025</p>
+      
+      </div>
+    </div>
+
+    <div class="sections-row">
+      <div class="section tabs">
+        <h3>Tabs opened</h3>
+        <h2>18</h2>
+       
+      </div>
+
+      <div class="section followers">
+        <h3>favorites</h3>
+        <h2>11</h2>
+      </div>
+
+      <div class="section following">
+        <h3>notes-created</h3>
+        <h2>5</h2>
+      </div>
+
+       <div class="section following">
+        <h3>collections</h3>
+        <h2>7</h2>
+      </div>
+
+      
+  <div class="form-container">
+  <div class="form-group">
+    <label>Email</label>
+    <p class="field">kairo55555@gmail.com</p>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label>Date of Birth</label>
+      <p class="field">11 november 2000</p>
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <p class="field">+91 9876543210</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Bio</label>
+    <p class="field">Love building products and exploring new tech </p>
+  </div>
+  <button>Update Profile</button>
+</div>
+      <div class="section logout">
+        <p>Click below to <b>sign out.</b></p>
+        <a href="file:///C:/Users/Abhi/Downloads/site.html"><button>Logout</button></a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>©2025 Kairo. All rights reserved.</p>
+  </footer>
+</body>
+</html>
