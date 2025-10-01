@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
             background-color: #ffffff;
             color: #000000;
             line-height: 1.6;
-            background-image: 
+            background-image:
                 linear-gradient(to right, #f0f0f0 1px, transparent 1px),
                 linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
             background-size: 20px 20px;
@@ -78,38 +79,46 @@
             margin: 0 auto;
         }
 
-        .d{
+        .d {
             background: #ffffff;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 15px;
             text-align: left;
-            flex: 1 1 300px; /* grow, shrink, base width */
+            flex: 1 1 300px;
+            /* grow, shrink, base width */
             max-width: 365px;
             text-align: ;
         }
-        .notes, .recents, .favorites{
+
+        .notes,
+        .recents,
+        .favorites {
             height: 450px;
             width: 365px;
-            background-color: #ffffff; 
-            transition: background-color 0.3s ease; 
-            overflow: auto; 
+            background-color: #ffffff;
+            transition: background-color 0.3s ease;
+            overflow: auto;
             border-radius: 10px;
             display: flex;
-            flex-direction: column; 
-            align-items: flex-start; 
-            padding: 15px; /
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px;/
         }
-        
-        
 
-        .notes:hover, .recents:hover, .favorites:hover {
-            background-color: rgba(20, 121, 168, 0.377); 
+
+
+        .notes:hover,
+        .recents:hover,
+        .favorites:hover {
+            background-color: rgba(20, 121, 168, 0.377);
             border-radius: 20px;
-            transform: scale(1.01);   
+            transform: scale(1.01);
         }
-       
-        .notes h3, .recents h3, .favorites h3{
+
+        .notes h3,
+        .recents h3,
+        .favorites h3 {
             margin-top: 15px;
             font-size: 1.2em;
             color: #333;
@@ -140,7 +149,8 @@
             text-align: center;
             color: #ffffff;
         }
-          .collection-list {
+
+        .collection-list {
             padding-left: 20px;
             margin: 0;
         }
@@ -151,6 +161,7 @@
             color: #666;
             padding-left: 10px;
         }
+
         nav {
             display: flex;
             justify-content: space-between;
@@ -195,49 +206,64 @@
         }
     </style>
 </head>
+
 <body>
-   <header>
-          <nav>
-        <a href="dashboard.html" class="nav-logo">kairo.</a>
-        <div class="nav-links">
-            <a href="dashboard.html">dashboard</a>
-            <a href="recent.html">recents</a>
-            <a href="notes.html">notes</a>
-            <a href="favorites.html">favorites</a>
-            <a href="collections.html">collections</a>
-            <a href="profile.html">profile</a>
-            <a href="landing.html">logout</a>
-        </div>
-    </nav>
+    <header>
+        <nav>
+            <a href="dashboard.html" class="nav-logo">kairo.</a>
+            <div class="nav-links">
+                <a href="dashboard.html">dashboard</a>
+                <a href="recent.html">recents</a>
+                <a href="notes.html">notes</a>
+                <a href="favorites.html">favorites</a>
+                <a href="collections.html">collections</a>
+                <a href="profile.html">profile</a>
+                <a href="landing.html">logout</a>
+            </div>
+        </nav>
     </header>
-<h1 style="padding-left: 20px; margin: 5px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">BOOKS</h1>
+    <h1
+        style="padding-left: 20px; margin: 5px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+        BOOKS</h1>
     <main class="dashboard">
 
         <div class="d notes">
-                        <div class="collection-title">
-                            <h1>📚books</h1>
-                        <ul class="collection-list">
-                                <li><a href="https://books.google.com/books/about/Clean_Code.html?id=hjEFCAAAQBAJ" target="_blank">“Clean Code” by Robert C. Martin</a></li>
-                                <li><a href="https://medium.com/@thepragmaticprogrammer/the-pragmatic-programmer-summary-7e7e6e7e7e7e" target="_blank">“The Pragmatic Programmer” by Andrew Hunt</a></li>
-                                <li><a href="https://eloquentjavascript.net/" target="_blank">“Eloquent JavaScript” by Marijn Haverbeke</a></li>
-                                <li><a href="https://jamesclear.com/atomic-habits-summary" target="_blank">“Atomic Habits” by James Clear</a></li>
-                                <li><a href="https://www.calnewport.com/books/deep-work/" target="_blank">“Deep Work” by Cal Newport</a></li>
-                                <li><a href="https://refactoring.guru/design-patterns/book" target="_blank">“Design Patterns” by Erich Gamma</a></li>
-                                <li><a href="https://github.com/getify/You-Dont-Know-JS" target="_blank">“You Don’t Know JS” series</a></li>
-                                <li><a href="https://www.startupgrind.com/blog/the-lean-startup-summary/" target="_blank">“The Lean Startup” by Eric Ries</a></li>
-                                <li><a href="https://fs.blog/thinking-fast-and-slow/" target="_blank">“Thinking, Fast and Slow” by Daniel Kahneman</a></li>
-                                
-                        </ul>
+            <div class="collection-title">
+                <h1>📚books</h1>
+                <ul class="collection-list">
+                    <li><a href="https://books.google.com/books/about/Clean_Code.html?id=hjEFCAAAQBAJ"
+                            target="_blank">“Clean Code” by Robert C. Martin</a></li>
+                    <li><a href="https://medium.com/@thepragmaticprogrammer/the-pragmatic-programmer-summary-7e7e6e7e7e7e"
+                            target="_blank">“The Pragmatic Programmer” by Andrew Hunt</a></li>
+                    <li><a href="https://eloquentjavascript.net/" target="_blank">“Eloquent JavaScript” by Marijn
+                            Haverbeke</a></li>
+                    <li><a href="https://jamesclear.com/atomic-habits-summary" target="_blank">“Atomic Habits” by James
+                            Clear</a></li>
+                    <li><a href="https://www.calnewport.com/books/deep-work/" target="_blank">“Deep Work” by Cal
+                            Newport</a></li>
+                    <li><a href="https://refactoring.guru/design-patterns/book" target="_blank">“Design Patterns” by
+                            Erich Gamma</a></li>
+                    <li><a href="https://github.com/getify/You-Dont-Know-JS" target="_blank">“You Don’t Know JS”
+                            series</a></li>
+                    <li><a href="https://www.startupgrind.com/blog/the-lean-startup-summary/" target="_blank">“The Lean
+                            Startup” by Eric Ries</a></li>
+                    <li><a href="https://fs.blog/thinking-fast-and-slow/" target="_blank">“Thinking, Fast and Slow” by
+                            Daniel Kahneman</a></li>
+
+                </ul>
             </div>
         </div>
         <div class="d recents">
             <h1>🔗links</h1>
             <div class="collection-title">
-            <ul class="collection-list">
-                <li><a href="https://books.google.com/books/about/Clean_Code.html?id=hjEFCAAAQBAJ&utm_source=chatgpt.com" target="_blank">Clean Code by Robert C. Martin</a></li>
-                <li><a href="https://books.google.com/books/about/Clean_Code.html?id=hjEFCAAAQBAJ&utm_source=chatgpt.com" target="_blank">The Pragmatic Programmer by Andrew Hunt</a></li>
-                <li><a href="https://www.crackingthecodinginterview.com/?utm_source=chatgpt.com" target="_blank">Cracking the Coding Interview by Gayle Laakmann McDowell</a></li>
-            </ul>
+                <ul class="collection-list">
+                    <li><a href="https://books.google.com/books/about/Clean_Code.html?id=hjEFCAAAQBAJ&utm_source=chatgpt.com"
+                            target="_blank">Clean Code by Robert C. Martin</a></li>
+                    <li><a href="https://books.google.com/books/about/Clean_Code.html?id=hjEFCAAAQBAJ&utm_source=chatgpt.com"
+                            target="_blank">The Pragmatic Programmer by Andrew Hunt</a></li>
+                    <li><a href="https://www.crackingthecodinginterview.com/?utm_source=chatgpt.com"
+                            target="_blank">Cracking the Coding Interview by Gayle Laakmann McDowell</a></li>
+                </ul>
             </div>
         </div>
         <div class="d favorites">
@@ -250,10 +276,11 @@
                 <li>“Cracking the Coding Interview” by Gayle Laakmann McDowell</li>
             </ul>
         </div>
-      
+
     </main>
     <footer>
         <p>©2025 Kairo. All rights reserved.</p>
     </footer>
 </body>
+
 </html>

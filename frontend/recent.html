@@ -1,98 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>kairo. - recents</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
-    :root{
-      --bg-white:#ffffff;
-      --text-black:#1a1a1a;
-      --text-gray:#666;
-      --text-light:#999;
-      --border:#e8e8e8;
-      --grid-color:#f5f5f5;
-      --shadow:rgba(0,0,0,0.04);
-      --shadow-hover:rgba(0,0,0,0.12);
-      --accent-blue:#e3f2fd;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    body{
-      font-family:'Inter',sans-serif;background:var(--bg-white);
-      color:var(--text-black);min-height:100vh;line-height:1.5;
+
+    :root {
+      --bg-white: #ffffff;
+      --text-black: #1a1a1a;
+      --text-gray: #666;
+      --text-light: #999;
+      --border: #e8e8e8;
+      --grid-color: #f5f5f5;
+      --shadow: rgba(0, 0, 0, 0.04);
+      --shadow-hover: rgba(0, 0, 0, 0.12);
+      --accent-blue: #e3f2fd;
     }
-    body::before{
-      content:'';position:fixed;inset:0;
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-white);
+      color: var(--text-black);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
       background-image:
-        linear-gradient(to right,var(--grid-color) 1px,transparent 1px),
-        linear-gradient(to bottom,var(--grid-color) 1px,transparent 1px);
-      background-size:20px 20px;z-index:-1;
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: -1;
     }
-    nav{
-      width:100%;background:var(--text-black);color:var(--bg-white);
-      padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;
-      position:sticky;top:0;z-index:10;
+
+    nav {
+      width: 100%;
+      background: var(--text-black);
+      color: var(--bg-white);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-    .nav-logo{font-size:1.8rem;font-weight:500;text-decoration:none;color:var(--bg-white);}
-    .nav-links{display:flex;gap:1.5rem;}
-    .nav-links a{text-decoration:none;color:var(--bg-white);font-size:0.95rem;text-transform:lowercase;transition:color .3s;}
-    .nav-links a:hover{color:var(--accent-blue);}
-    .container{max-width:1200px;margin:2rem auto;padding:0 2rem;}
-    h1.page-heading{font-size:2rem;font-weight:600;margin-bottom:1.5rem;text-transform:lowercase;}
-    .recents-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:1.5rem;
+
+    .nav-logo {
+      font-size: 1.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--bg-white);
     }
-    .recent-card{
-      background:var(--bg-white);border:1px solid var(--border);
-      border-radius:10px;padding:1.2rem;box-shadow:0 2px 16px var(--shadow);
-      transition:all .3s;
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
     }
-    .recent-card:hover{
-      background:var(--accent-blue);transform:translateY(-4px);
-      box-shadow:0 8px 24px var(--shadow-hover);
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--bg-white);
+      font-size: 0.95rem;
+      text-transform: lowercase;
+      transition: color .3s;
     }
-    .recent-title{
-      font-size:1rem;font-weight:500;margin-bottom:.5rem;text-transform:lowercase;display:flex;align-items:center;justify-content:space-between;
+
+    .nav-links a:hover {
+      color: var(--accent-blue);
     }
-    .recent-url{font-size:.85rem;color:var(--text-gray);text-decoration:none;word-break:break-word;}
-    .recent-url:hover{color:var(--text-black);}
-    .recent-timestamp{font-size:.8rem;color:var(--text-light);margin-top:.6rem;}
-    .view-history{
-      display:block;margin:2rem auto 0;text-align:center;
-      background:var(--text-black);color:var(--bg-white);
-      padding:.8rem 1.5rem;border-radius:8px;width:max-content;
-      text-decoration:none;font-size:.95rem;text-transform:lowercase;
-      transition:background .3s;
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
     }
-    .view-history:hover{background:#333;}
+
+    h1.page-heading {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-transform: lowercase;
+    }
+
+    .recents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .recent-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem;
+      box-shadow: 0 2px 16px var(--shadow);
+      transition: all .3s;
+    }
+
+    .recent-card:hover {
+      background: var(--accent-blue);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--shadow-hover);
+    }
+
+    .recent-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: .5rem;
+      text-transform: lowercase;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .recent-url {
+      font-size: .85rem;
+      color: var(--text-gray);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .recent-url:hover {
+      color: var(--text-black);
+    }
+
+    .recent-timestamp {
+      font-size: .8rem;
+      color: var(--text-light);
+      margin-top: .6rem;
+    }
+
+    .view-history {
+      display: block;
+      margin: 2rem auto 0;
+      text-align: center;
+      background: var(--text-black);
+      color: var(--bg-white);
+      padding: .8rem 1.5rem;
+      border-radius: 8px;
+      width: max-content;
+      text-decoration: none;
+      font-size: .95rem;
+      text-transform: lowercase;
+      transition: background .3s;
+    }
+
+    .view-history:hover {
+      background: #333;
+    }
+
     /* STAR STYLES */
-    .star{
-      display:inline-block;
-      cursor:pointer;
-      margin-left:0.5rem;
-      font-size:1.2rem;
-      position:relative;
+    .star {
+      display: inline-block;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      font-size: 1.2rem;
+      position: relative;
     }
-    .star input{
-      display:none; /* hide checkbox */
+
+    .star input {
+      display: none;
+      /* hide checkbox */
     }
-    .star span{
-      color:var(--text-gray);
+
+    .star span {
+      color: var(--text-gray);
       transition: color 0.3s, transform 0.2s;
     }
-    .star span:hover{
-      color:gold;
-      transform:scale(1.2);
+
+    .star span:hover {
+      color: gold;
+      transform: scale(1.2);
     }
-    .star input:checked + span{
-      color:gold;
-      content:'★';
+
+    .star input:checked+span {
+      color: gold;
+      content: '★';
     }
-    @media(max-width:768px){.nav-links{display:none;}.container{padding:1rem;}}
+
+    @media(max-width:768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+    }
   </style>
 </head>
+
 <body>
   <!-- Navbar -->
   <nav>
@@ -111,13 +220,14 @@
   <div class="container">
     <h1 class="page-heading">⌚ recents</h1>
     <div class="recents-grid">
-      
+
       <div class="recent-card">
         <h3 class="recent-title">
           github repository
           <label class="star"><input type="checkbox"><span>☆</span></label>
         </h3>
-        <a href="https://github.com/user/awesome-project" target="_blank" rel="noopener noreferrer" class="recent-url">https://github.com/user/awesome-project</a>
+        <a href="https://github.com/user/awesome-project" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://github.com/user/awesome-project</a>
         <div class="recent-timestamp">3 minutes ago</div>
       </div>
 
@@ -126,7 +236,8 @@
           react hooks guide
           <label class="star"><input type="checkbox"><span>☆</span></label>
         </h3>
-        <a href="https://react.dev/reference/react/hooks" target="_blank" rel="noopener noreferrer" class="recent-url">https://react.dev/reference/react/hooks</a>
+        <a href="https://react.dev/reference/react/hooks" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://react.dev/reference/react/hooks</a>
         <div class="recent-timestamp">15 minutes ago</div>
       </div>
 
@@ -135,7 +246,8 @@
           figma design system
           <label class="star"><input type="checkbox"><span>☆</span></label>
         </h3>
-        <a href="https://figma.com/file/design-system" target="_blank" rel="noopener noreferrer" class="recent-url">https://figma.com/file/design-system</a>
+        <a href="https://figma.com/file/design-system" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://figma.com/file/design-system</a>
         <div class="recent-timestamp">1 hour ago</div>
       </div>
 
@@ -144,7 +256,9 @@
           mdn css grid
           <label class="star"><input type="checkbox"><span>☆</span></label>
         </h3>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout" target="_blank" rel="noopener noreferrer" class="recent-url">https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout</a>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout" target="_blank"
+          rel="noopener noreferrer"
+          class="recent-url">https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout</a>
         <div class="recent-timestamp">2 hours ago</div>
       </div>
 
@@ -153,7 +267,8 @@
           medium article
           <label class="star"><input type="checkbox"><span>☆</span></label>
         </h3>
-        <a href="https://medium.com/web-design" target="_blank" rel="noopener noreferrer" class="recent-url">https://medium.com/web-design</a>
+        <a href="https://medium.com/web-design" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://medium.com/web-design</a>
         <div class="recent-timestamp">3 hours ago</div>
       </div>
 
@@ -162,7 +277,8 @@
           dribbble inspiration
           <label class="star"><input type="checkbox"><span>☆</span></label>
         </h3>
-        <a href="https://dribbble.com/shots/xyz" target="_blank" rel="noopener noreferrer" class="recent-url">https://dribbble.com/shots/xyz</a>
+        <a href="https://dribbble.com/shots/xyz" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://dribbble.com/shots/xyz</a>
         <div class="recent-timestamp">4 hours ago</div>
       </div>
 
@@ -171,7 +287,8 @@
           stackoverflow thread
           <label class="star"><input type="checkbox"><span>☆</span></label>
         </h3>
-        <a href="https://stackoverflow.com/q/12345" target="_blank" rel="noopener noreferrer" class="recent-url">https://stackoverflow.com/q/12345</a>
+        <a href="https://stackoverflow.com/q/12345" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://stackoverflow.com/q/12345</a>
         <div class="recent-timestamp">6 hours ago</div>
       </div>
 
@@ -180,7 +297,8 @@
           youtube tutorial
           <label class="star"><input type="checkbox"><span>☆</span></label>
         </h3>
-        <a href="https://youtube.com/watch?v=abc123" target="_blank" rel="noopener noreferrer" class="recent-url">https://youtube.com/watch?v=abc123</a>
+        <a href="https://youtube.com/watch?v=abc123" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://youtube.com/watch?v=abc123</a>
         <div class="recent-timestamp">8 hours ago</div>
       </div>
 
@@ -188,4 +306,5 @@
     <a href="history.html" class="view-history">view full history</a>
   </div>
 </body>
+
 </html>

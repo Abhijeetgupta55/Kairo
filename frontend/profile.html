@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
       background-color: #ffffff;
       color: #000000;
       line-height: 1.6;
-      background-image: 
+      background-image:
         linear-gradient(to right, #f0f0f0 1px, transparent 1px),
         linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
       background-size: 20px 20px;
@@ -31,52 +32,53 @@
       align-items: center;
     }
 
-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #000000;
-            /* dark navbar */
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000000;
+      /* dark navbar */
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-        .nav-logo {
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: #fff;
-            text-decoration: none;
-            font-family: Arial, sans-serif;
-            padding-right: 600px;
-        }
+    .nav-logo {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #fff;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      padding-right: 600px;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
 
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            text-transform: lowercase;
-            transition: color 0.3s;
-        }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      text-transform: lowercase;
+      transition: color 0.3s;
+    }
 
-        .nav-links a:hover {
-            color: #e3f2fd;
-            /* accent hover */
-        }
+    .nav-links a:hover {
+      color: #e3f2fd;
+      /* accent hover */
+    }
 
-        @media(max-width:768px) {
-            .nav-links {
-                display: none;
-            }
-        }
+    @media(max-width:768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
     main.profile-container {
-      margin: 10px auto 20px auto; 
+      margin: 10px auto 20px auto;
       padding: 10px;
     }
 
@@ -96,7 +98,7 @@ nav {
     }
 
     .profile-header:hover {
-      transform: scale(1.05); 
+      transform: scale(1.05);
     }
 
     .profile-header img {
@@ -105,7 +107,7 @@ nav {
       height: 120px;
       border-radius: 50%;
       margin-bottom: 15px;
-      
+
     }
 
     .profile-header .info {
@@ -115,24 +117,28 @@ nav {
 
     .sections-row {
       display: flex;
-      gap: 20px;              
-      flex-wrap: wrap;        
+      gap: 20px;
+      flex-wrap: wrap;
       justify-content: center;
     }
 
 
     .section {
-      flex: 1 1 220px;        
+      flex: 1 1 220px;
       max-width: 200px;
-      background: rgba(255, 254, 241, 0.689);;
+      background: rgba(255, 254, 241, 0.689);
+      ;
       padding: 15px;
       border-radius: 20px;
       transition: background-color 0.3s ease, transform 0.2s ease;
       align-items: center;
       text-align: center;
     }
-.followers:hover,.following:hover,.tabs:hover{
-      background-color:#ceff464e;
+
+    .followers:hover,
+    .following:hover,
+    .tabs:hover {
+      background-color: #ceff464e;
       border-radius: 20px;
       transform: scale(1.01);
     }
@@ -141,18 +147,20 @@ nav {
       padding-top: 5px;
       font-size: 1.5em;
       color: #333;
-      font-family:Verdana, Geneva, Tahoma, sans-serif
+      font-family: Verdana, Geneva, Tahoma, sans-serif
     }
+
     .section h2 {
       padding-top: 5px;
       font-size: 2.5em;
       color: #333;
-      font-family:Verdana, Geneva, Tahoma, sans-serif;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
       align-items: center;
       text-align: center;
-       transition: transform 0.3s ease;
+      transition: transform 0.3s ease;
     }
-    .section h2:hover{
+
+    .section h2:hover {
       transform: scale(1.2);
     }
 
@@ -163,23 +171,24 @@ nav {
       color: #ffffff;
       bottom: 0;
     }
-    .rotate{
-  display: block;
-  margin: 10px auto;   
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  transition: transform 1s ease;
-}
+
+    .rotate {
+      display: block;
+      margin: 10px auto;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      transition: transform 1s ease;
+    }
 
 
- .form-container {
+    .form-container {
       width: 80%;
       margin: 40px auto;
       padding: 30px;
       background: rgba(240, 240, 240, 0.9);
       border-radius: 25px;
-      box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
     }
 
     .form-group {
@@ -193,7 +202,8 @@ nav {
       color: #333;
     }
 
-    input, textarea {
+    input,
+    textarea {
       padding: 8px 10px;
       border: 1px solid #ddd;
       border-radius: 5px;
@@ -222,46 +232,47 @@ nav {
     button:hover {
       background: #333;
     }
+
     .field {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 8px 10px;
-  font-size: 1em;
-  margin-top: 5px;
-}
-.form-container button{
-  margin-left: 430px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 8px 10px;
+      font-size: 1em;
+      margin-top: 5px;
+    }
 
-}
+    .form-container button {
+      margin-left: 430px;
 
-    
+    }
   </style>
 </head>
+
 <body>
   <header>
-       <nav>
-        <a href="dashboard.html" class="nav-logo">kairo.</a>
-        <div class="nav-links">
-            <a href="dashboard.html">dashboard</a>
-            <a href="recent.html">recents</a>
-            <a href="notes.html">notes</a>
-            <a href="favorites.html">favorites</a>
-            <a href="collections.html">collections</a>
-            <a href="profile.html">profile</a>
-            <a href="landing.html">logout</a>
-        </div>
+    <nav>
+      <a href="dashboard.html" class="nav-logo">kairo.</a>
+      <div class="nav-links">
+        <a href="dashboard.html">dashboard</a>
+        <a href="recent.html">recents</a>
+        <a href="notes.html">notes</a>
+        <a href="favorites.html">favorites</a>
+        <a href="collections.html">collections</a>
+        <a href="profile.html">profile</a>
+        <a href="landing.html">logout</a>
+      </div>
     </nav>
   </header>
 
   <main class="profile-container">
 
     <div class="profile-header">
-      <img src="C:\Users\Abhi\OneDrive\Desktop\download.jpg" >
+      <img src="C:\Users\Abhi\OneDrive\Desktop\download.jpg">
       <div class="info">
         <h2>Bob</h2>
         <p>Member since June 2025</p>
-      
+
       </div>
     </div>
 
@@ -269,7 +280,7 @@ nav {
       <div class="section tabs">
         <h3>Tabs opened</h3>
         <h2>18</h2>
-       
+
       </div>
 
       <div class="section followers">
@@ -282,34 +293,35 @@ nav {
         <h2>5</h2>
       </div>
 
-       <div class="section following">
+      <div class="section following">
         <h3>collections</h3>
         <h2>7</h2>
       </div>
 
-      
-  <div class="form-container">
-  <div class="form-group">
-    <label>Email</label>
-    <p class="field">kairo55555@gmail.com</p>
-  </div>
 
-  <div class="row">
-    <div class="form-group">
-      <label>Date of Birth</label>
-      <p class="field">11 november 2000</p>
-    </div>
-    <div class="form-group">
-      <label>Phone Number</label>
-      <p class="field">+91 9876543210</p>
-    </div>
-  </div>
+      <div class="form-container">
+        <div class="form-group">
+          <label>Email</label>
+          <p class="field">kairo55555@gmail.com</p>
+        </div>
 
-  <div class="form-group">
-    <label>Bio</label>
-    <p class="field">Loves exploring new tech, organizing workflows, and a big fan of coffee powered productivity. </p>
-  </div>
-  <button>Update Profile</button>
+        <div class="row">
+          <div class="form-group">
+            <label>Date of Birth</label>
+            <p class="field">11 november 2000</p>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <p class="field">+91 9876543210</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Bio</label>
+          <p class="field">Loves exploring new tech, organizing workflows, and a big fan of coffee powered productivity.
+          </p>
+        </div>
+        <button>Update Profile</button>
 
   </main>
 
@@ -317,4 +329,5 @@ nav {
     <p>©2025 Kairo. All rights reserved.</p>
   </footer>
 </body>
+
 </html>

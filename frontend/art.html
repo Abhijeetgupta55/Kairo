@@ -1,30 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kairo Art Collections</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #fff; color: #000; line-height: 1.6; background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px), linear-gradient(to bottom, #f0f0f0 1px, transparent 1px); background-size: 20px 20px; }
-        a { text-decoration: none; color: inherit; }
-        header { background-color: #000; color: #fff; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5em; font-weight: bold; background-color: #000; padding: 5px 10px; border-radius: 15px; padding-left: 25px; text-align: center; }
-        nav { flex-grow: 1; display: flex; justify-content: flex-end; }
-        nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
-        nav ul li { margin-left: 20px; font-size: 1em; }
-        nav ul li a { color: #fff; text-decoration: none; }
-        .dashboard { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; margin: 0 auto; }
-        .d { background: #fff; border: 1px solid #ddd; border-radius: 5px; padding: 15px; text-align: left; flex: 1 1 300px; max-width: 365px; }
-        .notes, .recents, .favorites { height: 450px; width: 365px; background-color: #fff; transition: background-color 0.3s ease; overflow: auto; border-radius: 10px; display: flex; flex-direction: column; align-items: flex-start; padding: 15px; }
-        .notes:hover, .recents:hover, .favorites:hover { background-color: rgba(239, 155, 30, 0.267); border-radius: 20px; transform: scale(1.01); }
-        .d ul { margin-top: 10px; margin-left: 10px; padding: 0; text-align: left; }
-        ul li { padding: 5px 0; font-size: 0.9em; color: #666; }
-        ul li a { color: #000; font-size: 1.1em; }
-        footer { background-color: #000; padding: 10px; text-align: center; color: #fff; }
-        .collection-list { padding-left: 20px; margin: 0; }
-        .collection-list li { padding: 5px 0; font-size: 0.9em; color: #666; padding-left: 10px; }
-        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #000;
+            line-height: 1.6;
+            background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px), linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background-color: #000;
+            padding: 5px 10px;
+            border-radius: 15px;
+            padding-left: 25px;
+            text-align: center;
+        }
+
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            font-size: 1em;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .d {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: left;
+            flex: 1 1 300px;
+            max-width: 365px;
+        }
+
+        .notes,
+        .recents,
+        .favorites {
+            height: 450px;
+            width: 365px;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+            overflow: auto;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px;
+        }
+
+        .notes:hover,
+        .recents:hover,
+        .favorites:hover {
+            background-color: rgba(239, 155, 30, 0.267);
+            border-radius: 20px;
+            transform: scale(1.01);
+        }
+
+        .d ul {
+            margin-top: 10px;
+            margin-left: 10px;
+            padding: 0;
+            text-align: left;
+        }
+
+        ul li {
+            padding: 5px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        ul li a {
+            color: #000;
+            font-size: 1.1em;
+        }
+
+        footer {
+            background-color: #000;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .collection-list {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .collection-list li {
+            padding: 5px 0;
+            font-size: 0.9em;
+            color: #666;
+            padding-left: 10px;
+        }
+
         nav {
             display: flex;
             justify-content: space-between;
@@ -69,32 +187,38 @@
         }
     </style>
 </head>
+
 <body>
     <header>
-         <nav>
-        <a href="dashboard.html" class="nav-logo">kairo.</a>
-        <div class="nav-links">
-            <a href="dashboard.html">dashboard</a>
-            <a href="recent.html">recents</a>
-            <a href="notes.html">notes</a>
-            <a href="favorites.html">favorites</a>
-            <a href="collections.html">collections</a>
-            <a href="profile.html">profile</a>
-            <a href="landing.html">logout</a>
-        </div>
-    </nav>
+        <nav>
+            <a href="dashboard.html" class="nav-logo">kairo.</a>
+            <div class="nav-links">
+                <a href="dashboard.html">dashboard</a>
+                <a href="recent.html">recents</a>
+                <a href="notes.html">notes</a>
+                <a href="favorites.html">favorites</a>
+                <a href="collections.html">collections</a>
+                <a href="profile.html">profile</a>
+                <a href="landing.html">logout</a>
+            </div>
+        </nav>
     </header>
-    <h1 style="padding-left: 20px; margin: 5px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">ART</h1>
+    <h1
+        style="padding-left: 20px; margin: 5px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+        ART</h1>
     <main class="dashboard">
         <div class="d notes">
-            <div class="collection-title"><h1>🎨 Art & Design</h1></div>
+            <div class="collection-title">
+                <h1>🎨 Art & Design</h1>
+            </div>
             <ul class="collection-list">
                 <li><a href="https://www.behance.net/" target="_blank">Behance</a></li>
                 <li><a href="https://dribbble.com/" target="_blank">Dribbble</a></li>
                 <li><a href="https://www.deviantart.com/" target="_blank">DeviantArt</a></li>
                 <li><a href="https://www.artstation.com/" target="_blank">ArtStation</a></li>
                 <li><a href="https://www.canva.com/learn/graphic-design/" target="_blank">Canva Design Articles</a></li>
-                <li><a href="https://www.smashingmagazine.com/category/design/" target="_blank">Smashing Magazine Design</a></li>
+                <li><a href="https://www.smashingmagazine.com/category/design/" target="_blank">Smashing Magazine
+                        Design</a></li>
                 <li><a href="https://www.creativebloq.com/" target="_blank">Creative Bloq</a></li>
                 <li><a href="https://99designs.com/blog/" target="_blank">99designs Blog</a></li>
                 <li><a href="https://www.ted.com/topics/art" target="_blank">TED Talks on Art</a></li>
@@ -106,7 +230,8 @@
                 <li><a href="https://www.adobe.com/creativecloud.html" target="_blank">Adobe Creative Cloud</a></li>
                 <li><a href="https://www.figma.com/community" target="_blank">Figma Community</a></li>
                 <li><a href="https://www.pinterest.com/topics/art/" target="_blank">Pinterest Art</a></li>
-                <li><a href="https://www.coreldraw.com/en/pages/graphic-design/" target="_blank">CorelDRAW Design</a></li>
+                <li><a href="https://www.coreldraw.com/en/pages/graphic-design/" target="_blank">CorelDRAW Design</a>
+                </li>
                 <li><a href="https://www.vectorstock.com/" target="_blank">VectorStock</a></li>
                 <li><a href="https://www.pexels.com/search/art/" target="_blank">Pexels Art Photos</a></li>
                 <li><a href="https://www.unsplash.com/search/photos/art" target="_blank">Unsplash Art</a></li>
@@ -117,10 +242,11 @@
             <h1>❤️ Art Favorites</h1>
             <ul>
                 <li><a href="https://www.behance.net/" target="_blank">Behance</a></li>
-                <li><a href="https://www.smashingmagazine.com/category/design/" target="_blank">Smashing Magazine Design</a></li>
+                <li><a href="https://www.smashingmagazine.com/category/design/" target="_blank">Smashing Magazine
+                        Design</a></li>
                 <li><a href="https://www.creativebloq.com/" target="_blank">Creative Bloq</a></li>
                 <li><a href="https://www.deviantart.com/" target="_blank">DeviantArt</a></li>
-                                <li><a href="https://www.behance.net/" target="_blank">Behance</a></li>
+                <li><a href="https://www.behance.net/" target="_blank">Behance</a></li>
                 <li><a href="https://www.canva.com/learn/graphic-design/" target="_blank">Canva Design Articles</a></li>
             </ul>
         </div>
@@ -129,4 +255,5 @@
         <p>©2025 Kairo. All rights reserved.</p>
     </footer>
 </body>
+
 </html>
