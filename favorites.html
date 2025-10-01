@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kairo. - favorites</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bg-white:#ffffff;
+      --text-black:#1a1a1a;
+      --text-gray:#666;
+      --text-light:#999;
+      --border:#e8e8e8;
+      --grid-color:#f5f5f5;
+      --shadow:rgba(0,0,0,0.04);
+      --shadow-hover:rgba(0,0,0,0.12);
+      --accent-gold:#fff8e1;
+      --gold:#f5b400;
+    }
+    body{
+      font-family:'Inter',sans-serif;background:var(--bg-white);
+      color:var(--text-black);min-height:100vh;line-height:1.5;
+    }
+    body::before{
+      content:'';position:fixed;inset:0;
+      background-image:
+        linear-gradient(to right,var(--grid-color) 1px,transparent 1px),
+        linear-gradient(to bottom,var(--grid-color) 1px,transparent 1px);
+      background-size:20px 20px;z-index:-1;
+    }
+    nav{
+      width:100%;background:var(--text-black);color:var(--bg-white);
+      padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;
+      position:sticky;top:0;z-index:10;
+    }
+    .nav-logo{font-size:1.8rem;font-weight:500;text-decoration:none;color:var(--bg-white);}
+    .nav-links{display:flex;gap:1.5rem;}
+    .nav-links a{text-decoration:none;color:var(--bg-white);font-size:0.95rem;text-transform:lowercase;transition:color .3s;}
+    .nav-links a:hover{color:var(--gold);}
+    .container{max-width:1200px;margin:2rem auto;padding:0 2rem;}
+    h1.page-heading{font-size:2rem;font-weight:600;margin-bottom:1.5rem;text-transform:lowercase;display:flex;align-items:center;gap:.5rem;}
+    h1.page-heading span{color:var(--gold);}
+    .favorites-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:1.5rem;
+    }
+    .favorite-card{
+      background:var(--bg-white);border:1px solid var(--border);
+      border-radius:12px;padding:1.2rem;box-shadow:0 2px 16px var(--shadow);
+      transition:all .3s;position:relative;overflow:hidden;
+    }
+    .favorite-card:hover{
+      background:var(--accent-gold);transform:translateY(-4px);
+      box-shadow:0 8px 24px var(--shadow-hover);
+    }
+    .favorite-title{
+      font-size:1rem;font-weight:500;margin-bottom:.5rem;text-transform:lowercase;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .favorite-url{font-size:.85rem;color:var(--text-gray);text-decoration:none;word-break:break-word;}
+    .favorite-url:hover{color:var(--text-black);}
+    .favorite-timestamp{font-size:.8rem;color:var(--text-light);margin-top:.6rem;}
+    .star{
+      font-size:1.2rem;
+      color:var(--gold);
+    }
+    .remove-btn{
+      position:absolute;top:10px;right:10px;
+      font-size:.8rem;background:var(--text-black);color:var(--bg-white);
+      border:none;border-radius:6px;padding:.3rem .6rem;
+      cursor:pointer;opacity:0;transition:opacity .3s;
+    }
+   
+   
+    @media(max-width:768px){.nav-links{display:none;}.container{padding:1rem;}}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <a href="dashboard.html" class="nav-logo">kairo.</a>
+    <div class="nav-links">
+      <a href="dashboard.html">dashboard</a>
+      <a href="recent.html">recents</a>
+      <a href="notes.html">notes</a>
+      <a href="favorites.html">favorites</a>
+      <a href="collections.html">collections</a>
+      <a href="profile.html">profile</a>
+      <a href="#">logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-heading">🌟 <span>favorites</span></h1>
+    <div class="favorites-grid">
+
+      <div class="favorite-card">
+       
+        <h3 class="favorite-title">github repository <span class="star">★</span></h3>
+        <a href="https://github.com/user/awesome-project" target="_blank" class="favorite-url">https://github.com/user/awesome-project</a>
+        <div class="favorite-timestamp">added 2 days ago</div>
+      </div>
+
+      <div class="favorite-card">
+    
+        <h3 class="favorite-title">react hooks guide <span class="star">★</span></h3>
+        <a href="https://react.dev/reference/react/hooks" target="_blank" class="favorite-url">https://react.dev/reference/react/hooks</a>
+        <div class="favorite-timestamp">added 5 days ago</div>
+      </div>
+
+      <div class="favorite-card">
+        
+        <h3 class="favorite-title">figma design system <span class="star">★</span></h3>
+        <a href="https://figma.com/file/design-system" target="_blank" class="favorite-url">https://figma.com/file/design-system</a>
+        <div class="favorite-timestamp">added 1 week ago</div>
+      </div>
+
+      <div class="favorite-card">
+    
+        <h3 class="favorite-title">react hooks guide <span class="star">★</span></h3>
+        <a href="https://react.dev/reference/react/hooks" target="_blank" class="favorite-url">https://react.dev/reference/react/hooks</a>
+        <div class="favorite-timestamp">added 5 days ago</div>
+      </div>
+
+      <div class="favorite-card">
+    
+        <h3 class="favorite-title">react hooks guide <span class="star">★</span></h3>
+        <a href="https://react.dev/reference/react/hooks" target="_blank" class="favorite-url">https://react.dev/reference/react/hooks</a>
+        <div class="favorite-timestamp">added 5 days ago</div>
+      </div>
+
+
+      <div class="favorite-card">
+    
+        <h3 class="favorite-title">react hooks guide <span class="star">★</span></h3>
+        <a href="https://react.dev/reference/react/hooks" target="_blank" class="favorite-url">https://react.dev/reference/react/hooks</a>
+        <div class="favorite-timestamp">added 5 days ago</div>
+      </div>
+
+
+      <div class="favorite-card">
+    
+        <h3 class="favorite-title">react hooks guide <span class="star">★</span></h3>
+        <a href="https://react.dev/reference/react/hooks" target="_blank" class="favorite-url">https://react.dev/reference/react/hooks</a>
+        <div class="favorite-timestamp">added 5 days ago</div>
+      </div>
+
+      <div class="favorite-card">
+    
+        <h3 class="favorite-title">youtube reference <span class="star">★</span></h3>
+        <a href="https://www.youtube.com/watch?v=aXntSsF5-uc&t=62s&pp=ygUIZ2F1eCBhcnQ%3D" target="_blank" class="favorite-url">https://react.dev/reference/react/hooks</a>
+        <div class="favorite-timestamp">added 5 days ago</div>
+      </div>
+
+
+
+    </div>
+    
+    
+
+</body>
+</html>
