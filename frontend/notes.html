@@ -2,18 +2,11 @@
 <html lang="en">
 
 <head>
-    <!-- Character encoding - tells browser how to read text -->
     <meta charset="UTF-8">
-
-    <!-- Viewport - makes site work on mobile phones -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Page title - shows in browser tab -->
     <title>Kairo - Notes</title>
 
-    <!-- CSS STYLES - this is where we make things look pretty -->
     <style>
-        /* Reset - removes default spacing from browser */
         * {
             margin: 0;
             padding: 0;
@@ -33,7 +26,6 @@
             background-size: 20px 20px;
         }
 
-        /* HEADER - top bar with logo and navigation */
         header {
             background-color: black;
             border-bottom: 1px solid #e5e5e5;
@@ -41,7 +33,6 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Navigation container with flexbox layout */
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -50,14 +41,12 @@
             align-items: center;
         }
 
-        /* Logo text - aligned to the left */
         .logo {
             font-size: 32px;
             font-weight: 700;
             color: white;
         }
 
-        /* Navigation links container */
         .nav-links {
             display: flex;
             list-style: none;
@@ -65,7 +54,6 @@
             align-items: center;
         }
 
-        /* Individual navigation links */
         .nav-links a {
             color: white;
             text-decoration: none;
@@ -78,13 +66,11 @@
             color: #ccc;
         }
 
-        /* Active/current page link */
         .nav-links a.active {
             color: #ffffff;
             font-weight: 500;
         }
 
-        /* MAIN - main content area that grows to push footer down */
         main {
             max-width: 1200px;
             margin: 0 auto;
@@ -92,9 +78,9 @@
             position: relative;
             flex: 1;
             width: 100%;
+            padding-bottom: 120px;
         }
 
-        /* Header section with title and add button */
         .notes-header {
             display: flex;
             justify-content: space-between;
@@ -102,14 +88,12 @@
             margin-bottom: 32px;
         }
 
-        /* Section title */
         .section-title {
             font-size: 36px;
             font-weight: 700;
             color: #1a1a1a;
         }
 
-        /* Add button - minimalist + design */
         .add-button {
             width: 50px;
             height: 50px;
@@ -122,7 +106,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
+            cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
@@ -137,7 +121,6 @@
             transform: scale(0.95);
         }
 
-        /* Notes grid - holds all note cards */
         .notes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -145,7 +128,6 @@
             margin-bottom: 32px;
         }
 
-        /* Individual note card with hover effect */
         .note-card {
             background-color: white;
             padding: 24px;
@@ -162,31 +144,162 @@
             transform: translateY(-4px);
         }
 
-        /* Note text inside card */
         .note-text {
             color: #374151;
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 16px;
+            word-wrap: break-word;
         }
 
-        /* Edit link */
-        .edit-link {
+        .note-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .edit-link, .delete-link {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
             transition: color 0.2s ease;
+            cursor: pointer;
         }
 
         .edit-link:hover {
             color: #4f46e5;
         }
 
+        .delete-link {
+            color: #ef4444;
+        }
 
+        .delete-link:hover {
+            color: #dc2626;
+        }
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.2s ease;
+        }
 
-        /* FOOTER - FIXED to bottom of viewport */
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { 
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .modal textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+            margin-bottom: 20px;
+            transition: border-color 0.2s ease;
+        }
+
+        .modal textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .save-button {
+            background-color: black;
+            color: white;
+        }
+
+        .save-button:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .cancel-button {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+
+        .cancel-button:hover {
+            background-color: #d1d5db;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state-text {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
         footer {
             background-color: rgb(0, 0, 0);
             border-top: 1px solid #e5e5e5;
@@ -207,12 +320,6 @@
             color: #6b7280;
         }
 
-        /* Add bottom padding to main to prevent footer overlap */
-        main {
-            padding-bottom: 120px;
-        }
-
-        /* Make it work on small screens (phones) */
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -246,21 +353,19 @@
             footer {
                 padding: 16px;
             }
+
+            .modal-content {
+                padding: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- ========================================== -->
-    <!-- HEADER - Top navigation bar -->
-    <!-- ========================================== -->
     <header>
         <div class="nav-container">
-            <!-- Logo - aligned to the left -->
             <h1 class="logo">kairo.</h1>
-
-            <!-- Navigation links - aligned to the right -->
             <nav class="nav-links">
                 <a href="dashboard.html">dashboard</a>
                 <a href="recent.html">recents</a>
@@ -273,87 +378,254 @@
         </div>
     </header>
 
-
-    <!-- ========================================== -->
-    <!-- MAIN - Main page content -->
-    <!-- ========================================== -->
     <main>
-
-        <!-- Notes section -->
         <div>
-            <!-- Header with title and add button -->
             <div class="notes-header">
                 <h2 class="section-title">📝 notes</h2>
-                <a href="#" class="add-button">+</a>
+                <button class="add-button" id="addNoteBtn">+</button>
             </div>
 
-            <!-- Grid of note cards -->
-            <div class="notes-grid">
-
-                <!-- Your original 2 note cards -->
-                <div class="note-card">
-                    <p class="note-text">
-                        Remember to update the user interface mockups before the client meeting tomorrow. Focus on the
-                        dashboard layout and navigation flow.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
-            </div>
-
-
+            <div class="notes-grid" id="notesGrid"></div>
         </div>
-
     </main>
 
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-header" id="modalTitle">Add Note</h3>
+            <textarea id="noteInput" placeholder="Write your note here..."></textarea>
+            <div class="modal-buttons">
+                <button class="modal-button cancel-button" id="cancelBtn">Cancel</button>
+                <button class="modal-button save-button" id="saveBtn">Save</button>
+            </div>
+        </div>
+    </div>
 
-    <!-- ========================================== -->
-    <!-- FOOTER - Bottom section with copyright -->
-    <!-- ========================================== -->
     <footer>
         <div class="footer-container">
             <p class="copyright">© 2025 Kairo. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // ============================================================
+        // WHAT IS A CLASS? 
+        // Think of it as a TEMPLATE or BLUEPRINT for creating objects
+        // Like a cookie cutter that makes many cookies!
+        // ============================================================
+
+        // CLASS 1: Note 
+        // This is our template for ONE note
+        class Note {
+            // constructor = special function that runs when we make a new note
+            constructor(text) {
+                this.id = Date.now();     // Give each note a unique number ID
+                this.text = text;         // Store the note's text
+            }
+            // That's it! A note just has an ID and text.
+        }
+
+        // CLASS 2: NotesApp
+        // This is our main app that manages ALL the notes
+        class NotesApp {
+            
+            // STEP 1: Constructor - This runs ONCE when app starts
+            constructor() {
+                this.notes = [];          // Empty box to store all notes
+                this.editingId = null;    // Remember which note we're editing
+                
+                this.addSampleNotes();    // Add 2 starter notes
+                this.showNotes();         // Display notes on screen
+                this.setupButtons();      // Make buttons work
+            }
+
+            // STEP 2: Add 2 sample notes when app starts
+            addSampleNotes() {
+                // Create first note using our Note class
+                let note1 = new Note("Remember to update the user interface mockups before the client meeting tomorrow. Focus on the dashboard layout and navigation flow.");
+                
+                // Create second note
+                let note2 = new Note("New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import from bookmarks.");
+                
+                // Add both notes to our notes array
+                this.notes.push(note1);
+                this.notes.push(note2);
+            }
+
+            // STEP 3: Display all notes on the webpage
+            showNotes() {
+                // Get the grid where notes go
+                let grid = document.getElementById('notesGrid');
+                
+                // If no notes exist, show a friendly message
+                if (this.notes.length === 0) {
+                    grid.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📝</div>
+                            <p class="empty-state-text">No notes yet</p>
+                            <p>Click the + button to create your first note</p>
+                        </div>
+                    `;
+                    return;  // Stop here
+                }
+                
+                // Build HTML for all notes
+                let html = '';
+                
+                // Loop through each note and create HTML
+                for (let i = 0; i < this.notes.length; i++) {
+                    let note = this.notes[i];
+                    
+                    html += `
+                        <div class="note-card">
+                            <p class="note-text">${note.text}</p>
+                            <div class="note-actions">
+                                <a class="edit-link" onclick="app.editNote(${note.id})">Edit</a>
+                                <a class="delete-link" onclick="app.deleteNote(${note.id})">Delete</a>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Put the HTML on the page
+                grid.innerHTML = html;
+            }
+
+            // STEP 4: Make all buttons do something when clicked
+            setupButtons() {
+                
+                // When user clicks + button
+                document.getElementById('addNoteBtn').onclick = () => {
+                    this.openModal();
+                };
+                
+                // When user clicks Save button
+                document.getElementById('saveBtn').onclick = () => {
+                    this.saveNote();
+                };
+                
+                // When user clicks Cancel button
+                document.getElementById('cancelBtn').onclick = () => {
+                    this.closeModal();
+                };
+                
+                // When user clicks outside the popup
+                document.getElementById('noteModal').onclick = (e) => {
+                    if (e.target.id === 'noteModal') {
+                        this.closeModal();
+                    }
+                };
+            }
+
+            // STEP 5: Open the popup window
+            openModal() {
+                // Get elements we need
+                let modal = document.getElementById('noteModal');
+                let title = document.getElementById('modalTitle');
+                let input = document.getElementById('noteInput');
+                
+                // Set title and clear input
+                title.textContent = 'Add Note';
+                input.value = '';
+                this.editingId = null;
+                
+                // Show the popup
+                modal.classList.add('active');
+                input.focus();  // Put cursor in text box
+            }
+
+            // STEP 6: Close the popup window
+            closeModal() {
+                let modal = document.getElementById('noteModal');
+                modal.classList.remove('active');
+                this.editingId = null;
+            }
+
+            // STEP 7: Save the note (either new or edited)
+            saveNote() {
+                // Get what user typed
+                let input = document.getElementById('noteInput');
+                let text = input.value.trim();  // Remove extra spaces
+                
+                // Check if empty
+                if (text === '') {
+                    alert('Please write something!');
+                    return;  // Stop here
+                }
+                
+                // Are we EDITING an old note?
+                if (this.editingId !== null) {
+                    
+                    // Find and update the note
+                    for (let i = 0; i < this.notes.length; i++) {
+                        if (this.notes[i].id === this.editingId) {
+                            this.notes[i].text = text;  // Update text
+                            break;  // Stop searching
+                        }
+                    }
+                    
+                } else {
+                    // ADDING a new note
+                    let newNote = new Note(text);     // Create new note
+                    this.notes.unshift(newNote);      // Add to start of array
+                }
+                
+                // Refresh the display and close popup
+                this.showNotes();
+                this.closeModal();
+            }
+
+            // STEP 8: Edit an existing note
+            editNote(id) {
+                // Find the note with this ID
+                let foundNote = null;
+                
+                for (let i = 0; i < this.notes.length; i++) {
+                    if (this.notes[i].id === id) {
+                        foundNote = this.notes[i];
+                        break;  // Found it! Stop searching
+                    }
+                }
+                
+                // If we found the note, show it in the popup
+                if (foundNote !== null) {
+                    this.editingId = id;
+                    
+                    document.getElementById('modalTitle').textContent = 'Edit Note';
+                    document.getElementById('noteInput').value = foundNote.text;
+                    document.getElementById('noteModal').classList.add('active');
+                    document.getElementById('noteInput').focus();
+                }
+            }
+
+            // STEP 9: Delete a note
+            deleteNote(id) {
+                // Ask user to confirm
+                let confirmDelete = confirm('Delete this note?');
+                
+                if (confirmDelete === false) {
+                    return;  // User clicked Cancel, so stop
+                }
+                
+                // Remove the note from array
+                let newNotes = [];
+                for (let i = 0; i < this.notes.length; i++) {
+                    if (this.notes[i].id !== id) {
+                        newNotes.push(this.notes[i]);  // Keep this note
+                    }
+                }
+                this.notes = newNotes;
+                
+                // Refresh the display
+                this.showNotes();
+            }
+        }
+
+        // ============================================================
+        // START THE APP!
+        // This creates our app and makes everything work
+        // ============================================================
+        let app = new NotesApp();
+    </script>
 
 </body>
 
