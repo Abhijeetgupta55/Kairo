@@ -121,7 +121,6 @@
             transform: scale(0.95);
         }
 
-        /* Notes grid - holds all note cards */
         .notes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -129,7 +128,6 @@
             margin-bottom: 32px;
         }
 
-        /* Individual note card with hover effect */
         .note-card {
             background-color: white;
             padding: 24px;
@@ -151,10 +149,16 @@
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 16px;
+            word-wrap: break-word;
         }
 
-        /* Edit link */
-        .edit-link {
+        .note-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .edit-link, .delete-link {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
@@ -167,10 +171,135 @@
             color: #4f46e5;
         }
 
+        .delete-link {
+            color: #ef4444;
+        }
 
+        .delete-link:hover {
+            color: #dc2626;
+        }
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.2s ease;
+        }
 
-        /* FOOTER - FIXED to bottom of viewport */
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { 
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .modal textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+            margin-bottom: 20px;
+            transition: border-color 0.2s ease;
+        }
+
+        .modal textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .save-button {
+            background-color: black;
+            color: white;
+        }
+
+        .save-button:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .cancel-button {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+
+        .cancel-button:hover {
+            background-color: #d1d5db;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state-text {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
         footer {
             background-color: rgb(0, 0, 0);
             border-top: 1px solid #e5e5e5;
@@ -191,12 +320,6 @@
             color: #6b7280;
         }
 
-        /* Add bottom padding to main to prevent footer overlap */
-        main {
-            padding-bottom: 120px;
-        }
-
-        /* Make it work on small screens (phones) */
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -242,10 +365,7 @@
 
     <header>
         <div class="nav-container">
-            <!-- Logo - aligned to the left -->
             <h1 class="logo">kairo.</h1>
-
-            <!-- Navigation links - aligned to the right -->
             <nav class="nav-links">
                 <a href="dashboard.html">dashboard</a>
                 <a href="recent.html">recents</a>
@@ -259,65 +379,23 @@
     </header>
 
     <main>
-
-        <!-- Notes section -->
         <div>
             <div class="notes-header">
                 <h2 class="section-title">📝 notes</h2>
                 <button class="add-button" id="addNoteBtn">+</button>
             </div>
 
-            <!-- Grid of note cards -->
-            <div class="notes-grid">
+            <div class="notes-grid" id="notesGrid"></div>
+        </div>
+    </main>
 
-                <!-- Your original 2 note cards -->
-                <div class="note-card">
-                    <p class="note-text">
-                        Remember to update the user interface mockups before the client meeting tomorrow. Focus on the
-                        dashboard layout and navigation flow.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
-                <div class="note-card">
-                    <p class="note-text">
-                        New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import
-                        from bookmarks.
-                    </p>
-                    <a href="#" class="edit-link">Edit</a>
-                </div>
-
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-header" id="modalTitle">Add Note</h3>
+            <textarea id="noteInput" placeholder="Write your note here..."></textarea>
+            <div class="modal-buttons">
+                <button class="modal-button cancel-button" id="cancelBtn">Cancel</button>
+                <button class="modal-button save-button" id="saveBtn">Save</button>
             </div>
         </div>
     </div>
