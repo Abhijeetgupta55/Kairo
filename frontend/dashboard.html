@@ -24,7 +24,7 @@
   </nav>
   <div class="dash-container">
     <div class="dashboard-grid">
-      <!-- Profile -->
+  
       <div class="card profile-card">
         <div class="profile-content" onclick="window.location.href='profile.html'">
           <div class="avatar">B</div>
@@ -34,14 +34,12 @@
           </div>
         </div>
 
-        <!-- bio section inside same card -->
         <div class="profile-bio">
           <p>
             Loves exploring new tech, organizing workflows, and a big fan of coffee-powered productivity.
           </p>
         </div>
       </div>
-      <!-- Recents -->
       <div class="card recents-card" onclick="window.location.href='recent.html'">
         <h2 class="card-title">⌚ recents</h2>
         <div class="recent-item">github repository</div>
@@ -49,14 +47,13 @@
         <div class="recent-item">figma design system</div>
       </div>
 
-      <!-- Add New URL -->
       <div class="card add-url-card" onclick="document.getElementById('addUrlModal').style.display='flex'">
         <h2 class="card-title">➕ add new url</h2>
         <p class="add-url-text">click here to save a new link with a title.</p>
         <button class="add-btn">+ add</button>
       </div>
 
-      <!-- Favorites -->
+  
       <div class="card favorites-card" onclick="window.location.href='favorites.html'">
         <h2 class="card-title">⭐ favorites</h2>
         <div class="favorite-item">mdn web docs</div>
@@ -64,14 +61,12 @@
         <div class="favorite-item">vs code extensions</div>
       </div>
 
-      <!-- Notes -->
       <div class="card notes-card" onclick="window.location.href='notes.html'">
         <h2 class="card-title">📝 notes</h2>
         <div class="note-preview">remember to update ui mockups before tomorrow.</div>
         <div class="note-preview">new features: dark mode, shortcuts, bulk url import.</div>
       </div>
 
-      <!-- Collections -->
       <div class="card collections-card" onclick="window.location.href='collections.html'">
         <h2 class="card-title">🗃️ collections</h2>
         <div class="collection-chip">research</div>
@@ -83,7 +78,6 @@
     </div>
   </div>
 
-  <!-- Modal -->
   <div id="addUrlModal" class="modal" style="display:none;">
     <div class="modal-content">
       <span class="close" onclick="document.getElementById('addUrlModal').style.display='none'">&times;</span>
@@ -96,7 +90,7 @@
       <button class="modal-add-btn">save link</button>
     </div>
   </div>
-  <!-- Logout Modal -->
+ 
   <div id="logoutModal" class="modal">
     <div class="modal-box">
       <p>Are you sure you want to logout?</p>
