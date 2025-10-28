@@ -5,17 +5,17 @@
   "members": [
     {
       "id": 1,
-      "name": "Alice Johnson",
+      "name": "Abhijeet Gupta",
       "role": "Product Designer",
-      "email": "alice.johnson@example.com",
+      "email": "abhijeet.gutpa.24cse@bmu.edu.in",
       "joined": "2023-08-12",
       "skills": ["Figma", "UX", "Prototyping"]
     },
     {
       "id": 2,
-      "name": "Bob Martin",
+      "name": "Reia Baid",
       "role": "Frontend Engineer",
-      "email": "bob.martin@example.com",
+      "email": "reia.baid.24cse@bmu.edu.in",
       "joined": "2022-03-04",
       "skills": ["JavaScript", "React", "Accessibility"]
     },
@@ -23,7 +23,7 @@
       "id": 3,
       "name": "Carla Reyes",
       "role": "Backend Engineer",
-      "email": "carla.reyes@example.com",
+      "email": "abhishek.mishra.24cse@bmu.edu.in",
       "joined": "2021-11-20",
       "skills": ["Node.js", "Databases", "APIs"]
     }
