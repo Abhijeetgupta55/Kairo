@@ -407,56 +407,32 @@
     </footer>
 
     <script>
-        // ============================================================
-        // WHAT IS A CLASS? 
-        // Think of it as a TEMPLATE or BLUEPRINT for creating objects
-        // Like a cookie cutter that makes many cookies!
-        // ============================================================
-
-        // CLASS 1: Note 
-        // This is our template for ONE note
         class Note {
-            // constructor = special function that runs when we make a new note
             constructor(text) {
-                this.id = Date.now();     // Give each note a unique number ID
-                this.text = text;         // Store the note's text
+                this.id = Date.now();     
+                this.text = text;         
             }
-            // That's it! A note just has an ID and text.
         }
 
-        // CLASS 2: NotesApp
-        // This is our main app that manages ALL the notes
         class NotesApp {
-            
-            // STEP 1: Constructor - This runs ONCE when app starts
             constructor() {
-                this.notes = [];          // Empty box to store all notes
-                this.editingId = null;    // Remember which note we're editing
+                this.notes = [];          
+                this.editingId = null;    
                 
-                this.addSampleNotes();    // Add 2 starter notes
-                this.showNotes();         // Display notes on screen
-                this.setupButtons();      // Make buttons work
+                this.addSampleNotes();    
+                this.showNotes();         
+                this.setupButtons();      
             }
 
-            // STEP 2: Add 2 sample notes when app starts
             addSampleNotes() {
-                // Create first note using our Note class
-                let note1 = new Note("Remember to update the user interface mockups before the client meeting tomorrow. Focus on the dashboard layout and navigation flow.");
-                
-                // Create second note
-                let note2 = new Note("New feature ideas: dark mode toggle, keyboard shortcuts for quick navigation, bulk URL import from bookmarks.");
-                
-                // Add both notes to our notes array
+                let note1 = new Note("Remember to update the user interface mockups before the client meeting tomorrow. Focus on the dashboard layout and navigation flow.");                
                 this.notes.push(note1);
-                this.notes.push(note2);
+
             }
 
-            // STEP 3: Display all notes on the webpage
             showNotes() {
-                // Get the grid where notes go
                 let grid = document.getElementById('notesGrid');
                 
-                // If no notes exist, show a friendly message
                 if (this.notes.length === 0) {
                     grid.innerHTML = `
                         <div class="empty-state">
@@ -465,13 +441,11 @@
                             <p>Click the + button to create your first note</p>
                         </div>
                     `;
-                    return;  // Stop here
+                    return;  
                 }
                 
-                // Build HTML for all notes
                 let html = '';
                 
-                // Loop through each note and create HTML
                 for (let i = 0; i < this.notes.length; i++) {
                     let note = this.notes[i];
                     
@@ -486,29 +460,23 @@
                     `;
                 }
                 
-                // Put the HTML on the page
                 grid.innerHTML = html;
             }
 
-            // STEP 4: Make all buttons do something when clicked
             setupButtons() {
                 
-                // When user clicks + button
                 document.getElementById('addNoteBtn').onclick = () => {
                     this.openModal();
                 };
                 
-                // When user clicks Save button
                 document.getElementById('saveBtn').onclick = () => {
                     this.saveNote();
                 };
                 
-                // When user clicks Cancel button
                 document.getElementById('cancelBtn').onclick = () => {
                     this.closeModal();
                 };
                 
-                // When user clicks outside the popup
                 document.getElementById('noteModal').onclick = (e) => {
                     if (e.target.id === 'noteModal') {
                         this.closeModal();
@@ -516,77 +484,62 @@
                 };
             }
 
-            // STEP 5: Open the popup window
             openModal() {
-                // Get elements we need
                 let modal = document.getElementById('noteModal');
                 let title = document.getElementById('modalTitle');
                 let input = document.getElementById('noteInput');
                 
-                // Set title and clear input
                 title.textContent = 'Add Note';
                 input.value = '';
                 this.editingId = null;
                 
-                // Show the popup
                 modal.classList.add('active');
-                input.focus();  // Put cursor in text box
+                input.focus();  
             }
 
-            // STEP 6: Close the popup window
             closeModal() {
                 let modal = document.getElementById('noteModal');
                 modal.classList.remove('active');
                 this.editingId = null;
             }
 
-            // STEP 7: Save the note (either new or edited)
             saveNote() {
-                // Get what user typed
                 let input = document.getElementById('noteInput');
-                let text = input.value.trim();  // Remove extra spaces
+                let text = input.value.trim();  
                 
-                // Check if empty
                 if (text === '') {
                     alert('Please write something!');
-                    return;  // Stop here
+                    return;  
                 }
                 
-                // Are we EDITING an old note?
                 if (this.editingId !== null) {
                     
-                    // Find and update the note
                     for (let i = 0; i < this.notes.length; i++) {
                         if (this.notes[i].id === this.editingId) {
-                            this.notes[i].text = text;  // Update text
-                            break;  // Stop searching
+                            this.notes[i].text = text; 
+                            break;  
                         }
                     }
                     
                 } else {
-                    // ADDING a new note
-                    let newNote = new Note(text);     // Create new note
-                    this.notes.unshift(newNote);      // Add to start of array
+                    let newNote = new Note(text);     
+                    this.notes.unshift(newNote);     
                 }
                 
-                // Refresh the display and close popup
                 this.showNotes();
                 this.closeModal();
             }
 
-            // STEP 8: Edit an existing note
             editNote(id) {
-                // Find the note with this ID
                 let foundNote = null;
                 
                 for (let i = 0; i < this.notes.length; i++) {
                     if (this.notes[i].id === id) {
                         foundNote = this.notes[i];
-                        break;  // Found it! Stop searching
+                        break;  
                     }
                 }
                 
-                // If we found the note, show it in the popup
                 if (foundNote !== null) {
                     this.editingId = id;
                     
@@ -597,33 +550,24 @@
                 }
             }
 
-            // STEP 9: Delete a note
             deleteNote(id) {
-                // Ask user to confirm
                 let confirmDelete = confirm('Delete this note?');
                 
                 if (confirmDelete === false) {
-                    return;  // User clicked Cancel, so stop
+                    return;  
                 }
                 
-                // Remove the note from array
                 let newNotes = [];
                 for (let i = 0; i < this.notes.length; i++) {
                     if (this.notes[i].id !== id) {
-                        newNotes.push(this.notes[i]);  // Keep this note
+                        newNotes.push(this.notes[i]);  
                     }
                 }
                 this.notes = newNotes;
                 
-                // Refresh the display
                 this.showNotes();
             }
         }
-
-        // ============================================================
-        // START THE APP!
-        // This creates our app and makes everything work
-        // ============================================================
         let app = new NotesApp();
     </script>
 
