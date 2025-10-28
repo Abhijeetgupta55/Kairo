@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kairo. - team</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kairo.css">
+  
+</head>
+  <body class="dash-body">
+  <nav>
+    <a href="#" class="nav-logo">kairo.</a>
+    <div class="nav-links">
+      <a href="dashboard.html">dashboard</a>
+      <a href="recent.html">recents</a>
+      <a href="notes.html">notes</a>
+      <a href="favorites.html">favorites</a>
+      <a href="collections.html">collections</a>
+      <a href="http://localhost:8000/team.html">team</a>
+      <a href="profile.html">profile</a>
+      <a href="#logoutModal">logout</a>
+    </div>
+  </nav>
+    <header style="padding:20px 0"></header>
+    <section style="max-width:1200px; margin:auto; overflow:hidden"></section
+    <div></div>
+
+    <script>
+        let header = document.querySelector("header");
+        let section = document.querySelector("section");
+
+        async function updateJSONPage() {
+            let request = new Request("team.json");
+            let response = await fetch(request);
+            let jsonobj = await response.json();
+            updateHeader(jsonobj);
+            updateSection(jsonobj);
+        }
+
+        function updateHeader(jsonobj) {
+            let img = document.createElement("img");
+            img.src = jsonobj["teamimg"];
+            img.style.margin = "0 auto";
+            img.style.display = "block";
+            img.style.width = "120px";
+            header.appendChild(img);
+
+            let teamName = document.createElement("h2");
+            teamName.textContent = jsonobj["teamName"];
+            teamName.style.textAlign = "center";
+            header.appendChild(teamName);
+
+            let org = document.createElement("h1");
+            org.textContent = jsonobj["org"];
+            org.style.textAlign = "center";
+            header.appendChild(org);
+        }
+
+        function updateSection(jsonobj) {
+            let members = jsonobj["members"];
+      for (let member of members) {
+        let article = document.createElement("article");
+
+        let name = document.createElement("h2");
+        name.textContent = member.name;
+        article.appendChild(name);
+
+        let role = document.createElement("p");
+        role.textContent = "Role: " + member.role;
+        article.appendChild(role);
+
+        let email = document.createElement("p");
+        email.textContent = "Email: " + member.email;
+        article.appendChild(email);
+
+        let joined = document.createElement("p");
+        joined.textContent = "Joined: " + member.joined;
+        article.appendChild(joined);
+
+        let skillsTitle = document.createElement("h3");
+        skillsTitle.textContent = "Skills:";
+        article.appendChild(skillsTitle);
+
+        let ul = document.createElement("ul");
+        for (let skill of member.skills) {
+          let li = document.createElement("li");
+          li.textContent = skill;
+          ul.appendChild(li);
+        }
+        article.appendChild(ul);
+
+        section.appendChild(article);
+      }
+        }
+
+        updateJSONPage();
+    </script>
+
+  <footer style="text-align:center; color:#6b7280">©2025 kairo. All rights reserved.</footer>
+</body>
+
+</html>
+
