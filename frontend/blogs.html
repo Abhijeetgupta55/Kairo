@@ -6,42 +6,84 @@
     <title>Blogs</title>
     
     <style>
+        :root {
+            --bg-white: #ffffff;
+            --text-black: #1a1a1a;
+            --text-gray: #666666;
+            --text-light: #999999;
+            --grid-color: #f5f5f5;
+            --border: #e8e8e8;
+            --accent-blue: #e3f2fd;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #ffffff;
-            color: #1a1a1a;
+            background-color: var(--bg-white);
+            color: var(--text-black);
             line-height: 1.6;
             background-image:
-                linear-gradient(to right, #f5f5f5 1px, transparent 1px),
-                linear-gradient(to bottom, #f5f5f5 1px, transparent 1px);
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
             background-size: 20px 20px;
         }
-        header {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 1.5rem 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
+
+        /* --- Navigation Bar Styles (from your kairo.css) --- */
+        nav {
+            width: 100%;
+            background: var(--text-black);
+            color: var(--bg-white);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            top: 0;
+            z-index: 10;
         }
-        header h1 {
-            font-size: 2.2rem;
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--bg-white);
         }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--bg-white);
+            font-size: 0.95rem;
+            text-transform: lowercase;
+            transition: color .3s;
+        }
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+        .nav-links a.active {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+        /* --- End Nav Bar Styles --- */
+
+
         main {
             max-width: 900px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
+
         .blog-post-card {
             background: #ffffff;
             padding: 2rem;
             margin-bottom: 2rem;
             border-radius: 10px;
-            border: 1px solid #e8e8e8;
+            border: 1px solid var(--border);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
@@ -67,7 +109,7 @@
         }
         .blog-post-card .date {
             font-size: 0.85rem;
-            color: #888;
+            color: var(--text-gray);
             margin-bottom: 1rem;
         }
 
@@ -78,19 +120,19 @@
             box-shadow: none;
         }
         .template-card:hover {
-            transform: none; /* Disable pop on template */
+            transform: none;
             box-shadow: none;
         }
         .template-card h2,
         .template-card h3,
         .template-card .content {
             color: #999;
-            outline: none; /* Remove outline when editing */
+            outline: none;
         }
         .template-card [contenteditable="true"]:focus {
-            color: #1a1a1a;
-            background: #f0f8ff; /* Light blue when editing */
-            box-shadow: 0 0 0 2px #a0cfff; /* Blue glow */
+            color: var(--text-black);
+            background: #f0f8ff;
+            box-shadow: 0 0 0 2px #a0cfff;
         }
         .template-card button {
             background: #007aff;
@@ -107,21 +149,34 @@
         .template-card button:hover {
             background: #0056b3;
         }
+        .template-card button.error-btn {
+            background: #dc3545;
+        }
+        .template-card button.error-btn:hover {
+            background: #a71d2a;
+        }
 
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Blogs</h1>
-    </header>
+    <nav>
+        <a href="dashboard.html" class="nav-logo">kairo.</a>
+        <div class="nav-links">
+            <a href="dashboard.html">dashboard</a>
+            <a href="recent.html">recents</a>
+            <a href="notes.html">notes</a>
+            <a href="favorites.html">favorites</a>
+            <a href="collections.html">collections</a>
+            <a href="blog.html" class="active">blogs</a>
+            <a href="team.html">team</a>
+            <a href="profile.html">profile</a>
+            <a href="landing.html">logout</a>
+        </div>
+    </nav>
 
     <main id="blog-posts-container">
-        <!-- 
-          The script will dynamically add:
-          1. The Template Card
-          2. All posts from blogs.json
-        -->
+        <!-- Script will add template card and JSON posts here -->
     </main>
 
     <script>
@@ -129,7 +184,6 @@
             
             const postsContainer = document.getElementById('blog-posts-container');
 
-            // --- 1. Create and Add the Template Card ---
             const templateCard = document.createElement('article');
             templateCard.className = 'blog-post-card template-card';
             
@@ -145,24 +199,26 @@
             
             postsContainer.appendChild(templateCard);
 
-            // --- 2. Add Functionality to the Template Card ---
             const publishBtn = document.getElementById('publish-btn');
             const authorInput = document.getElementById('template-author');
             const titleInput = document.getElementById('template-title');
             const contentInput = document.getElementById('template-content');
 
             publishBtn.addEventListener('click', () => {
-                const author = authorInput.textContent;
-                const title = titleInput.textContent;
-                const content = contentInput.textContent;
+                const author = authorInput.textContent.trim();
+                const title = titleInput.textContent.trim();
+                const content = contentInput.textContent.trim();
 
-                if (author === 'Your Name Here' || title === 'Blog Post Title Goes Here' || content.includes('This is where your main')) {
-                    // We don't use alert()
+                const isAuthorDefault = author === 'Your Name Here';
+                const isTitleDefault = title === 'Blog Post Title Goes Here';
+                const isContentDefault = content === 'This is where your main blog post content goes. Just click and type.';
+
+                if (isAuthorDefault || isTitleDefault || isContentDefault || !author || !title || !content) {
                     publishBtn.textContent = 'Please fill out all fields!';
-                    publishBtn.style.background = '#dc3545'; // Red color
+                    publishBtn.classList.add('error-btn');
                     setTimeout(() => {
                         publishBtn.textContent = 'Publish Post';
-                        publishBtn.style.background = '#007aff';
+                        publishBtn.classList.remove('error-btn');
                     }, 2000);
                     return;
                 }
@@ -186,8 +242,6 @@
                 contentInput.textContent = 'This is where your main blog post content goes. Just click and type.';
             });
 
-
-            // --- 3. Load existing posts from JSON ---
             fetch('blogs.json')
                 .then(response => {
                     if (!response.ok) {
