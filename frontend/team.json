@@ -21,8 +21,8 @@
     },
     {
       "id": 3,
-      "name": "Carla Reyes",
-      "role": "Backend Engineer",
+      "name": "Abhishek Mishra",
+      "role": "Generic Engineer",
       "email": "abhishek.mishra.24cse@bmu.edu.in",
       "joined": "2021-11-20",
       "skills": ["Node.js", "Databases", "APIs"]

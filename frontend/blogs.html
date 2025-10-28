@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            background-image:
+                linear-gradient(to right, #f5f5f5 1px, transparent 1px),
+                linear-gradient(to bottom, #f5f5f5 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        header h1 {
+            font-size: 2.2rem;
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .blog-post-card {
+            background: #ffffff;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            border: 1px solid #e8e8e8;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .blog-post-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        .blog-post-card h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .blog-post-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        .blog-post-card .content {
+            color: #444;
+            margin-bottom: 1.5rem;
+        }
+        .blog-post-card .date {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Template Card Styles --- */
+        .template-card {
+            background: #fdfdfd;
+            border: 2px dashed #cccccc;
+            box-shadow: none;
+        }
+        .template-card:hover {
+            transform: none; /* Disable pop on template */
+            box-shadow: none;
+        }
+        .template-card h2,
+        .template-card h3,
+        .template-card .content {
+            color: #999;
+            outline: none; /* Remove outline when editing */
+        }
+        .template-card [contenteditable="true"]:focus {
+            color: #1a1a1a;
+            background: #f0f8ff; /* Light blue when editing */
+            box-shadow: 0 0 0 2px #a0cfff; /* Blue glow */
+        }
+        .template-card button {
+            background: #007aff;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.3rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+        .template-card button:hover {
+            background: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Blogs</h1>
+    </header>
+
+    <main id="blog-posts-container">
+        <!-- 
+          The script will dynamically add:
+          1. The Template Card
+          2. All posts from blogs.json
+        -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const postsContainer = document.getElementById('blog-posts-container');
+
+            // --- 1. Create and Add the Template Card ---
+            const templateCard = document.createElement('article');
+            templateCard.className = 'blog-post-card template-card';
+            
+            templateCard.innerHTML = `
+                <h2 id="template-author" contenteditable="true">Your Name Here</h2>
+                <h3 id="template-title" contenteditable="true">Blog Post Title Goes Here</h3>
+                <p id="template-content" class="content" contenteditable="true">
+                    This is where your main blog post content goes. Just click and type.
+                </p>
+                <p class="date">Posted: (will be set automatically)</p>
+                <button id="publish-btn">Publish Post</button>
+            `;
+            
+            postsContainer.appendChild(templateCard);
+
+            // --- 2. Add Functionality to the Template Card ---
+            const publishBtn = document.getElementById('publish-btn');
+            const authorInput = document.getElementById('template-author');
+            const titleInput = document.getElementById('template-title');
+            const contentInput = document.getElementById('template-content');
+
+            publishBtn.addEventListener('click', () => {
+                const author = authorInput.textContent;
+                const title = titleInput.textContent;
+                const content = contentInput.textContent;
+
+                if (author === 'Your Name Here' || title === 'Blog Post Title Goes Here' || content.includes('This is where your main')) {
+                    // We don't use alert()
+                    publishBtn.textContent = 'Please fill out all fields!';
+                    publishBtn.style.background = '#dc3545'; // Red color
+                    setTimeout(() => {
+                        publishBtn.textContent = 'Publish Post';
+                        publishBtn.style.background = '#007aff';
+                    }, 2000);
+                    return;
+                }
+
+                const today = new Date();
+                const date = today.toISOString().split('T')[0];
+
+                const postElement = document.createElement('article');
+                postElement.className = 'blog-post-card';
+                postElement.innerHTML = `
+                    <h2>${author}</h2>
+                    <h3>${title}</h3>
+                    <p class="content">${content}</p>
+                    <p class="date">Posted: ${date}</p>
+                `;
+                
+                templateCard.after(postElement);
+
+                authorInput.textContent = 'Your Name Here';
+                titleInput.textContent = 'Blog Post Title Goes Here';
+                contentInput.textContent = 'This is where your main blog post content goes. Just click and type.';
+            });
+
+
+            // --- 3. Load existing posts from JSON ---
+            fetch('blogs.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok. Check if blogs.json is in the same folder.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const posts = data.posts;
+                    
+                    posts.forEach(post => {
+                        const postElement = document.createElement('article');
+                        postElement.className = 'blog-post-card';
+                        
+                        postElement.innerHTML = `
+                            <h2>${post.author}</h2>
+                            <h3>${post.title}</h3>
+                            <p class="content">${post.content}</p>
+                            <p class="date">Posted: ${post.date}</p>
+                        `;
+                        
+                        postsContainer.appendChild(postElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching blog posts:', error);
+                    const errorElement = document.createElement('p');
+                    errorElement.style = "text-align: center; color: red;";
+                    errorElement.textContent = `Error: Could not load blog posts. ${error.message}`;
+                    postsContainer.appendChild(errorElement);
+                });
+        });
+    </script>
+
+</body>
+</html>
+
