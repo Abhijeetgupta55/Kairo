@@ -26,6 +26,8 @@
    color: var(--text-black);
    min-height: 100vh;
    line-height: 1.5;
+   
+
  }
 
  .dash-body::before {
@@ -80,6 +82,9 @@
    max-width: 1200px;
    margin: 2rem auto;
    padding: 0 2rem;
+
+   /* footer fix */
+  flex-grow: 1;
  }
 
  .dashboard-grid {
@@ -427,6 +432,11 @@
      linear-gradient(to right, #f0f0f0 1px, transparent 1px),
      linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
    background-size: 20px 20px;
+
+   /* just adding these here to fix the issues with the footer */
+   display: flex;
+  flex-direction: column;
+  min-height: 100vh;
  }
 
  a {
@@ -507,6 +517,8 @@
    padding: 0 20px;
    max-width: 1200px;
    margin-bottom: 10px;
+   /*footer fix */
+   flex-grow: 1;
  }
 
  .left-stack {
