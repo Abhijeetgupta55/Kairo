@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs</title>
+    <title>kairo. - blogs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -23,63 +24,190 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-white);
-            color: var(--text-black);
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
             line-height: 1.6;
             background-image:
-                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+                linear-gradient(to right, #d8d8d886 1px, transparent 1px),
+                linear-gradient(to bottom, #d8d8d886 1px, transparent 1px);
             background-size: 20px 20px;
         }
 
-        /* --- Navigation Bar Styles (from your kairo.css) --- */
-        nav {
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: var(--text-black);
-            color: var(--bg-white);
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.482) 0%, transparent 40%),
+                radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 1rem 2rem;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            top: 0;
-            z-index: 10;
+            align-items: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
         }
-        .nav-logo {
-            font-size: 1.8rem;
-            font-weight: 500;
-            text-decoration: none;
-            color: var(--bg-white);
-        }
-        .nav-links {
+
+        .nav-left {
             display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s;
+        }
+
+        .hamburger:hover { opacity: 0.7; }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ffffff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
             gap: 1.5rem;
         }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--bg-white);
-            font-size: 0.95rem;
-            text-transform: lowercase;
-            transition: color .3s;
-        }
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-        .nav-links a.active {
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-        /* --- End Nav Bar Styles --- */
 
+        .logout-btn {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+        }
+
+        .logout-btn:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ffffff93;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(185, 185, 185, 0.3);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 2px 0 30px rgba(0, 0, 0, 0.3);
+            transition: left 0.3s ease;
+            z-index: 999;
+            padding-top: 80px;
+        }
+
+        .sidebar.active { left: 0; }
+
+        .sidebar-links {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-links a {
+            padding: 1.2rem 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(232, 232, 232, 0.605);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
         main {
             max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .blog-post-card {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
             margin-bottom: 2rem;
             border-radius: 10px;
@@ -113,7 +241,6 @@
             margin-bottom: 1rem;
         }
 
-        /* --- Template Card Styles --- */
         .template-card {
             background: #fdfdfd;
             border: 2px dashed #cccccc;
@@ -156,126 +283,146 @@
             background: #a71d2a;
         }
 
+        footer {
+            position: relative;
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 3rem;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 100px 1rem 2rem;
+            }
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="dashboard.html" class="nav-logo">kairo.</a>
-        <div class="nav-links">
-            <a href="dashboard.html">dashboard</a>
-            <a href="recent.html">recents</a>
-            <a href="notes.html">notes</a>
-            <a href="favorites.html">favorites</a>
-            <a href="collections.html">collections</a>
-            <a href="blog.html" class="active">blogs</a>
-            <a href="team.html">team</a>
-            <a href="profile.html">profile</a>
-            <a href="landing.html">logout</a>
+        <div class="nav-left">
+            <div class="hamburger" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="landing.html" class="nav-logo">kairo.</a>
+        </div>
+        <div class="nav-right">
+            <a href="login.html" class="logout-btn">login</a>
         </div>
     </nav>
 
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-links">
+            <a href="landing.html">home</a>
+            <a href="#">about us</a>
+            <a href="blogs.html">blogs</a>
+            <a href="team.html">team</a>
+            <a href="#">contact us</a>
+            <a href="login.html">login</a>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
     <main id="blog-posts-container">
-        <!-- Script will add template card and JSON posts here -->
+        <article class="blog-post-card template-card">
+            <h2 id="template-author" contenteditable="true">Your Name Here</h2>
+            <h3 id="template-title" contenteditable="true">Blog Post Title Goes Here</h3>
+            <p id="template-content" class="content" contenteditable="true">
+                This is where your main blog post content goes. Just click and type.
+            </p>
+            <p class="date">Posted: (will be set automatically)</p>
+            <button id="publish-btn">Publish Post</button>
+        </article>
+
+        <article class="blog-post-card">
+            <h2>Abhishek Mishra</h2>
+            <h3>The Art of Procedural Generation in Games</h3>
+            <p class="content">As a game developer and artist, I'm fascinated by procedural generation. It's not just about creating endless worlds; it's about designing a *system* that can build a unique experience for every player. The real challenge is teaching the code what 'looks good' or 'feels right'. That's where the art and the programming truly merge.</p>
+            <p class="date">Posted: 2025-10-29</p>
+        </article>
+
+        <article class="blog-post-card">
+            <h2>Reia Baid</h2>
+            <h3>Why Your Website Needs to be Accessible</h3>
+            <p class="content">In frontend development, we often focus on the visual 'wow' factor. But what if a user can't see your site? Or can't use a mouse? Web accessibility (a11y) means building our sites so *everyone* can use them. This includes using proper HTML, making sites keyboard-navigable, and ensuring color contrast. It's not just a 'nice-to-have', it's a core part of being a good developer.</p>
+            <p class="date">Posted: 2025-10-28</p>
+        </article>
+
+        <article class="blog-post-card">
+            <h2>Abhijeet Gupta</h2>
+            <h3>Good Design is Invisible: A UX Deep Dive</h3>
+            <p class="content">Have you ever used an app that just... worked? You found everything you needed without thinking? That's the power of good User Experience (UX) design. Our job as designers isn't to add more features; it's to remove friction. We use tools like Figma to build prototypes and test flows *before* any code is written. This saves time and ensures the final product is built for the user, not for us.</p>
+            <p class="date">Posted: 2025-10-27</p>
+        </article>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            const postsContainer = document.getElementById('blog-posts-container');
+    <footer>
+        <p>©2025 kairo. All rights reserved.</p>
+    </footer>
 
-            const templateCard = document.createElement('article');
-            templateCard.className = 'blog-post-card template-card';
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const hamburger = document.querySelector('.hamburger');
             
-            templateCard.innerHTML = `
-                <h2 id="template-author" contenteditable="true">Your Name Here</h2>
-                <h3 id="template-title" contenteditable="true">Blog Post Title Goes Here</h3>
-                <p id="template-content" class="content" contenteditable="true">
-                    This is where your main blog post content goes. Just click and type.
-                </p>
-                <p class="date">Posted: (will be set automatically)</p>
-                <button id="publish-btn">Publish Post</button>
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        const publishBtn = document.getElementById('publish-btn');
+        const authorInput = document.getElementById('template-author');
+        const titleInput = document.getElementById('template-title');
+        const contentInput = document.getElementById('template-content');
+
+        publishBtn.addEventListener('click', () => {
+            const author = authorInput.textContent.trim();
+            const title = titleInput.textContent.trim();
+            const content = contentInput.textContent.trim();
+
+            const isAuthorDefault = author === 'Your Name Here';
+            const isTitleDefault = title === 'Blog Post Title Goes Here';
+            const isContentDefault = content === 'This is where your main blog post content goes. Just click and type.';
+
+            if (isAuthorDefault || isTitleDefault || isContentDefault || !author || !title || !content) {
+                publishBtn.textContent = 'Please fill out all fields!';
+                publishBtn.classList.add('error-btn');
+                setTimeout(() => {
+                    publishBtn.textContent = 'Publish Post';
+                    publishBtn.classList.remove('error-btn');
+                }, 2000);
+                return;
+            }
+
+            const today = new Date();
+            const date = today.toISOString().split('T')[0];
+
+            const postElement = document.createElement('article');
+            postElement.className = 'blog-post-card';
+            postElement.innerHTML = `
+                <h2>${author}</h2>
+                <h3>${title}</h3>
+                <p class="content">${content}</p>
+                <p class="date">Posted: ${date}</p>
             `;
             
-            postsContainer.appendChild(templateCard);
+            document.querySelector('.template-card').after(postElement);
 
-            const publishBtn = document.getElementById('publish-btn');
-            const authorInput = document.getElementById('template-author');
-            const titleInput = document.getElementById('template-title');
-            const contentInput = document.getElementById('template-content');
-
-            publishBtn.addEventListener('click', () => {
-                const author = authorInput.textContent.trim();
-                const title = titleInput.textContent.trim();
-                const content = contentInput.textContent.trim();
-
-                const isAuthorDefault = author === 'Your Name Here';
-                const isTitleDefault = title === 'Blog Post Title Goes Here';
-                const isContentDefault = content === 'This is where your main blog post content goes. Just click and type.';
-
-                if (isAuthorDefault || isTitleDefault || isContentDefault || !author || !title || !content) {
-                    publishBtn.textContent = 'Please fill out all fields!';
-                    publishBtn.classList.add('error-btn');
-                    setTimeout(() => {
-                        publishBtn.textContent = 'Publish Post';
-                        publishBtn.classList.remove('error-btn');
-                    }, 2000);
-                    return;
-                }
-
-                const today = new Date();
-                const date = today.toISOString().split('T')[0];
-
-                const postElement = document.createElement('article');
-                postElement.className = 'blog-post-card';
-                postElement.innerHTML = `
-                    <h2>${author}</h2>
-                    <h3>${title}</h3>
-                    <p class="content">${content}</p>
-                    <p class="date">Posted: ${date}</p>
-                `;
-                
-                templateCard.after(postElement);
-
-                authorInput.textContent = 'Your Name Here';
-                titleInput.textContent = 'Blog Post Title Goes Here';
-                contentInput.textContent = 'This is where your main blog post content goes. Just click and type.';
-            });
-
-            fetch('blogs.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok. Check if blogs.json is in the same folder.');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const posts = data.posts;
-                    
-                    posts.forEach(post => {
-                        const postElement = document.createElement('article');
-                        postElement.className = 'blog-post-card';
-                        
-                        postElement.innerHTML = `
-                            <h2>${post.author}</h2>
-                            <h3>${post.title}</h3>
-                            <p class="content">${post.content}</p>
-                            <p class="date">Posted: ${post.date}</p>
-                        `;
-                        
-                        postsContainer.appendChild(postElement);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching blog posts:', error);
-                    const errorElement = document.createElement('p');
-                    errorElement.style = "text-align: center; color: red;";
-                    errorElement.textContent = `Error: Could not load blog posts. ${error.message}`;
-                    postsContainer.appendChild(errorElement);
-                });
+            authorInput.textContent = 'Your Name Here';
+            titleInput.textContent = 'Blog Post Title Goes Here';
+            contentInput.textContent = 'This is where your main blog post content goes. Just click and type.';
         });
     </script>
 
 </body>
 </html>
-

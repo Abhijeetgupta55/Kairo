@@ -20,6 +20,7 @@
       position: relative;
       overflow-x: hidden;
       line-height: 1.6;
+<<<<<<< Updated upstream
             background-image:
                 linear-gradient(to right, #d8d8d886 1px, transparent 1px),
                 linear-gradient(to bottom,#d8d8d886 1px, transparent 1px);
@@ -28,6 +29,14 @@
     }
 
     /* Subtle gradient mesh background */
+=======
+      background-image:
+        linear-gradient(to right, #d8d8d886 1px, transparent 1px),
+        linear-gradient(to bottom,#d8d8d886 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+>>>>>>> Stashed changes
     body::before {
       content: '';
       position: fixed;
@@ -37,13 +46,18 @@
       height: 100%;
       background: 
         radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.482) 0%, transparent 40%),
+<<<<<<< Updated upstream
         radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
         radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 45%),
         radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.04) 0%, transparent 40%);
+=======
+        radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+>>>>>>> Stashed changes
       pointer-events: none;
       z-index: 0;
     }
 
+<<<<<<< Updated upstream
     /* Animated gradient orbs */
     body::after {
       content: '';
@@ -67,15 +81,22 @@
     }
 
     /* Navbar Styles with Glassmorphism */
+=======
+>>>>>>> Stashed changes
     nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
+<<<<<<< Updated upstream
       background: rgba(255, 255, 255, 0.747);
       border-bottom : solid 2 #000;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(10px);
+=======
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+>>>>>>> Stashed changes
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding: 1rem 2rem;
       display: flex;
@@ -100,18 +121,27 @@
       transition: all 0.3s;
     }
 
+<<<<<<< Updated upstream
     .hamburger:hover {
       opacity: 0.7;
     }
+=======
+    .hamburger:hover { opacity: 0.7; }
+>>>>>>> Stashed changes
 
     .hamburger span {
       width: 25px;
       height: 3px;
+<<<<<<< Updated upstream
       background: #2b2b2bc8;
+=======
+      background: #ffffff;
+>>>>>>> Stashed changes
       border-radius: 3px;
       transition: all 0.3s ease;
     }
 
+<<<<<<< Updated upstream
     .hamburger.active span:nth-child(1) {
       transform: rotate(45deg) translate(8px, 8px);
     }
@@ -123,11 +153,20 @@
     .hamburger.active span:nth-child(3) {
       transform: rotate(-45deg) translate(7px, -7px);
     }
+=======
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+>>>>>>> Stashed changes
 
     .nav-logo {
       font-size: 1.5rem;
       font-weight: 600;
+<<<<<<< Updated upstream
       color: #000000;
+=======
+      color: #ffffff;
+>>>>>>> Stashed changes
       text-decoration: none;
       letter-spacing: -0.5px;
     }
@@ -139,6 +178,7 @@
     }
 
     .logout-btn {
+<<<<<<< Updated upstream
       color: rgba(28, 28, 28, 0.8);
       text-decoration: none;
       font-weight: 500;
@@ -150,13 +190,30 @@
       background-color: rgba(0, 0, 0, 0.05);
       padding: 0.5px;
       border-radius: 10px;
+=======
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+    }
+
+    .logout-btn:hover {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.1);
+>>>>>>> Stashed changes
     }
 
     .profile-icon {
       width: 40px;
       height: 40px;
       border-radius: 50%;
+<<<<<<< Updated upstream
       background: #0b98de93;
+=======
+      background: #ffffff93;
+>>>>>>> Stashed changes
       display: flex;
       align-items: center;
       justify-content: center;
@@ -172,26 +229,40 @@
       box-shadow: 0 0 0 3px rgba(185, 185, 185, 0.3);
     }
 
+<<<<<<< Updated upstream
     /* Sidebar Menu with Glass Effect */
+=======
+>>>>>>> Stashed changes
     .sidebar {
       position: fixed;
       top: 0;
       left: -300px;
       width: 300px;
       height: 100vh;
+<<<<<<< Updated upstream
       background: rgba(0, 0, 0, 0.05);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-right: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 2px 0 30px rgba(255, 255, 255, 0.3);
+=======
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 2px 0 30px rgba(0, 0, 0, 0.3);
+>>>>>>> Stashed changes
       transition: left 0.3s ease;
       z-index: 999;
       padding-top: 80px;
     }
 
+<<<<<<< Updated upstream
     .sidebar.active {
       left: 0;
     }
+=======
+    .sidebar.active { left: 0; }
+>>>>>>> Stashed changes
 
     .sidebar-links {
       display: flex;
@@ -200,16 +271,26 @@
 
     .sidebar-links a {
       padding: 1.2rem 2rem;
+<<<<<<< Updated upstream
       color: rgba(50, 50, 50, 0.8);
+=======
+      color: rgba(255, 255, 255, 0.8);
+>>>>>>> Stashed changes
       text-decoration: none;
       transition: all 0.3s;
       border-left: 3px solid transparent;
     }
 
     .sidebar-links a:hover {
+<<<<<<< Updated upstream
       background: rgba(255, 255, 255, 0.08);
       border-left-color: #4f4f4f;
       color: #000000;
+=======
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: #ffffff;
+      color: #ffffff;
+>>>>>>> Stashed changes
     }
 
     .overlay {
@@ -231,15 +312,22 @@
       visibility: visible;
     }
 
+<<<<<<< Updated upstream
     /* Dashboard Content */
     .dash-container {
       padding: 100px 2rem 2rem;
+=======
+    /* Dashboard Layout */
+    .dash-container {
+      padding: 100px 3rem 3rem;
+>>>>>>> Stashed changes
       max-width: 1400px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
+<<<<<<< Updated upstream
     .dashboard-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -382,6 +470,296 @@
     }
 
     /* Modal Styles with Glass Effect */
+=======
+    /* Add URL Section - Top Banner */
+    .add-url-banner {
+      background: linear-gradient(135deg, rgba(205, 205, 205, 0.08) 0%, rgba(189, 210, 255, 0.12) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2.5rem 3rem;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .add-url-banner:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    .add-url-content {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .add-url-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(59, 130, 246, 0.15);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .add-url-text h2 {
+      font-size: 1.5rem;
+      color: #000;
+      margin-bottom: 0.3rem;
+    }
+
+    .add-url-text p {
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 0.95rem;
+    }
+
+    .add-url-arrow {
+      font-size: 1.5rem;
+      color: rgba(0, 0, 0, 0.3);
+      transition: all 0.3s;
+    }
+
+    .add-url-banner:hover .add-url-arrow {
+      transform: translateX(5px);
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* Profile Section - Inline */
+    .profile-section {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-section:hover {
+      transform: translateX(5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .profile-details h3 {
+      font-size: 1.4rem;
+      color: #000;
+      margin-bottom: 0.2rem;
+    }
+
+    .profile-details .member-tag {
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-details .bio-text {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Main Content Area */
+    .content-wrapper {
+      display: flex;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Left Column - Recents & Favorites */
+    .left-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .section-box {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .section-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .section-title .icon {
+      font-size: 1.3rem;
+    }
+
+    .section-title h3 {
+      font-size: 1.2rem;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .view-all-link {
+      color: rgba(0, 0, 0, 0.5);
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
+    .section-box:hover .view-all-link {
+      opacity: 1;
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    .view-all-link:hover {
+      color: #000;
+    }
+
+    .items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .item {
+      padding: 1rem 1.2rem;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      border-radius: 10px;
+      color: rgba(0, 0, 0, 0.8);
+      transition: all 0.3s;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .item:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: translateX(5px);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Right Column - Notes & Collections */
+    .right-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .notes-box {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      flex: 1;
+    }
+
+    .notes-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .note-item {
+      padding: 1rem 1.2rem;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      border-radius: 10px;
+      color: rgba(0, 0, 0, 0.75);
+      transition: all 0.3s;
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .note-item:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: translateX(5px);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Collections Tags */
+    .collections-box {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .collections-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .tags-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .collection-tag {
+      padding: 0.7rem 1.3rem;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 25px;
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .collection-tag:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    
+    /* Enhanced Modal */
+>>>>>>> Stashed changes
     .modal {
       display: none;
       position: fixed;
@@ -396,6 +774,7 @@
       z-index: 1001;
     }
 
+<<<<<<< Updated upstream
     .modal-content, .modal-box {
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(20px);
@@ -423,10 +802,58 @@
 
     .close:hover {
       color: #000000;
+=======
+    .modal-content {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 2.5rem;
+      border-radius: 20px;
+      max-width: 550px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .modal-header h2 {
+      color: #000;
+      font-size: 1.5rem;
+    }
+
+    .close {
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.5);
+      transition: color 0.3s;
+      line-height: 1;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+>>>>>>> Stashed changes
     }
 
     .modal-input {
       width: 100%;
+<<<<<<< Updated upstream
       padding: 0.8rem;
       margin: 0.5rem 0;
       background: rgba(255, 255, 255, 0.05);
@@ -439,10 +866,21 @@
 
     .modal-input::placeholder {
       color: rgba(255, 255, 255, 0.4);
+=======
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      color: #000;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+>>>>>>> Stashed changes
     }
 
     .modal-input:focus {
       outline: none;
+<<<<<<< Updated upstream
       border-color: rgba(255, 255, 255, 0.3);
       background: rgba(255, 255, 255, 0.08);
     }
@@ -488,6 +926,162 @@
       margin-top: 2rem;
       position: relative;
       z-index: 1;
+=======
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      background: #fff;
+    }
+
+    .modal-select {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      color: #000;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .modal-select:focus {
+      outline: none;
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      background: #fff;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .checkbox-item label {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn-primary {
+      flex: 1;
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-secondary {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.05);
+      color: #000;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .modal-box {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .modal-box p {
+      color: #000;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .modal-box .btn-primary,
+    .modal-box .btn-secondary {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      text-decoration: none;
+      margin: 0.5rem;
+      flex: none;
+    }
+
+    footer {
+      position: relative;
+      text-align: center;
+      padding: 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 3rem;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dash-container {
+        padding: 100px 1.5rem 2rem;
+      }
+      .add-url-banner {
+        padding: 2rem;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .profile-section {
+        flex-direction: column;
+        text-align: center;
+      }
+>>>>>>> Stashed changes
     }
   </style>
 </head>
@@ -522,85 +1116,176 @@
   <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
   <div class="dash-container">
-    <div class="dashboard-grid">
-  
-      <div class="card profile-card">
-        <div class="profile-content" onclick="window.location.href='profile.html'">
-          <div class="avatar">B</div>
-          <div class="profile-info">
-            <h3>Bob</h3>
-            <p>member since june 2025</p>
+    
+    <!-- Add URL Banner -->
+    <div class="add-url-banner" onclick="document.getElementById('addUrlModal').style.display='flex'">
+      <div class="add-url-content">
+        <div class="add-url-icon">➕</div>
+        <div class="add-url-text">
+          <h2>add new url</h2>
+          <p>save links to favorites, collections, or recent pages</p>
+        </div>
+      </div>
+      <div class="add-url-arrow">→</div>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-section" onclick="window.location.href='profile.html'">
+      <div class="profile-avatar">B</div>
+      <div class="profile-details">
+        <h3>Bob</h3>
+        <p class="member-tag">member since june 2025</p>
+        <p class="bio-text">Loves exploring new tech, organizing workflows, and a big fan of coffee-powered productivity.</p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+      
+      <!-- Left Column -->
+      <div class="left-column">
+        <!-- Recents -->
+        <div class="section-box">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="icon">⌚</span>
+              <h3>recents</h3>
+            </div>
+            <a href="recent.html" class="view-all-link">view all →</a>
+          </div>
+          <div class="items-list">
+            <div class="item">github repository</div>
+            <div class="item">react documentation</div>
+            <div class="item">figma design system</div>
+            <div class="item">tailwind css docs</div>
           </div>
         </div>
 
-        <div class="profile-bio">
-          <p>
-            Loves exploring new tech, organizing workflows, and a big fan of coffee-powered productivity.
-          </p>
+        <!-- Favorites -->
+        <div class="section-box">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="icon">⭐</span>
+              <h3>favorites</h3>
+            </div>
+            <a href="favorites.html" class="view-all-link">view all →</a>
+          </div>
+          <div class="items-list">
+            <div class="item">mdn web docs</div>
+            <div class="item">chrome devtools</div>
+            <div class="item">vs code extensions</div>
+          </div>
         </div>
       </div>
-      <div class="card recents-card" onclick="window.location.href='recent.html'">
-        <h2 class="card-title">⌚ recents</h2>
-        <div class="recent-item">github repository</div>
-        <div class="recent-item">react documentation</div>
-        <div class="recent-item">figma design system</div>
+
+      <!-- Right Column -->
+      <div class="right-column">
+        <!-- Notes -->
+        <div class="notes-box">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="icon">📝</span>
+              <h3>notes</h3>
+            </div>
+            <a href="notes.html" class="view-all-link">view all →</a>
+          </div>
+          <div class="items-list">
+            <div class="note-item">remember to update ui mockups before tomorrow</div>
+            <div class="note-item">new features: dark mode, shortcuts, bulk url import</div>
+            <div class="note-item">meeting notes from client call</div>
+          </div>
+        </div>
+
+        <!-- Collections -->
+        <div class="collections-box">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="icon">🗃️</span>
+              <h3>collections</h3>
+            </div>
+            <a href="collections.html" class="view-all-link">view all →</a>
+          </div>
+          <div class="tags-grid">
+            <div class="collection-tag">research</div>
+            <div class="collection-tag">music</div>
+            <div class="collection-tag">portfolio inspo</div>
+            <div class="collection-tag">ui ideas</div>
+            <div class="collection-tag">reading list</div>
+            <div class="collection-tag">tutorials</div>
+          </div>
+        </div>
       </div>
 
-      <div class="card add-url-card" onclick="document.getElementById('addUrlModal').style.display='flex'">
-        <h2 class="card-title">➕ add new url</h2>
-        <p class="add-url-text">click here to save a new link with a title.</p>
-        <button class="add-btn">+ add</button>
-      </div>
-
-  
-      <div class="card favorites-card" onclick="window.location.href='favorites.html'">
-        <h2 class="card-title">⭐ favorites</h2>
-        <div class="favorite-item">mdn web docs</div>
-        <div class="favorite-item">chrome devtools</div>
-        <div class="favorite-item">vs code extensions</div>
-      </div>
-
-      <div class="card notes-card" onclick="window.location.href='notes.html'">
-        <h2 class="card-title">📝 notes</h2>
-        <div class="note-preview">remember to update ui mockups before tomorrow.</div>
-        <div class="note-preview">new features: dark mode, shortcuts, bulk url import.</div>
-      </div>
-
-      <div class="card collections-card" onclick="window.location.href='collections.html'">
-        <h2 class="card-title">🗃️ collections</h2>
-        <div class="collection-chip">research</div>
-        <div class="collection-chip">music</div>
-        <div class="collection-chip">portfolio inspo</div>
-        <div class="collection-chip">ui ideas</div>
-        <div class="collection-chip">reading list</div>
-      </div>
     </div>
   </div>
 
-  <div id="addUrlModal" class="modal" style="display:none;">
+  <!-- Enhanced Add URL Modal -->
+  <div id="addUrlModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="document.getElementById('addUrlModal').style.display='none'">&times;</span>
-      <h2>add new url</h2>
-      <input type="text" placeholder="enter title..." class="modal-input">
-      <input type="url" placeholder="enter url..." class="modal-input">
-      <div class="modal-options">
-        <label><input type="checkbox"> add to favorites</label>
+      <div class="modal-header">
+        <h2>add new url</h2>
+        <span class="close" onclick="document.getElementById('addUrlModal').style.display='none'">&times;</span>
       </div>
-      <button class="modal-add-btn">save link</button>
+      
+      <form>
+        <div class="form-group">
+          <label>title</label>
+          <input type="text" placeholder="enter link title..." class="modal-input">
+        </div>
+
+        <div class="form-group">
+          <label>url</label>
+          <input type="url" placeholder="https://example.com" class="modal-input">
+        </div>
+
+        <div class="form-group">
+          <label>add to collection (optional)</label>
+          <select class="modal-select">
+            <option value="">select a collection...</option>
+            <option value="research">research</option>
+            <option value="music">music</option>
+            <option value="portfolio">portfolio inspo</option>
+            <option value="ui">ui ideas</option>
+            <option value="reading">reading list</option>
+            <option value="tutorials">tutorials</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>quick actions</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="addFavorites">
+              <label for="addFavorites">add to favorites</label>
+            </div>
+          </div>
+          <p style="color: rgba(0, 0, 0, 0.5); font-size: 0.85rem; margin-top: 0.5rem;">* URLs are automatically added to recents</p>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="document.getElementById('addUrlModal').style.display='none'">cancel</button>
+          <button type="submit" class="btn-primary">save link</button>
+        </div>
+      </form>
     </div>
   </div>
  
+  <!-- Logout Modal -->
   <div id="logoutModal" class="modal">
     <div class="modal-box">
-      <p>Are you sure you want to logout?</p>
-      <a href="login.html" class="btn yes">Yes</a>
-      <a href="dashboard.html" class="btn no">No</a>
+      <p>are you sure you want to logout?</p>
+      <a href="login.html" class="btn-primary">yes, logout</a>
+      <a href="dashboard.html" class="btn-secondary">cancel</a>
     </div>
   </div>
+
   <footer>
     <p>©2025 kairo. All rights reserved.</p>
-
   </footer>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   <script>
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
@@ -611,6 +1296,16 @@
       overlay.classList.toggle('active');
       hamburger.classList.toggle('active');
     }
+<<<<<<< Updated upstream
+=======
+
+    // Prevent form submission for demo
+    document.querySelector('form')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('URL saved successfully!');
+      document.getElementById('addUrlModal').style.display='none';
+    });
+>>>>>>> Stashed changes
   </script>
 </body>
 

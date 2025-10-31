@@ -4,82 +4,196 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kairo Profile</title>
+  <title>Kairo - Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      color: #000000;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      min-height: 100vh;
       line-height: 1.6;
       background-image:
-        linear-gradient(to right, #f0f0f0 1px, transparent 1px),
-        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+        linear-gradient(to right, #d8d8d886 1px, transparent 1px),
+        linear-gradient(to bottom, #d8d8d886 1px, transparent 1px);
       background-size: 20px 20px;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    button {
-      cursor: pointer;
-    }
-
-    header {
-      background-color: #000000;
-      color: #ffffff;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.482) 0%, transparent 40%),
+        radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #000000;
-      /* dark navbar */
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
     }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+      transition: all 0.3s;
+    }
+
+    .hamburger:hover { opacity: 0.7; }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #ffffff;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
     .nav-logo {
-      font-size: 1.8rem;
-      font-weight: 500;
-      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffffff;
       text-decoration: none;
-      font-family: Arial, sans-serif;
-      padding-right: 600px;
+      letter-spacing: -0.5px;
     }
 
-    .nav-links {
+    .nav-right {
       display: flex;
+      align-items: center;
       gap: 1.5rem;
     }
 
-    .nav-links a {
-      color: #fff;
+    .logout-btn {
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
-      font-size: 0.95rem;
-      text-transform: lowercase;
-      transition: color 0.3s;
+      font-weight: 500;
+      transition: all 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
     }
 
-    .nav-links a:hover {
-      color: #e3f2fd;
-      /* accent hover */
+    .logout-btn:hover {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
-    @media(max-width:768px) {
-      .nav-links {
-        display: none;
-      }
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ffffff93;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 3px rgba(185, 185, 185, 0.3);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 2px 0 30px rgba(0, 0, 0, 0.3);
+      transition: left 0.3s ease;
+      z-index: 999;
+      padding-top: 80px;
+    }
+
+    .sidebar.active { left: 0; }
+
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-links a {
+      padding: 1.2rem 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-links a:hover, .sidebar-links a.active {
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(232, 232, 232, 0.605);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 998;
+      backdrop-filter: blur(5px);
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
 
     main.profile-container {
-      margin: 10px auto 20px auto;
-      padding: 10px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 2rem 3rem;
+      position: relative;
+      z-index: 1;
     }
 
     .profile-header {
@@ -87,219 +201,413 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.692);
-      padding: 5px;
-      margin: 0 auto 30px auto;
+      background: linear-gradient(135deg, rgba(205, 205, 205, 0.08) 0%, rgba(189, 210, 255, 0.12) 100%);
+      backdrop-filter: blur(20px);
+      padding: 2.5rem;
+      margin: 0 auto 40px auto;
       text-align: center;
-      max-width: 300px;
-      transition: transform 0.4s ease;
-      border-radius: 70px;
-      border: 1px solid #000000;
+      max-width: 350px;
+      transition: all 0.4s ease;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
     .profile-header:hover {
-      transform: scale(1.05);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+    }
+
+    .profile-avatar-wrapper {
+      position: relative;
+      margin-bottom: 1.5rem;
     }
 
     .profile-header img {
-      padding-top: 20px;
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      margin-bottom: 15px;
-
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+      transition: all 0.3s ease;
     }
 
-    .profile-header .info {
-      font-size: 1em;
+    .profile-header img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
     }
 
+    .edit-avatar-btn {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      width: 35px;
+      height: 35px;
+      background: #000;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid #fff;
+      font-size: 0.9rem;
+    }
+
+    .edit-avatar-btn:hover {
+      background: #333;
+      transform: scale(1.1);
+    }
+
+    .profile-header .info h2 {
+      font-size: 2em;
+      color: #000;
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+    }
+
+    .profile-header .info p {
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 0.9rem;
+    }
 
     .sections-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
+      margin-bottom: 3rem;
     }
-
 
     .section {
-      flex: 1 1 220px;
-      max-width: 200px;
-      background: rgba(255, 254, 241, 0.689);
-      ;
-      padding: 15px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100%);
+      backdrop-filter: blur(20px);
+      padding: 2rem;
       border-radius: 20px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      align-items: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
-    .followers:hover,
-    .following:hover,
-    .tabs:hover {
-      background-color: #ceff464e;
-      border-radius: 20px;
-      transform: scale(1.01);
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(206, 255, 70, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .section:hover::before {
+      left: 100%;
+    }
+
+    .section:hover {
+      background: linear-gradient(135deg, rgba(206, 255, 70, 0.3) 0%, rgba(206, 255, 70, 0.2) 100%);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      border-color: rgba(206, 255, 70, 0.5);
+    }
+
+    .section-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: block;
     }
 
     .section h3 {
-      padding-top: 5px;
-      font-size: 1.5em;
-      color: #333;
-      font-family: Verdana, Geneva, Tahoma, sans-serif
+      font-size: 0.85em;
+      color: rgba(0, 0, 0, 0.6);
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 0.5rem;
+      text-transform: lowercase;
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
 
     .section h2 {
-      padding-top: 5px;
-      font-size: 2.5em;
-      color: #333;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      align-items: center;
-      text-align: center;
+      font-size: 2.8em;
+      color: #000;
+      font-family: 'Inter', sans-serif;
       transition: transform 0.3s ease;
+      font-weight: 700;
     }
 
-    .section h2:hover {
-      transform: scale(1.2);
+    .section:hover h2 {
+      transform: scale(1.15);
     }
-
-    footer {
-      background-color: #000000;
-      padding: 5px;
-      text-align: center;
-      color: #ffffff;
-      bottom: 0;
-    }
-
-    .rotate {
-      display: block;
-      margin: 10px auto;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      transition: transform 1s ease;
-    }
-
 
     .form-container {
-      width: 80%;
+      width: 100%;
+      max-width: 900px;
       margin: 40px auto;
-      padding: 30px;
-      background: rgba(240, 240, 240, 0.9);
+      padding: 2.5rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100%);
+      backdrop-filter: blur(20px);
       border-radius: 25px;
-      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .form-container:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .form-header h3 {
+      font-size: 1.5rem;
+      color: #000;
+      font-weight: 700;
+    }
+
+    .edit-mode-btn {
+      background: rgba(0, 0, 0, 0.05);
+      color: #000;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .edit-mode-btn:hover {
+      background: rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 1.8rem;
     }
 
     label {
       display: block;
-      font-size: 0.9em;
-      margin-bottom: 6px;
-      color: #333;
-    }
-
-    input,
-    textarea {
-      padding: 8px 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 1em;
+      font-size: 0.85em;
+      margin-bottom: 0.6rem;
+      color: rgba(0, 0, 0, 0.7);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .row {
-      display: flex;
-      gap: 15px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
 
-    .row .form-group {
-      flex: 1;
+    input, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      font-size: 1em;
+      color: rgba(0, 0, 0, 0.8);
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .field {
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 12px 15px;
+      font-size: 1em;
+      color: rgba(0, 0, 0, 0.8);
+      transition: all 0.3s;
+    }
+
+    .field.editable {
+      cursor: pointer;
+    }
+
+    .field.editable:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
     }
 
     button {
-      background: #000000;
+      background: #000;
       color: #fff;
       border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
+      padding: 12px 32px;
+      border-radius: 12px;
       cursor: pointer;
       font-size: 1em;
+      font-weight: 600;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
     }
 
     button:hover {
       background: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
 
-    .field {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 8px 10px;
-      font-size: 1em;
-      margin-top: 5px;
+    .btn-secondary {
+      background: rgba(0, 0, 0, 0.05);
+      color: #000;
+      border: 2px solid rgba(0, 0, 0, 0.1);
     }
 
-    .form-container button {
-      margin-left: 430px;
+    .btn-secondary:hover {
+      background: rgba(0, 0, 0, 0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
 
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+      position: relative;
+      z-index: 1;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      main.profile-container {
+        padding: 100px 1rem 2rem;
+      }
+
+      .sections-row {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+
+      .form-container {
+        padding: 1.5rem;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <nav>
-      <a href="dashboard.html" class="nav-logo">kairo.</a>
-      <div class="nav-links">
-        <a href="dashboard.html">dashboard</a>
-        <a href="recent.html">recents</a>
-        <a href="notes.html">notes</a>
-        <a href="favorites.html">favorites</a>
-        <a href="collections.html">collections</a>
-        <a href="profile.html">profile</a>
-        <a href="landing.html">logout</a>
+  <nav>
+    <div class="nav-left">
+      <div class="hamburger" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-    </nav>
-  </header>
+      <a href="dashboard.html" class="nav-logo">kairo.</a>
+    </div>
+    <div class="nav-right">
+      <a href="landing.html" class="logout-btn">logout</a>
+      <a href="#" class="profile-icon">B</a>
+    </div>
+  </nav>
+
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-links">
+      <a href="dashboard.html">dashboard</a>
+      <a href="recent.html">recents</a>
+      <a href="notes.html">notes</a>
+      <a href="favorites.html">favorites</a>
+      <a href="collections.html">collections</a>
+      <a href="profile.html" class="active">profile</a>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
   <main class="profile-container">
-
     <div class="profile-header">
-      <img src="download.jpg">
+      <div class="profile-avatar-wrapper">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-size='55' fill='white' text-anchor='middle' dy='.35em' font-family='Inter, Arial' font-weight='600'%3EB%3C/text%3E%3C/svg%3E" alt="Profile">
+        <div class="edit-avatar-btn" title="Change avatar">✏️</div>
+      </div>
       <div class="info">
         <h2>Bob</h2>
         <p>Member since June 2025</p>
-
       </div>
     </div>
 
     <div class="sections-row">
-      <div class="section tabs">
-        <h3>Tabs opened</h3>
+      <div class="section tabs" onclick="showNotification('Tabs Opened')">
+        <span class="section-icon">🗂️</span>
+        <h3>tabs opened</h3>
         <h2>18</h2>
-
       </div>
 
-      <div class="section followers">
+      <div class="section followers" onclick="showNotification('Favorites')">
+        <span class="section-icon">⭐</span>
         <h3>favorites</h3>
         <h2>11</h2>
       </div>
 
-      <div class="section following">
-        <h3>notes-created</h3>
+      <div class="section following" onclick="showNotification('Notes Created')">
+        <span class="section-icon">📝</span>
+        <h3>notes created</h3>
         <h2>5</h2>
       </div>
 
-      <div class="section following">
+      <div class="section following" onclick="showNotification('Collections')">
+        <span class="section-icon">📚</span>
         <h3>collections</h3>
         <h2>7</h2>
       </div>
+    </div>
 
+    <div class="form-container">
+      <div class="form-header">
+        <h3>Personal Information</h3>
+        <button class="edit-mode-btn" onclick="toggleEditMode()">
+          <span id="editBtnText"> Edit Profile</span>
+        </button>
+      </div>
 
-      <div class="form-container">
+      <div id="viewMode">
         <div class="form-group">
           <label>Email</label>
           <p class="field">kairo55555@gmail.com</p>
@@ -308,7 +616,7 @@
         <div class="row">
           <div class="form-group">
             <label>Date of Birth</label>
-            <p class="field">11 november 2000</p>
+            <p class="field">11 November 2000</p>
           </div>
           <div class="form-group">
             <label>Phone Number</label>
@@ -318,16 +626,97 @@
 
         <div class="form-group">
           <label>Bio</label>
-          <p class="field">Loves exploring new tech, organizing workflows, and a big fan of coffee powered productivity.
-          </p>
+          <p class="field">Loves exploring new tech, organizing workflows, and a big fan of coffee-powered productivity.</p>
         </div>
-        <button>Update Profile</button>
+      </div>
 
+      <div id="editMode" class="hidden">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="emailInput" value="kairo55555@gmail.com">
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Date of Birth</label>
+            <input type="date" id="dobInput" value="2000-11-11">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="phoneInput" value="+91 9876543210">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Bio</label>
+          <textarea id="bioInput">Loves exploring new tech, organizing workflows, and a big fan of coffee-powered productivity.</textarea>
+        </div>
+
+        <div class="button-group">
+          <button class="btn-secondary" onclick="cancelEdit()">Cancel</button>
+          <button onclick="saveProfile()">Save Changes</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer>
     <p>©2025 Kairo. All rights reserved.</p>
   </footer>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.querySelector('.hamburger');
+      
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    function toggleEditMode() {
+      const viewMode = document.getElementById('viewMode');
+      const editMode = document.getElementById('editMode');
+      const editBtn = document.getElementById('editBtnText');
+
+      if (viewMode.classList.contains('hidden')) {
+        viewMode.classList.remove('hidden');
+        editMode.classList.add('hidden');
+        editBtn.textContent = ' Edit Profile';
+      } else {
+        viewMode.classList.add('hidden');
+        editMode.classList.remove('hidden');
+        editBtn.textContent = ' View Mode';
+      }
+    }
+
+    function cancelEdit() {
+      toggleEditMode();
+    }
+
+    function saveProfile() {
+      const email = document.getElementById('emailInput').value;
+      const dob = document.getElementById('dobInput').value;
+      const phone = document.getElementById('phoneInput').value;
+      const bio = document.getElementById('bioInput').value;
+
+      // Update view mode fields
+      document.querySelector('#viewMode .form-group:nth-child(1) .field').textContent = email;
+      document.querySelector('#viewMode .row .form-group:nth-child(1) .field').textContent = new Date(dob).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      document.querySelector('#viewMode .row .form-group:nth-child(2) .field').textContent = phone;
+      document.querySelector('#viewMode .form-group:nth-child(3) .field').textContent = bio;
+
+      toggleEditMode();
+      
+      // Show success message
+      alert('profile updated successfully! ');
+    }
+
+    function showNotification(section) {
+      alert(`📊 ${section} section clicked!\n\nThis would typically navigate to a detailed view of your ${section.toLowerCase()}.`);
+    }
+  </script>
 </body>
 
 </html>
