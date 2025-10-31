@@ -5,52 +5,666 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kairo - Organize Your Web. Your Way.</title>
-  <link rel="stylesheet" href="kairo.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image:
+        linear-gradient(to right, #d8d8d886 1px, transparent 1px),
+        linear-gradient(to bottom, #d8d8d886 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    /* Navbar Styles - Matching Dashboard */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+      transition: all 0.3s;
+    }
+
+    .hamburger:hover {
+      opacity: 0.7;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #ffffff;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .login-btn {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+    }
+
+    .login-btn:hover {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .signup-btn {
+      background: #ffffff;
+      color: #000;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1.2rem;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    .signup-btn:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Sidebar Menu */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 2px 0 30px rgba(0, 0, 0, 0.3);
+      transition: left 0.3s ease;
+      z-index: 999;
+      padding-top: 80px;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-links a {
+      padding: 1.2rem 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-links a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(232, 232, 232, 0.605);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 998;
+      backdrop-filter: blur(5px);
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 100px 3rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 3rem;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 3rem;
+      transition: all 0.4s ease;
+    }
+
+    .hero-content:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .get-started,
+    .learn-more {
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      border: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .get-started {
+      background: #000;
+      color: #fff;
+    }
+
+    .get-started:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .learn-more {
+      background: rgba(0, 0, 0, 0.05);
+      color: #000;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .learn-more:hover {
+      background: rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .hero-illustration {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s ease;
+    }
+
+    .hero-illustration:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-illustration img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Discover Section */
+    .discover {
+      padding: 5rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .discover-illustration {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s ease;
+    }
+
+    .discover-illustration:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .discover-illustration img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .discover-content {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 3rem;
+      transition: all 0.4s ease;
+    }
+
+    .discover-content:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .discover-content h2 {
+      font-size: 2.5rem;
+      color: #000;
+      margin-bottom: 1.5rem;
+    }
+
+    .discover-content p {
+      font-size: 1.1rem;
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    /* About Section */
+    .about {
+      padding: 5rem 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      transition: all 0.4s ease;
+    }
+
+    .about:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      color: #000;
+      margin-bottom: 1.5rem;
+    }
+
+    .about p {
+      font-size: 1.1rem;
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    /* Connect Section */
+    .connect {
+      padding: 5rem 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      transition: all 0.4s ease;
+    }
+
+    .connect:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .connect hr {
+      border: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .connect h3 {
+      font-size: 2rem;
+      color: #000;
+      margin-bottom: 1rem;
+    }
+
+    .connect p {
+      font-size: 1.1rem;
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 2rem;
+    }
+
+    .connect form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .connect input {
+      padding: 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .connect input:focus {
+      outline: none;
+      border-color: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .connect button {
+      padding: 1rem 2rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .connect button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .lan-footer-links {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .lan-footer-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .lan-footer-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 1001;
+      overflow-y: auto;
+    }
+
+    .modal:target {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 3rem;
+      border-radius: 20px;
+      max-width: 700px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .modal-content h2 {
+      color: #000;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .modal-content p {
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 2rem;
+      color: rgba(0, 0, 0, 0.5);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero,
+      .discover {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-illustration,
+      .discover-illustration {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .hero,
+      .discover,
+      .about,
+      .connect {
+        padding: 3rem 1.5rem;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .get-started,
+      .learn-more {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
-<body class="lan-body">
-  <header class="lanheader">
-    <div class="lanlogo">kairo. </div>
-    <nav class="lannav">
-      <ul class="lannav ul">
-        <li class="lannav ul li"><a href="#">home</a></li>
-        <li class="lannav ul li"><a href="#discover">discover</a></li>
-        <li class="lannav ul li"><a href="#clarity">blog</a></li>
-        <li class="lannav ul li"><a href="#about">about_us</a></li>
-        <li class="lannav ul li"><a href="#connect">contact</a></li>
-        <li class="lannav ul li"></li><a href="blogs.html">Blogs</a></li>
-        <li class="lannav ul li"><a href="login.html">login</a></li>
+<body>
+  <nav>
+    <div class="nav-left">
+      <div class="hamburger" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <a href="#" class="nav-logo">kairo.</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html" class="login-btn">login</a>
+      <a href="signup.html" class="signup-btn">sign up</a>
+    </div>
+  </nav>
 
-      </ul>
-    </nav>
-  </header>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-links">
+      <a href="#hero">home</a>
+      <a href="#discover">discover</a>
+      <a href="blogs.html">blogs</a>
+      <a href="#about">about us</a>
+      <a href="team.html">the team</a>
+      <a href="#connect">contact</a>
+      <a href="login.html">login</a>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
   <section class="hero">
     <div class="hero-content">
       <h1>Organize Your Web, Your Way.</h1>
       <p>A clean dashboard to collect, track, and manage all your tabs in one place.</p>
       <div class="hero-buttons">
-        <a href="login.html" button class="get-started">Get Started</button></a>
-        <button class="learn-more">Learn More</button>
+        <a href="login.html" class="get-started">Get Started</a>
+        <button class="learn-more" onclick="document.location='#discover'">Learn More</button>
       </div>
     </div>
     <div class="hero-illustration">
       <img src="C:\Users\Abhi\Downloads\Adobe Express - file (1).png" alt="Hero Illustration">
     </div>
   </section>
+
   <section class="discover" id="discover">
     <div class="discover-illustration">
-      <img id="myImage" src="Images/img2.jpg"
-        alt="Discover Illustration"> <!-- Replace with actual image URL -->
+      <img id="myImage" src="Images/img2.jpg" alt="Discover Illustration">
     </div>
     <div class="discover-content">
       <h2>Discover a Smarter Way to Browse.</h2>
       <p>Drowning in tabs? KAIRO brings order to the chaos.
         With intelligent grouping, collections, favorites, and quick access to your most recent pages</p>
-      <p> KAIRO makes browsing smoother, faster, and smarter. Add notes to your collections, save what matters, and skip
-        the endless hunt for “that one tab.</p>
+      <p>KAIRO makes browsing smoother, faster, and smarter. Add notes to your collections, save what matters, and skip
+        the endless hunt for "that one tab."</p>
     </div>
   </section>
-  
+
   <section class="about" id="about">
     <h2>About Kairo.</h2>
     <p>At Kairo, we make browsing calm, not chaotic.</p>
@@ -65,21 +679,19 @@
     <h3>Connect with us</h3>
     <p>Want to hear our thoughts, feedback, or ideas to make Kairo even better?</p>
     <form>
-      <input type="email" placeholder="Your email">
-
-      <input type="text" placeholder="your feedback">
+      <input type="email" placeholder="Your email" required>
+      <input type="text" placeholder="Your feedback" required>
       <button type="submit">Submit</button>
     </form>
   </section>
 
   <footer class="lan-footer">
-    <!-- Footer links -->
     <ul class="lan-footer-links">
       <li><a href="#privacyModal">Privacy Policy</a></li>
       <li><a href="#termsModal">Terms of Service</a></li>
-      <li><a href="#clarity">Blog</a></li>
     </ul>
   </footer>
+
   <!-- Privacy Policy Modal -->
   <div id="privacyModal" class="modal">
     <div class="modal-content">
@@ -116,16 +728,26 @@
     </div>
   </div>
 
-  </footer>
   <script>
-    const img = document.getElementById("myImage"),
-      images = [
-        "Images/img2.jpg",
-        "Images/img3.jpg",
-      ];
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.querySelector('.hamburger');
+
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    // Image slider
+    const img = document.getElementById("myImage");
+    const images = [
+      "Images/img2.jpg",
+      "Images/img3.jpg",
+    ];
     let i = 0;
     setInterval(() => {
-      i = (i + 1) % images.length; // cycles through 0 → 1 → 2 → 0 ...
+      i = (i + 1) % images.length;
       img.src = images[i];
     }, 2000);
   </script>

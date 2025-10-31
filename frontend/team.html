@@ -6,60 +6,408 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>kairo. - team</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="kairo.css">
-  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image:
+        linear-gradient(to right, #d8d8d886 1px, transparent 1px),
+        linear-gradient(to bottom, #d8d8d886 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.482) 0%, transparent 40%),
+        radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navbar Styles */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+      transition: all 0.3s;
+    }
+
+    .hamburger:hover {
+      opacity: 0.7;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #ffffff;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .login-btn {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+    }
+
+    .login-btn:hover {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .signup-btn {
+      background: #ffffff;
+      color: #000;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1.2rem;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    .signup-btn:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Sidebar Menu */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 2px 0 30px rgba(0, 0, 0, 0.3);
+      transition: left 0.3s ease;
+      z-index: 999;
+      padding-top: 80px;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-links a {
+      padding: 1.2rem 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-links a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(232, 232, 232, 0.605);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 998;
+      backdrop-filter: blur(5px);
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Team Page Styles */
+    header {
+      padding: 120px 20px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    header img {
+      margin: 0 auto;
+      display: block;
+      width: 120px;
+      border-radius: 50%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    header h2 {
+      margin-top: 1.5rem;
+      font-size: 1.8rem;
+      color: #000;
+    }
+
+    header h1 {
+      margin-top: 0.5rem;
+      font-size: 2.5rem;
+      color: #000;
+      font-weight: 600;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: 2rem auto;
+      overflow: hidden;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    article {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s ease;
+    }
+
+    article:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    article h2 {
+      font-size: 1.5rem;
+      color: #000;
+      margin-bottom: 1rem;
+    }
+
+    article p {
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    article h3 {
+      font-size: 1.1rem;
+      color: #000;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    article ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    article ul li {
+      color: rgba(0, 0, 0, 0.7);
+      padding: 0.3rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    article ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #000;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      text-align: center;
+      padding: 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 3rem;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      header {
+        padding: 100px 1.5rem 2rem;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header h2 {
+        font-size: 1.5rem;
+      }
+
+      section {
+        padding: 0 1.5rem;
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-  <body class="dash-body">
+
+<body>
   <nav>
-    <a href="#" class="nav-logo">kairo.</a>
-    <div class="nav-links">
-      <a href="dashboard.html">dashboard</a>
-      <a href="recent.html">recents</a>
-      <a href="notes.html">notes</a>
-      <a href="favorites.html">favorites</a>
-      <a href="collections.html">collections</a>
-      <a href="team.html">team</a>
-      <a href="profile.html">profile</a>
-      <a href="#logoutModal">logout</a>
+    <div class="nav-left">
+      <div class="hamburger" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <a href="landing.html" class="nav-logo">kairo.</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html" class="login-btn">login</a>
+      <a href="signup.html" class="signup-btn">sign up</a>
     </div>
   </nav>
-    <header style="padding:20px 0"></header>
-    <section style="max-width:1200px; margin:auto; overflow:hidden"></section>
-    <div></div>
 
-    <script>
-        let header = document.querySelector("header");
-        let section = document.querySelector("section");
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-links">
+      <a href="landing.html">home</a>
+      <a href="landing.html#discover">discover</a>
+      <a href="blogs.html">blogs</a>
+      <a href="landing.html#about">about us</a>
+      <a href="landing.html#connect">contact</a>
+      <a href="login.html">login</a>
+    </div>
+  </div>
 
-        async function updateJSONPage() {
-            let request = new Request("team.json");
-            let response = await fetch(request);
-            let jsonobj = await response.json();
-            updateHeader(jsonobj);
-            updateSection(jsonobj);
-        }
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-        function updateHeader(jsonobj) {
-            let img = document.createElement("img");
-            img.src = jsonobj["teamimg"];
-            img.style.margin = "0 auto";
-            img.style.display = "block";
-            img.style.width = "120px";
-            header.appendChild(img);
+  <header></header>
+  <section></section>
 
-            let teamName = document.createElement("h2");
-            teamName.textContent = jsonobj["teamName"];
-            teamName.style.textAlign = "center";
-            header.appendChild(teamName);
+  <footer>©2025 kairo. All rights reserved.</footer>
 
-            let org = document.createElement("h1");
-            org.textContent = jsonobj["org"];
-            org.style.textAlign = "center";
-            header.appendChild(org);
-        }
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.querySelector('.hamburger');
 
-        function updateSection(jsonobj) {
-            let members = jsonobj["members"];
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    let header = document.querySelector("header");
+    let section = document.querySelector("section");
+
+    async function updateJSONPage() {
+      let request = new Request("team.json");
+      let response = await fetch(request);
+      let jsonobj = await response.json();
+      updateHeader(jsonobj);
+      updateSection(jsonobj);
+    }
+
+    function updateHeader(jsonobj) {
+      let img = document.createElement("img");
+      img.src = jsonobj["teamimg"];
+      header.appendChild(img);
+
+      let teamName = document.createElement("h2");
+      teamName.textContent = jsonobj["teamName"];
+      header.appendChild(teamName);
+
+      let org = document.createElement("h1");
+      org.textContent = jsonobj["org"];
+      header.appendChild(org);
+    }
+
+    function updateSection(jsonobj) {
+      let members = jsonobj["members"];
       for (let member of members) {
         let article = document.createElement("article");
 
@@ -93,13 +441,10 @@
 
         section.appendChild(article);
       }
-        }
+    }
 
-        updateJSONPage();
-    </script>
-
-  <footer style="text-align:center; color:#6b7280">©2025 kairo. All rights reserved.</footer>
+    updateJSONPage();
+  </script>
 </body>
 
 </html>
-
