@@ -791,13 +791,13 @@
       backdrop-filter: blur(10px);
       z-index: 1001;
       overflow-y: auto;
-    }
-
-    .modal:target {
-      display: flex;
       align-items: center;
       justify-content: center;
       padding: 2rem;
+    }
+
+    .modal.active {
+      display: flex;
     }
 
     .modal-content {
@@ -1005,15 +1005,15 @@
 
   <footer class="lan-footer">
     <ul class="lan-footer-links">
-      <li><a href="#privacyModal">Privacy Policy</a></li>
-      <li><a href="#termsModal">Terms of Service</a></li>
+      <li><a href="#" onclick="openModal('privacyModal'); return false;">Privacy Policy</a></li>
+      <li><a href="#" onclick="openModal('termsModal'); return false;">Terms of Service</a></li>
     </ul>
   </footer>
 
   <!-- Privacy Policy Modal -->
   <div id="privacyModal" class="modal">
     <div class="modal-content">
-      <a href="#connect" class="close">&times;</a>
+      <a href="#" class="close" onclick="closeModal('privacyModal'); return false;">&times;</a>
       <h2>Privacy Policy</h2>
       <p>At Kairo, your privacy is our top priority. We collect minimal personal information necessary to provide a
         seamless experience. This includes your account credentials, browsing history within the app, and your saved
@@ -1030,7 +1030,7 @@
   <!-- Terms of Service Modal -->
   <div id="termsModal" class="modal">
     <div class="modal-content">
-      <a href="#connect" class="close">&times;</a>
+      <a href="#" class="close" onclick="closeModal('termsModal'); return false;">&times;</a>
       <h2>Terms of Service</h2>
       <p>Welcome to Kairo! By accessing or using our platform, you agree to comply with these terms. Kairo is designed
         to help you organize your web browsing efficiently. All content, services, and features are provided "as-is".
@@ -1056,6 +1056,16 @@
       sidebar.classList.toggle('active');
       overlay.classList.toggle('active');
       hamburger.classList.toggle('active');
+    }
+
+    // Open Modal
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+    }
+
+    // Close Modal
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
     }
 
     // Image Slider with Fade Effect
@@ -1150,7 +1160,7 @@
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           const href = this.getAttribute('href');
-          if (href !== '#privacyModal' && href !== '#termsModal') {
+          if (href !== '#privacyModal' && href !== '#termsModal' && href !== '#') {
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
@@ -1163,6 +1173,15 @@
                 toggleSidebar();
               }
             }
+          }
+        });
+      });
+
+      // Close modal when clicking outside the modal content
+      document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+          if (e.target === this) {
+            closeModal(this.id);
           }
         });
       });
