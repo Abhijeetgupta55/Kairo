@@ -2,59 +2,464 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>kairo Login</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Poppins:wght@500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="kairo.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kairo. - login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+            line-height: 1.6;
+            
+            /* Apply Grid Pattern from Profile Page */
+            background-image:
+                linear-gradient(to right, #d8d8d886 1px, transparent 1px),
+                linear-gradient(to bottom, #d8d8d886 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Main Layout Container */
+        .l-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* New Keyframe for Gradient Animation */
+        @keyframes circularGradientShift {
+            0%   { background-position: 0% 50%; }
+            25%  { background-position: 50% 0%; }
+            50%  { background-position: 100% 50%; }
+            75%  { background-position: 50% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+
+        /* --- Left Side - Brand Section (Dark Theme) --- */
+        .l-left {
+            flex: 0 0 50%; 
+            background: rgba(0, 0, 0, 0.95); /* Base dark background */
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 3rem;
+            overflow: hidden;
+            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+
+            /* Remove grid background from .l-left itself */
+            background-image: none; 
+            animation: none;
+        }
+
+        .l-left::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             /* Intensified Dark Gradient Effect + New White Hue */
+             background: 
+                radial-gradient(circle at 15% 50%, rgba(50, 50, 50, 1) 0%, transparent 50%), /* Dark Gray Light Source */
+                radial-gradient(circle at 85% 50%, rgba(10, 10, 10, 1) 0%, transparent 60%), /* Near Black Shadow */
+                radial-gradient(circle at 50% 15%, rgba(0, 0, 0, 0.8) 0%, transparent 70%), /* White/Gray Highlight */
+                radial-gradient(circle at 50% 85%, rgba(0, 0, 0, 1) 0%, transparent 50%), /* Deep Black Shadow */
+                
+                /* --- NEW HUE LAYER --- */
+                radial-gradient(circle at 70% 30%, rgba(62, 62, 62, 0.15) 0%, transparent 60%); /* Soft White Hue */
+                
+             background-size: 300% 300%; 
+             animation: circularGradientShift 60s ease infinite; /* Slower, circular transition */
+             pointer-events: none;
+        }
+        
+        /* Keep original radial light source effect for sparkle */
+        .l-left::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%); /* More subtle white glow */
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .l-left h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -3px;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* --- Back Button CSS Removed --- */
+
+
+        /* --- Right Side - Login Form (Light Theme) --- */
+        .l-right {
+            flex: 0 0 50%; 
+            padding: 8vh 4rem; /* Increased vertical padding for 'breathing room' */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            background: transparent;
+            
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .l-right h2 {
+            font-size: 2.2rem; 
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 0.2rem; 
+            letter-spacing: -0.5px;
+        }
+
+        .l-right p {
+            /* Removed 'Get ready to organize' */
+            display: none; 
+        }
+
+        .l-input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .l-input-group label {
+            display: block;
+            font-size: 0.8rem; 
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 0.4rem; 
+        }
+
+        .l-input-group input {
+            width: 100%;
+            padding: 0.9rem 1.2rem; 
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px; 
+            font-size: 0.95rem; 
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .l-input-group input:focus {
+            outline: none;
+            border-color: #4A90E2;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .l-btn {
+            width: 100%;
+            padding: 0.9rem; 
+            background: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 8px; 
+            font-size: 1rem; 
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .l-btn:hover {
+            background: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Social Login Section */
+        .l-social-login {
+            text-align: center;
+            margin: 2rem 0 1rem; 
+            font-size: 0.9rem; 
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .l-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem; 
+        }
+
+        .l-social-icons i {
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            /* Monochromatic styling */
+            color: #333; 
+        }
+
+        .l-social-icons i:hover {
+            border-color: #000; /* Dark border on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .l-social-icons .fa-google,
+        .l-social-icons .fa-apple, 
+        .l-social-icons .fa-facebook-f {
+            color: #333; /* Enforce dark color regardless of original brand color */
+        }
+
+
+        /* Sign Up Link */
+        .l-signup {
+            text-align: center;
+            font-size: 0.9rem; 
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .l-signup a {
+            color: #000;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .l-signup a:hover {
+            color: #4A90E2;
+            text-decoration: underline;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: none;
+            align-items: center;
+            gap: 0.8rem;
+            z-index: 2000;
+            animation: slideInRight 0.4s ease;
+            max-width: 400px;
+        }
+
+        .notification.show {
+            display: flex;
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .l-container {
+                flex-direction: column;
+            }
+
+            .l-left {
+                min-height: 25vh; 
+                flex: 0 0 auto;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .l-left h1 {
+                font-size: 3.5rem;
+            }
+
+            .l-right {
+                flex: 1;
+                padding: 3rem 2rem;
+                max-width: 100%;
+                overflow-y: visible; 
+            }
+
+            .notification {
+                top: 15px;
+                right: 15px;
+                left: 15px;
+            }
+        }
+    </style>
 </head>
 
-<body class="l-body">
+<body>
 
-  <div class="l-container">
-
-    <div class="l-left">
-      <a href="landing.html" class="l-back-btn">
-        <i class="fa-solid fa-arrow-left"></i>
-      </a>
-      <h1>kairo.</h1>
+    <div class="notification" id="notification">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="notificationText">Account doesn't exist. Please sign up first!</span>
     </div>
 
+    <div class="l-container">
 
-    <div class="l-divider"></div>
+        
+        <div class="l-left">
+            <h1>kairo.</h1>
+        </div>
 
 
-    <div class="l-right">
-      <h2>Welcome back!</h2>
-      <p>Get ready to organize.</p>
+        
+        <div class="l-right">
+            <h2>Welcome back!</h2>
 
-      <div class="l-input-group">
-        <label for="email">E-mail or phone number</label>
-        <input type="text" id="email" placeholder="Type your e-mail or phone number">
-      </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="l-input-group">
+                    <label for="email">E-mail or phone number</label>
+                    <input type="text" id="email" placeholder="Type your e-mail or phone number">
+                </div>
 
-      <div class="l-input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Type your password">
-      </div>
+                <div class="l-input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Type your password">
+                </div>
+                
+                <button type="submit" class="l-btn">Sign In</button>
+            </form>
 
-      <a href="dashboard.html" button class="l-btn">Sign In</button></a>
 
-      <div class="l-social-login">or do it via other accounts</div>
-      <div class="l-social-icons">
-        <i class="fa-brands fa-google"></i>
-        <i class="fa-brands fa-apple"></i>
-        <i class="fa-brands fa-facebook-f"></i>
-      </div>
+            <div class="l-social-login">or do it via other accounts</div>
+            <div class="l-social-icons">
+                <i class="fa-brands fa-google" onclick="showNotification('Google login is not yet implemented!', 'error')" aria-label="Login with Google"></i>
+                <i class="fa-brands fa-apple" onclick="showNotification('Apple login is not yet implemented!', 'error')" aria-label="Login with Apple"></i>
+                <i class="fa-brands fa-facebook-f" onclick="showNotification('Facebook login is not yet implemented!', 'error')" aria-label="Login with Facebook"></i>
+            </div>
 
-      <div class="l-signup">
-        Don’t have an account? <a href="signup.html">Sign Up</a>
-      </div>
+            <div class="l-signup">
+                Don’t have an account? <a href="signup.html">Sign Up</a>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <script>
+        // Sample user data (demo accounts)
+        // In a real app, this would be validated on a server.
+        const validUsers = [
+            { email: 'bob@kairo.com', password: 'password123' },
+            { email: 'alice@kairo.com', password: 'alice2025' },
+            { email: 'demo@kairo.com', password: 'demo1234' }
+        ];
+
+        /**
+         * Displays a notification message at the top right of the screen.
+         * @param {string} message - The message to display.
+         * @param {string} type - 'error' (default) or 'success'.
+         */
+        function showNotification(message, type = 'error') {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            
+            // Reset classes
+            notification.classList.remove('success');
+            
+            if (type === 'success') {
+                notification.classList.add('success');
+            }
+            
+            notification.classList.add('show');
+            
+            // Hide notification after 4 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        /**
+         * Handles the login form submission.
+         * @param {Event} event - The form submission event.
+         */
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent the form from actually submitting
+            
+            const emailInput = document.getElementById('email').value.trim();
+            const passwordInput = document.getElementById('password').value;
+
+            // Basic validation
+            if (!emailInput || !passwordInput) {
+                showNotification('Please fill in all fields!', 'error');
+                return;
+            }
+
+            // Check if the user exists and the password is correct
+            const userExists = validUsers.some(user => 
+                user.email === emailInput && user.password === passwordInput
+            );
+
+            if (userExists) {
+                showNotification('Login successful! Redirecting...', 'success');
+                // Redirect to dashboard after a short delay
+                setTimeout(() => {
+                    // In a real app, you'd receive a token and save it.
+                    // For this demo, we just redirect.
+                    window.location.href = 'dashboard.html'; // Assumes dashboard.html exists
+                }, 1500);
+            } else {
+                // Check if only the email exists (for a more specific error)
+                const emailExists = validUsers.some(user => user.email === emailInput);
+                
+                if (emailExists) {
+                    showNotification('Incorrect password. Please try again!', 'error');
+                } else {
+                    showNotification("Account doesn't exist. Please sign up first!", 'error');
+                }
+            }
+        }
+
+    </script>
 
 </body>
 
