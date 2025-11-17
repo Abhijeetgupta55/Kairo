@@ -1,381 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>kairo. - favorites</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kairo. - favorites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-      line-height: 1.6;
-      background-image:
-        linear-gradient(to right, #d8d8d886 1px, transparent 1px),
-        linear-gradient(to bottom, #d8d8d886 1px, transparent 1px);
-      background-size: 20px 20px;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image:
+                linear-gradient(to right, #d8d8d886 1px, transparent 1px),
+                linear-gradient(to bottom, #d8d8d886 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.482) 0%, transparent 40%),
-        radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-    }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.482) 0%, transparent 40%),
+                radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
-    }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 5px;
-      transition: all 0.3s;
-    }
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s;
+        }
 
-    .hamburger:hover { opacity: 0.7; }
+        .hamburger:hover { opacity: 0.7; }
 
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: #ffffff;
-      border-radius: 3px;
-      transition: all 0.3s ease;
-    }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ffffff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
 
-    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
-    .nav-logo {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #ffffff;
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
 
-    .logout-btn {
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
-    }
+        .logout-btn {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+        }
 
-    .logout-btn:hover {
-      color: #ffffff;
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+        .logout-btn:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-    .profile-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #ffffff93;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-    }
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ffffff93;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            overflow: hidden;
+            line-height: 1;
+        }
 
-    .profile-icon:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 0 3px rgba(185, 185, 185, 0.3);
-    }
+        .profile-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(185, 185, 185, 0.3);
+        }
 
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: -300px;
-      width: 300px;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(20px);
-      border-right: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 2px 0 30px rgba(0, 0, 0, 0.3);
-      transition: left 0.3s ease;
-      z-index: 999;
-      padding-top: 80px;
-    }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 2px 0 30px rgba(0, 0, 0, 0.3);
+            transition: left 0.3s ease;
+            z-index: 999;
+            padding-top: 80px;
+        }
 
-    .sidebar.active { left: 0; }
+        .sidebar.active { left: 0; }
 
-    .sidebar-links {
-      display: flex;
-      flex-direction: column;
-    }
+        .sidebar-links {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .sidebar-links a {
-      padding: 1.2rem 2rem;
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      transition: all 0.3s;
-      border-left: 3px solid transparent;
-    }
+        .sidebar-links a {
+            padding: 1.2rem 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
 
-    .sidebar-links a:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-left-color: #ffffff;
-      color: #ffffff;
-    }
+        .sidebar-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: #ffffff;
+            color: #ffffff;
+        }
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(232, 232, 232, 0.605);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 998;
-      backdrop-filter: blur(5px);
-    }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(232, 232, 232, 0.605);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+            backdrop-filter: blur(5px);
+        }
 
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 100px 2rem 2rem;
-      position: relative;
-      z-index: 1;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
 
-    h1.page-heading {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      text-transform: lowercase;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
+        /* --- Page Header --- */
+        h1.page-heading {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #000;
+        }
+        
+        h1.page-heading .icon {
+            color: #000;
+            font-size: 1.7rem;
+            line-height: 1;
+        }
 
-    h1.page-heading span {
-      color: #f5b400;
-    }
+        /* --- Favorites Grid --- */
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
 
-    .favorites-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
+        /* --- Card Styling --- */
+        .favorite-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .favorite-card {
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
+        .favorite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            background: #fffdef; /* Very light pastel yellow */
+            border-color: #faeeb5; /* Pastel yellow border */
+        }
 
-    .favorite-card:hover {
-      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(245, 180, 0, 0.3);
-      border-color: rgba(245, 180, 0, 0.4);
-    }
+        .favorite-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: .5rem;
+            text-transform: lowercase;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .favorite-title {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: .5rem;
-      text-transform: lowercase;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+        .favorite-url {
+            font-size: .9rem;
+            color: #666;
+            word-break: break-all;
+            margin-bottom: 1rem;
+        }
 
-    .favorite-url {
-      font-size: .85rem;
-      color: #666;
-      text-decoration: none;
-      word-break: break-word;
-    }
+        .favorite-timestamp {
+            font-size: .8rem;
+            color: #999;
+            margin-top: auto;
+            padding-top: 0.5rem;
+        }
 
-    .favorite-url:hover {
-      color: #1a1a1a;
-    }
+        .star {
+            font-size: 1.1rem;
+            color: #f5b400;
+        }
 
-    .favorite-timestamp {
-      font-size: .8rem;
-      color: #999;
-      margin-top: .6rem;
-    }
+        footer {
+            position: relative;
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 3rem;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+        }
 
-    .star {
-      font-size: 1.2rem;
-      color: #f5b400;
-    }
-
-    footer {
-      position: relative;
-      text-align: center;
-      padding: 2rem;
-      color: rgba(255, 255, 255, 0.8);
-      margin-top: 3rem;
-      z-index: 1;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 100px 1rem 2rem;
-      }
-      .favorites-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        @media (max-width: 768px) {
+            .container {
+                padding: 100px 1.5rem 2rem;
+            }
+            .favorites-grid {
+                grid-template-columns: 1fr;
+            }
+            h1.page-heading {
+                padding: 0 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-left">
-      <div class="hamburger" onclick="toggleSidebar()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <a href="#" class="nav-logo">kairo.</a>
-    </div>
-    <div class="nav-right">
-      <a href="#" class="logout-btn">logout</a>
-      <a href="#" class="profile-icon">B</a>
-    </div>
-  </nav>
+    <nav>
+        <div class="nav-left">
+            <div class="hamburger" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="dashboard.html" class="nav-logo">kairo.</a>
+        </div>
+        <div class="nav-right">
+            <a href="login.html" class="logout-btn">logout</a>
+            <a href="profile.html" class="profile-icon" id="navProfileIcon">B</a>
+        </div>
+    </nav>
 
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-links">
-      <a href="dashboard.html">dashboard</a>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-links">
+            <a href="dashboard.html">dashboard</a>
             <a href="recent.html">recents</a>
             <a href="notes.html">notes</a>
             <a href="favorites.html">favorites</a>
             <a href="collections.html">collections</a>
             <a href="profile.html">profile</a>
+        </div>
     </div>
-  </div>
 
-  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-  <div class="container">
-    <h1 class="page-heading">🌟 <span>favorites</span></h1>
-    <div class="favorites-grid">
+    <div class="container">
+        <h1 class="page-heading"><span class="icon">★</span> <span>Favorites</span></h1>
+        
+        <div class="favorites-grid">
 
-      <div class="favorite-card">
-        <h3 class="favorite-title">github repository <span class="star">★</span></h3>
-        <a href="https://github.com/user/awesome-project" target="_blank" class="favorite-url">https://github.com/user/awesome-project</a>
-        <div class="favorite-timestamp">added 2 days ago</div>
-      </div>
+            <a href="https://github.com/user/awesome-project" target="_blank" class="favorite-card">
+                <h3 class="favorite-title">github repository <span class="star">★</span></h3>
+                <p class="favorite-url">https://github.com/user/awesome-project</p>
+                <div class="favorite-timestamp">added 2 days ago</div>
+            </a>
 
-      <div class="favorite-card">
-        <h3 class="favorite-title">react hooks guide <span class="star">★</span></h3>
-        <a href="https://react.dev/reference/react/hooks" target="_blank" class="favorite-url">https://react.dev/reference/react/hooks</a>
-        <div class="favorite-timestamp">added 5 days ago</div>
-      </div>
+            <a href="https://react.dev/reference/react/hooks" target="_blank" class="favorite-card">
+                <h3 class="favorite-title">react hooks guide <span class="star">★</span></h3>
+                <p class="favorite-url">https://react.dev/reference/react/hooks</p>
+                <div class="favorite-timestamp">added 5 days ago</div>
+            </a>
 
-      <div class="favorite-card">
-        <h3 class="favorite-title">figma design system <span class="star">★</span></h3>
-        <a href="https://figma.com/file/design-system" target="_blank" class="favorite-url">https://figma.com/file/design-system</a>
-        <div class="favorite-timestamp">added 1 week ago</div>
-      </div>
+            <a href="https://figma.com/file/design-system" target="_blank" class="favorite-card">
+                <h3 class="favorite-title">figma design system <span class="star">★</span></h3>
+                <p class="favorite-url">https://figma.com/file/design-system</p>
+                <div class="favorite-timestamp">added 1 week ago</div>
+            </a>
 
-      <div class="favorite-card">
-        <h3 class="favorite-title">mdn web docs <span class="star">★</span></h3>
-        <a href="https://developer.mozilla.org" target="_blank" class="favorite-url">https://developer.mozilla.org</a>
-        <div class="favorite-timestamp">added 2 weeks ago</div>
-      </div>
+            <a href="https://developer.mozilla.org" target="_blank" class="favorite-card">
+                <h3 class="favorite-title">mdn web docs <span class="star">★</span></h3>
+                <p class="favorite-url">https://developer.mozilla.org</p>
+                <div class="favorite-timestamp">added 2 weeks ago</div>
+            </a>
 
-      <div class="favorite-card">
-        <h3 class="favorite-title">css tricks <span class="star">★</span></h3>
-        <a href="https://css-tricks.com" target="_blank" class="favorite-url">https://css-tricks.com</a>
-        <div class="favorite-timestamp">added 3 weeks ago</div>
-      </div>
+            <a href="https://css-tricks.com" target="_blank" class="favorite-card">
+                <h3 class="favorite-title">css tricks <span class="star">★</span></h3>
+                <p class="favorite-url">https://css-tricks.com</p>
+                <div class="favorite-timestamp">added 3 weeks ago</div>
+            </a>
 
-      <div class="favorite-card">
-        <h3 class="favorite-title">youtube reference <span class="star">★</span></h3>
-        <a href="https://www.youtube.com/watch?v=aXntSsF5-uc" target="_blank" class="favorite-url">https://www.youtube.com/watch?v=aXntSsF5-uc</a>
-        <div class="favorite-timestamp">added 1 month ago</div>
-      </div>
+            <a href="https://www.youtube.com/watch?v=aXntSsF5-uc" target="_blank" class="favorite-card">
+                <h3 class="favorite-title">youtube reference <span class="star">★</span></h3>
+                <p class="favorite-url">https://www.youtube.com/watch?v=aXntSsF5-uc</p>
+                <div class="favorite-timestamp">added 1 month ago</div>
+            </a>
 
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p>©2025 kairo. All rights reserved.</p>
-  </footer>
+    <footer>
+        <p>&copy; 2024 kairo. All rights reserved.</p>
+    </footer>
 
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.getElementById('overlay');
-      const hamburger = document.querySelector('.hamburger');
-      
-      sidebar.classList.toggle('active');
-      overlay.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    }
-  </script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const hamburger = document.querySelector('.hamburger');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const navProfileIcon = document.getElementById('navProfileIcon');
+                const savedData = JSON.parse(localStorage.getItem('kairoProfile')) || {};
+                
+                if (savedData.avatar) {
+                    navProfileIcon.innerHTML = `<img src="${savedData.avatar}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" alt="P">`;
+                } else {
+                    const initial = (savedData.name || "B").charAt(0).toUpperCase();
+                    navProfileIcon.textContent = initial;
+                }
+            } catch (e) {
+                console.error("Error loading profile icon data:", e);
+            }
+        });
+    </script>
 
 </body>
 </html>

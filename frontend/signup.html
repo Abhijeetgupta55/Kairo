@@ -73,16 +73,15 @@
              left: 0;
              width: 100%;
              height: 100%;
+             /* More Visible Black & White Gradient Animation */
              background: 
-                radial-gradient(circle at 15% 50%, rgb(89, 89, 89) 0%, transparent 50%), /* Dark Gray Light Source */
-                radial-gradient(circle at 85% 50%, rgb(53, 53, 53) 0%, transparent 60%), /* Near Black Shadow */
-                radial-gradient(circle at 50% 15%, rgba(0, 0, 0, 0.8) 0%, transparent 70%), /* White/Gray Highlight */
-                radial-gradient(circle at 50% 85%, rgba(0, 0, 0, 1) 0%, transparent 50%), /* Deep Black Shadow */
-                
-                /* --- NEW HUE LAYER --- */
-                radial-gradient(circle at 70% 30%, rgba(62, 62, 62, 0.15) 0%, transparent 60%); /* Soft White Hue */
-                background-size: 300% 300%; 
-             animation: circularGradientShift 50s ease infinite;
+                radial-gradient(circle at 15% 50%, rgba(50, 50, 50, 1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 50%, rgba(10, 10, 10, 1) 0%, transparent 60%),
+                radial-gradient(circle at 50% 15%, rgba(0, 0, 0, 0.8) 0%, transparent 70%),
+                radial-gradient(circle at 50% 85%, rgba(0, 0, 0, 1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(62, 62, 62, 0.15) 0%, transparent 60%);
+             background-size: 300% 300%; 
+             animation: circularGradientShift 60s ease infinite;
              pointer-events: none;
         }
         
@@ -93,7 +92,7 @@
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%); /* More visible white glow */
             animation: rotate 20s linear infinite;
         }
 

@@ -24,6 +24,7 @@
         linear-gradient(to right, #d8d8d886 1px, transparent 1px),
         linear-gradient(to bottom,#d8d8d886 1px, transparent 1px);
       background-size: 20px 20px;
+      padding-bottom: 80px; /* Space for fixed footer */
     }
 
     body::before {
@@ -197,128 +198,23 @@
       z-index: 1;
     }
 
-    /* Add URL Section - Top Banner */
-    .add-url-banner {
-      background: linear-gradient(135deg, rgba(205, 205, 205, 0.08) 0%, rgba(189, 210, 255, 0.12) 100%);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      padding: 2.5rem 3rem;
-      margin-bottom: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .add-url-banner:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
-      border-color: rgba(59, 130, 246, 0.4);
-    }
-
-    .add-url-content {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .add-url-icon {
-      width: 60px;
-      height: 60px;
-      background: rgba(59, 130, 246, 0.15);
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-    }
-
-    .add-url-text h2 {
-      font-size: 1.5rem;
-      color: #000;
-      margin-bottom: 0.3rem;
-    }
-
-    .add-url-text p {
-      color: rgba(0, 0, 0, 0.6);
-      font-size: 0.95rem;
-    }
-
-    .add-url-arrow {
-      font-size: 1.5rem;
-      color: rgba(0, 0, 0, 0.3);
-      transition: all 0.3s;
-    }
-
-    .add-url-banner:hover .add-url-arrow {
-      transform: translateX(5px);
-      color: rgba(0, 0, 0, 0.6);
-    }
-
-    /* Profile Section - Inline */
-    .profile-section {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 18px;
-      padding: 2rem 2.5rem;
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .profile-section:hover {
-      transform: translateX(5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    .profile-avatar {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1.8rem;
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-
-    .profile-details h3 {
-      font-size: 1.4rem;
-      color: #000;
-      margin-bottom: 0.2rem;
-    }
-
-    .profile-details .member-tag {
-      color: rgba(0, 0, 0, 0.5);
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .profile-details .bio-text {
-      color: rgba(0, 0, 0, 0.7);
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
     /* Main Content Area */
     .content-wrapper {
-      display: flex;
+      display: grid; 
+      grid-template-columns: 2fr 1fr; /* Asymmetrical layout */
       gap: 2.5rem;
       margin-bottom: 2.5rem;
     }
 
-    /* Left Column - Recents & Favorites */
-    .left-column {
-      flex: 1;
+    /* Left Column (Main) */
+    .main-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Right Column (Sidebar) */
+    .sidebar-column {
       display: flex;
       flex-direction: column;
       gap: 2rem;
@@ -337,6 +233,28 @@
       transform: translateY(-3px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
+    
+    /* NEW: Add URL Prompt Tile */
+    .add-url-prompt-tile {
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(205, 205, 205, 0.08) 0%, rgba(189, 210, 255, 0.12) 100%);
+    }
+    .add-url-prompt-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    .add-url-prompt-tile .section-title {
+      border-bottom: none; 
+      margin-bottom: 0.5rem;
+    }
+    .add-url-prompt-text {
+      font-size: 0.95rem;
+      color: rgba(0, 0, 0, 0.6);
+      padding-left: 2.2rem; /* Align with title */
+    }
+    /* END NEW STYLES */
+
 
     .section-header {
       display: flex;
@@ -355,6 +273,9 @@
 
     .section-title .icon {
       font-size: 1.3rem;
+      color: rgba(0, 0, 0, 0.7);
+      font-weight: 500;
+      line-height: 1; /* Aligns symbols better */
     }
 
     .section-title h3 {
@@ -362,22 +283,32 @@
       color: #000;
       font-weight: 600;
     }
-
-    .view-all-link {
+    
+    .view-all-link, .add-new-btn {
       color: rgba(0, 0, 0, 0.5);
       text-decoration: none;
       font-size: 0.9rem;
-      opacity: 0;
       transition: all 0.3s;
+      cursor: pointer;
     }
-
-    .section-box:hover .view-all-link {
+    .section-box:hover .view-all-link,
+    .section-box:hover .add-new-btn {
       opacity: 1;
       color: rgba(0, 0, 0, 0.7);
     }
-
-    .view-all-link:hover {
+    .view-all-link:hover,
+    .add-new-btn:hover {
       color: #000;
+    }
+    .add-new-btn {
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
     .items-list {
@@ -403,14 +334,6 @@
       border-color: rgba(0, 0, 0, 0.1);
     }
 
-    /* Right Column - Notes & Collections */
-    .right-column {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
     .notes-box {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(20px);
@@ -418,7 +341,6 @@
       border-radius: 18px;
       padding: 2rem;
       transition: all 0.3s ease;
-      flex: 1;
     }
 
     .notes-box:hover {
@@ -681,11 +603,13 @@
     }
 
     footer {
-      position: relative;
+      position:absolute;
+      bottom: 0;       
+      left: 0;         
+      right: 0;        
       text-align: center;
       padding: 2rem;
       color: rgba(255, 255, 255, 0.8);
-      margin-top: 3rem;
       z-index: 1;
       background: rgba(0, 0, 0, 0.95);
       backdrop-filter: blur(20px);
@@ -696,7 +620,7 @@
     /* Responsive */
     @media (max-width: 1024px) {
       .content-wrapper {
-        flex-direction: column;
+        grid-template-columns: 1fr; /* 1 column on tablets */
       }
     }
 
@@ -704,16 +628,7 @@
       .dash-container {
         padding: 100px 1.5rem 2rem;
       }
-      .add-url-banner {
-        padding: 2rem;
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-      }
-      .profile-section {
-        flex-direction: column;
-        text-align: center;
-      }
+      /* .profile-section removed */
     }
   </style>
 </head>
@@ -749,75 +664,23 @@
 
   <div class="dash-container">
     
-    <!-- Add URL Banner -->
-    <div class="add-url-banner" onclick="document.getElementById('addUrlModal').style.display='flex'">
-      <div class="add-url-content">
-        <div class="add-url-icon">➕</div>
-        <div class="add-url-text">
-          <h2>add new url</h2>
-          <p>save links to favorites, collections, or recent pages</p>
-        </div>
-      </div>
-      <div class="add-url-arrow">→</div>
-    </div>
-
-    <!-- Profile Section -->
-    <div class="profile-section" onclick="window.location.href='profile.html'">
-      <div class="profile-avatar">B</div>
-      <div class="profile-details">
-        <h3>Bob</h3>
-        <p class="member-tag">member since june 2025</p>
-        <p class="bio-text">Loves exploring new tech, organizing workflows, and a big fan of coffee-powered productivity.</p>
-      </div>
-    </div>
-
-    <!-- Main Content -->
     <div class="content-wrapper">
       
-      <!-- Left Column -->
-      <div class="left-column">
-        <!-- Recents -->
-        <div class="section-box">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="icon">⌚</span>
-              <h3>recents</h3>
-            </div>
-            <a href="recent.html" class="view-all-link">view all →</a>
+      <div class="main-column">
+        
+        <div class="section-box add-url-prompt-tile" onclick="document.getElementById('addUrlModal').style.display='flex'">
+          <div class="section-title">
+            <span class="icon">+</span>
+            <h3>Add New URL</h3>
           </div>
-          <div class="items-list">
-            <div class="item">github repository</div>
-            <div class="item">react documentation</div>
-            <div class="item">figma design system</div>
-            <div class="item">tailwind css docs</div>
-          </div>
+          <p class="add-url-prompt-text">Click here to save a new link to your dashboard.</p>
         </div>
 
-        <!-- Favorites -->
-        <div class="section-box">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="icon">⭐</span>
-              <h3>favorites</h3>
-            </div>
-            <a href="favorites.html" class="view-all-link">view all →</a>
-          </div>
-          <div class="items-list">
-            <div class="item">mdn web docs</div>
-            <div class="item">chrome devtools</div>
-            <div class="item">vs code extensions</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Column -->
-      <div class="right-column">
-        <!-- Notes -->
         <div class="notes-box">
           <div class="section-header">
             <div class="section-title">
-              <span class="icon">📝</span>
-              <h3>notes</h3>
+              <span>◼️</span>
+              <h3>Notes</h3>
             </div>
             <a href="notes.html" class="view-all-link">view all →</a>
           </div>
@@ -828,12 +691,26 @@
           </div>
         </div>
 
-        <!-- Collections -->
+        <div class="section-box">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="icon">★</span>
+              <h3>Favorites</h3>
+            </div>
+            <a href="favorites.html" class="view-all-link">view all →</a>
+          </div>
+          <div class="items-list">
+            <div class="item">mdn web docs</div>
+            <div class="item">chrome devtools</div>
+            <div class="item">vs code extensions</div>
+          </div>
+        </div>
+
         <div class="collections-box">
           <div class="section-header">
             <div class="section-title">
-              <span class="icon">🗃️</span>
-              <h3>collections</h3>
+              <span class="icon">+</span>
+              <h3>Collections</h3>
             </div>
             <a href="collections.html" class="view-all-link">view all →</a>
           </div>
@@ -848,32 +725,48 @@
         </div>
       </div>
 
+      <div class="sidebar-column">
+        <div class="section-box">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="icon">›</span>
+              <h3>Recents</h3>
+            </div>
+            <div class="header-controls">
+              <a href="recent.html" class="view-all-link">view all →</a>
+            </div>
+          </div>
+          <div class="items-list" id="recents-list">
+             </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 
-  <!-- Enhanced Add URL Modal -->
   <div id="addUrlModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>add new url</h2>
+        <h2>Add New URL</h2>
         <span class="close" onclick="document.getElementById('addUrlModal').style.display='none'">&times;</span>
       </div>
       
-      <form>
+      <form id="addUrlForm">
         <div class="form-group">
-          <label>title</label>
-          <input type="text" placeholder="enter link title..." class="modal-input">
+          <label>Title</label>
+          <input type="text" placeholder="Enter link title..." class="modal-input" id="modalTitleInput">
         </div>
 
         <div class="form-group">
-          <label>url</label>
-          <input type="url" placeholder="https://example.com" class="modal-input">
+          <label>URL</label>
+          <input type="url" placeholder="https://example.com" class="modal-input" id="modalUrlInput" required>
         </div>
 
         <div class="form-group">
-          <label>add to collection (optional)</label>
+          <label>Add to Collection (optional)</label>
           <select class="modal-select">
-            <option value="">select a collection...</option>
+            <option value="">Select a collection...</option>
             <option value="research">research</option>
             <option value="music">music</option>
             <option value="portfolio">portfolio inspo</option>
@@ -884,25 +777,24 @@
         </div>
 
         <div class="form-group">
-          <label>quick actions</label>
+          <label>Quick Actions</label>
           <div class="checkbox-group">
             <div class="checkbox-item">
               <input type="checkbox" id="addFavorites">
-              <label for="addFavorites">add to favorites</label>
+              <label for="addFavorites">Add to favorites</label>
             </div>
           </div>
           <p style="color: rgba(0, 0, 0, 0.5); font-size: 0.85rem; margin-top: 0.5rem;">* URLs are automatically added to recents</p>
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="btn-secondary" onclick="document.getElementById('addUrlModal').style.display='none'">cancel</button>
-          <button type="submit" class="btn-primary">save link</button>
+          <button type="button" class="btn-secondary" onclick="document.getElementById('addUrlModal').style.display='none'">Cancel</button>
+          <button type="submit" class="btn-primary">Save Link</button>
         </div>
       </form>
     </div>
   </div>
  
-  <!-- Logout Modal -->
   <div id="logoutModal" class="modal">
     <div class="modal-box">
       <p>are you sure you want to logout?</p>
@@ -914,6 +806,7 @@
   <footer>
     <p>©2025 kairo. All rights reserved.</p>
   </footer>
+  
   <script>
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
@@ -925,12 +818,136 @@
       hamburger.classList.toggle('active');
     }
 
-    // Prevent form submission for demo
-    document.querySelector('form')?.addEventListener('submit', function(e) {
+    // --- JAVASCRIPT LOGIC ---
+
+    // const addUrlBtn = document.getElementById('addUrlBtn'); <-- REMOVED
+    const addUrlModal = document.getElementById('addUrlModal');
+    const addUrlForm = document.getElementById('addUrlForm');
+    const recentsList = document.getElementById('recents-list');
+    const modalTitleInput = document.getElementById('modalTitleInput');
+    const modalUrlInput = document.getElementById('modalUrlInput');
+
+    const RECENTS_KEY = 'kairoRecents';
+    const MAX_RECENTS = 8; // Show 8 items
+
+    // Function to get recents from localStorage
+    function getRecents() {
+      const recents = localStorage.getItem(RECENTS_KEY);
+      // Pre-populate with sample data if empty
+      if (!recents || JSON.parse(recents).length === 0) {
+        return [
+          { title: 'github repository', url: '#' },
+          { title: 'react hooks guide', url: '#' },
+          { title: 'figma design system', url: '#' },
+          { title: 'mdn css grid', url: '#' },
+          { title: 'medium article', url: '#' },
+          { title: 'dribbble inspiration', url: '#' },
+          { title: 'stackoverflow thread', url: '#' },
+          { title: 'youtube tutorial', url: '#' }
+        ];
+      }
+      return JSON.parse(recents);
+    }
+
+    // Function to save recents to localStorage
+    function saveRecents(recents) {
+      localStorage.setItem(RECENTS_KEY, JSON.stringify(recents));
+    }
+
+    // Function to add a new item
+    function addRecentItem(title, url) {
+      let recents = getRecents();
+      
+      // Check if we're clearing sample data
+      if (recents.length === MAX_RECENTS && recents[0].title === 'github repository') {
+        recents = []; // Clear sample data on first add
+      }
+
+      // Add new item to the top of the list
+      recents.unshift({
+        title: title || url, // Use URL as title if title is empty
+        url: url,
+        timestamp: new Date().toISOString() // Good to store for later
+      });
+
+      // Keep the list to a max size
+      recents = recents.slice(0, MAX_RECENTS);
+      
+      saveRecents(recents);
+    }
+
+    // Function to render the list to the HTML
+    function renderRecents() {
+      const recents = getRecents();
+      recentsList.innerHTML = ''; // Clear the list
+
+      if (recents.length === 0) {
+        // Show a placeholder if no items
+        recentsList.innerHTML = '<div class="item" style="color: #999;">No recent items found.</div>';
+        return;
+      }
+
+      recents.forEach(item => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'item';
+        itemEl.textContent = item.title;
+        // Optional: make the item clickable
+        itemEl.onclick = () => {
+          if(item.url !== '#') {
+            window.open(item.url, '_blank');
+          }
+        };
+        recentsList.appendChild(itemEl);
+      });
+    }
+
+    // --- Event Listeners ---
+
+    // Open the modal when "+" is clicked
+    // addUrlBtn.addEventListener('click', () => { // <-- REMOVED
+    //   addUrlModal.style.display = 'flex';
+    //   modalUrlInput.focus();
+    // });
+
+    // Handle the form submission
+    addUrlForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('URL saved successfully!');
-      document.getElementById('addUrlModal').style.display='none';
+      
+      const title = modalTitleInput.value;
+      const url = modalUrlInput.value;
+
+      if (!url) return; // Don't save if URL is empty
+
+      // Add the new item
+      addRecentItem(title, url);
+      
+      // Re-render the list to show the new item
+      renderRecents();
+
+      // Close modal and reset form
+      addUrlModal.style.display = 'none';
+      addUrlForm.reset();
     });
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderRecents(); // Load and display recents when the page opens
+      
+      // Set up static modal close buttons
+      document.querySelectorAll('.modal-box .btn-secondary').forEach(btn => {
+        btn.onclick = (e) => {
+          e.preventDefault();
+          btn.closest('.modal').style.display = 'none';
+        }
+      });
+      document.querySelector('#addUrlModal .btn-secondary').onclick = () => {
+        addUrlModal.style.display = 'none';
+      }
+      document.querySelector('#addUrlModal .close').onclick = () => {
+        addUrlModal.style.display = 'none';
+      }
+    });
+
   </script>
 </body>
 

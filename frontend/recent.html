@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>kairo. - recents</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -214,6 +216,7 @@
       position: relative;
       max-width: 600px;
       margin-bottom: 2rem;
+      
     }
 
     .search-bar input {
@@ -235,7 +238,7 @@
       background: #fff;
     }
     .search-bar::before {
-      content: '🔍';
+      content: '';
       position: absolute;
       left: 1rem;
       top: 50%;
@@ -415,7 +418,8 @@
 
   <div class="container">
     <div class="page-header">
-      <h1><span>⌚</span> recents</h1>
+      
+      <h1><span class="icon">›</span> Recents</h1>
       <div class="search-bar">
         <input type="text" id="searchInput" placeholder="search recent items...">
       </div>
