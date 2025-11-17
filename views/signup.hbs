@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kairo. - sign up</title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -22,15 +21,12 @@
             position: relative;
             overflow: hidden;
             line-height: 1.6;
-            
-            /* Apply Grid Pattern */
             background-image:
                 linear-gradient(to right, #d8d8d886 1px, transparent 1px),
                 linear-gradient(to bottom, #d8d8d886 1px, transparent 1px);
             background-size: 20px 20px;
         }
         
-        /* Main Layout Container */
         .l-container {
             display: flex;
             width: 100vw;
@@ -39,7 +35,6 @@
             z-index: 1;
         }
         
-        /* Keyframe for Gradient Animation */
         @keyframes circularGradientShift {
             0%   { background-position: 0% 50%; }
             25%  { background-position: 50% 0%; }
@@ -48,7 +43,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- (WAS RIGHT) Left Side - Brand Section (Dark Theme) --- */
         .l-left {
             flex: 0 0 50%; 
             background: rgba(0, 0, 0, 0.95);
@@ -60,7 +54,6 @@
             position: relative;
             padding: 3rem;
             overflow: hidden;
-            /* UPDATED: Shadow is now on the right side */
             box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5); 
             background-image: none; 
             animation: none;
@@ -74,14 +67,12 @@
              width: 100%;
              height: 100%;
              background: 
-                radial-gradient(circle at 15% 50%, rgb(89, 89, 89) 0%, transparent 50%), /* Dark Gray Light Source */
-                radial-gradient(circle at 85% 50%, rgb(53, 53, 53) 0%, transparent 60%), /* Near Black Shadow */
-                radial-gradient(circle at 50% 15%, rgba(0, 0, 0, 0.8) 0%, transparent 70%), /* White/Gray Highlight */
-                radial-gradient(circle at 50% 85%, rgba(0, 0, 0, 1) 0%, transparent 50%), /* Deep Black Shadow */
-                
-                /* --- NEW HUE LAYER --- */
-                radial-gradient(circle at 70% 30%, rgba(62, 62, 62, 0.15) 0%, transparent 60%); /* Soft White Hue */
-                background-size: 300% 300%; 
+                radial-gradient(circle at 15% 50%, rgb(89, 89, 89) 0%, transparent 50%),
+                radial-gradient(circle at 85% 50%, rgb(53, 53, 53) 0%, transparent 60%),
+                radial-gradient(circle at 50% 15%, rgba(0, 0, 0, 0.8) 0%, transparent 70%),
+                radial-gradient(circle at 50% 85%, rgba(0, 0, 0, 1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(62, 62, 62, 0.15) 0%, transparent 60%);
+             background-size: 300% 300%; 
              animation: circularGradientShift 50s ease infinite;
              pointer-events: none;
         }
@@ -111,37 +102,30 @@
             z-index: 1;
         }
 
-        /* --- (WAS LEFT) Right Side - Signup Form (Light Theme) --- */
         .l-right {
             flex: 0 0 50%; 
             padding: 6vh 3rem; 
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Aligns to top */
-            align-items: center; /* Centers form horizontally */
+            justify-content: flex-start;
+            align-items: center;
             position: relative;
             background: transparent;
             overflow-y: auto;
             overflow-x: hidden;
         }
 
-        /* --- Form content wrapper --- */
         .l-form-content {
             width: 100%;
             max-width: 450px; 
         }
 
-        /* --- Form Styles --- */
         .l-form-content h2 {
             font-size: 2.2rem; 
             font-weight: 700;
             color: #000000;
             margin-bottom: 0.2rem; 
             letter-spacing: -0.5px;
-        }
-
-        .l-form-content p {
-            display: none; 
         }
 
         .l-input-group {
@@ -239,12 +223,6 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
-        .l-social-icons .fa-google,
-        .l-social-icons .fa-apple, 
-        .l-social-icons .fa-facebook-f {
-            color: #333;
-        }
 
         .l-signin {
             text-align: center;
@@ -264,60 +242,27 @@
             text-decoration: underline;
         }
 
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 30px;
-            /* UPDATED: Position to right */
-            right: 30px;
-            left: auto; 
+        .error-message {
             background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
             font-size: 0.95rem;
             font-weight: 500;
-            display: none;
+            display: flex;
             align-items: center;
             gap: 0.8rem;
-            z-index: 2000;
-            animation: slideInRight 0.4s ease; /* UPDATED animation */
-            max-width: 400px;
         }
 
-        .notification.show {
-            display: flex;
-        }
-
-        .notification.success {
-            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
-        }
-
-        /* UPDATED Keyframe */
-        @keyframes slideInRight {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* Responsive */
         @media (max-width: 968px) {
             .l-container {
                 flex-direction: column;
-                /* Brand (.l-left) is now first, so it appears on top */
             }
 
-            /* .l-left is the BRAND, now on top */
             .l-left {
                 min-height: 25vh; 
                 flex: 0 0 auto;
-                /* UPDATED: Shadow on bottom edge */
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
             }
 
@@ -325,33 +270,19 @@
                 font-size: 3.5rem;
             }
 
-            /* .l-right is the FORM, now on bottom */
             .l-right {
                 flex: 1;
                 padding: 3rem 2rem; 
                 max-width: 100%;
-                /* UPDATED: Remove shadow, match login.html behavior */
                 overflow-y: visible; 
                 box-shadow: none;
-            }
-
-            .notification {
-                top: 15px;
-                left: 15px; 
-                right: 15px;
             }
         }
     </style>
 </head>
 
 <body>
-
-    <div class="notification" id="notification">
-        <span id="notificationText">Account doesn't exist. Please sign up first!</span>
-    </div>
-
     <div class="l-container">
-
         <div class="l-left">
             <h1>kairo.</h1>
         </div>
@@ -360,112 +291,45 @@
             <div class="l-form-content">
                 <h2>Create your account</h2>
 
-                <form onsubmit="handleSignup(event)">
+                {{#if error}}
+                <div class="error-message">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>{{error}}</span>
+                </div>
+                {{/if}}
+
+                <form method="POST" action="/signup">
                     <div class="l-input-group condensed">
-                        <label for="fullname">Full Name</label>
-                        <input type="text" id="fullname" placeholder="Type your full name">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Type your username" value="{{username}}" required>
                     </div>
                     <div class="l-input-group condensed">
                         <label for="email">E-mail</label>
-                        <input type="email" id="email" placeholder="Type your e-mail">
+                        <input type="email" id="email" name="email" placeholder="Type your e-mail" value="{{email}}" required>
                     </div>
                     <div class="l-input-group condensed">
                         <label for="password">Password</label>
-                        <input type="password" id="password" placeholder="Type your password (min. 8 characters)">
+                        <input type="password" id="password" name="password" placeholder="Type your password (min. 6 characters)" required>
                     </div>
                     <div class="l-input-group">
                         <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
                     </div>
                     <button type="submit" class="l-btn">Sign Up</button>
                 </form>
 
                 <div class="l-social-login">or sign up via other accounts</div>
                 <div class="l-social-icons">
-                    <i class="fa-brands fa-google" onclick="showNotification('Google signup is not yet implemented!', 'error')" aria-label="Sign up with Google"></i>
-                    <i class="fa-brands fa-apple" onclick="showNotification('Apple signup is not yet implemented!', 'error')" aria-label="Sign up with Apple"></i>
-                    <i class="fa-brands fa-facebook-f" onclick="showNotification('Facebook signup is not yet implemented!', 'error')" aria-label="Sign up with Facebook"></i>
+                    <i class="fa-brands fa-google" aria-label="Sign up with Google"></i>
+                    <i class="fa-brands fa-apple" aria-label="Sign up with Apple"></i>
+                    <i class="fa-brands fa-facebook-f" aria-label="Sign up with Facebook"></i>
                 </div>
 
                 <div class="l-signin">
-                    Already have an account? <a href="login.html">Sign In</a>
+                    Already have an account? <a href="/login">Sign In</a>
                 </div>
             </div>
         </div>
-        
     </div>
-
-    <script>
-        // Sample user data (to check for duplicates)
-        const validUsers = [
-            { email: 'bob@kairo.com', password: 'password123' },
-            { email: 'alice@kairo.com', password: 'alice2025' },
-            { email: 'demo@kairo.com', password: 'demo1234' }
-        ];
-
-        /**
-         * Displays a notification message.
-         */
-        function showNotification(message, type = 'error') {
-            const notification = document.getElementById('notification');
-            const notificationText = document.getElementById('notificationText');
-            
-            notificationText.textContent = message;
-            
-            notification.classList.remove('success');
-            
-            if (type === 'success') {
-                notification.classList.add('success');
-            }
-            
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
-
-        /**
-         * Handles the SIGNUP form submission.
-         */
-        function handleSignup(event) {
-            event.preventDefault(); // Prevent form submission
-            
-            // Get all form values
-            const fullnameInput = document.getElementById('fullname').value.trim();
-            const emailInput = document.getElementById('email').value.trim();
-            const passwordInput = document.getElementById('password').value;
-            const confirmPasswordInput = document.getElementById('confirmPassword').value;
-
-            // --- Validation ---
-            if (!fullnameInput || !emailInput || !passwordInput || !confirmPasswordInput) {
-                showNotification('Please fill in all fields!', 'error');
-                return;
-            }
-            if (passwordInput !== confirmPasswordInput) {
-                showNotification('Passwords do not match. Please try again!', 'error');
-                return;
-            }
-            if (passwordInput.length < 8) {
-                showNotification('Password must be at least 8 characters long!', 'error');
-                return;
-            }
-            const emailExists = validUsers.some(user => user.email === emailInput);
-            if (emailExists) {
-                showNotification('An account with this email already exists!', 'error');
-                return;
-            }
-
-            // --- Success ---
-            showNotification('Account created successfully! Redirecting to login...', 'success');
-            
-            setTimeout(() => {
-                window.location.href = 'login.html'; // Redirect to login page
-            }, 2000);
-        }
-
-    </script>
-
 </body>
-
 </html>

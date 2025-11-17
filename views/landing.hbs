@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>kairo. - organize your digital life</title>
+  <title>{{title}}</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
@@ -43,7 +43,7 @@
       z-index: 0;
     }
 
-    /* Navbar Styles - Matching Dashboard */
+    /* Navbar Styles */
     nav {
       position: fixed;
       top: 0;
@@ -892,11 +892,11 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#" class="nav-logo">kairo.</a>
+      <a href="/" class="nav-logo">kairo.</a>
     </div>
     <div class="nav-right">
-      <a href="login.html" class="login-btn">login</a>
-      <a href="signup.html" class="signup-btn">sign up</a>
+      <a href="/login" class="login-btn">login</a>
+      <a href="/signup" class="signup-btn">sign up</a>
     </div>
   </nav>
 
@@ -904,11 +904,9 @@
     <div class="sidebar-links">
       <a href="#hero">home</a>
       <a href="#discover">discover</a>
-      <a href="blogs.html">blogs</a>
       <a href="#about">about us</a>
-      <a href="team.html">the team</a>
       <a href="#connect">contact</a>
-      <a href="login.html">login</a>
+      <a href="/login">login</a>
     </div>
   </div>
 
@@ -919,13 +917,13 @@
       <h1>Organize Your Web, <span class="highlight">Your Way.</span></h1>
       <p>A clean, powerful dashboard to collect, track, and manage all your tabs in one beautiful place. Say goodbye to browser chaos.</p>
       <div class="hero-buttons">
-        <a href="signup.html" class="get-started">Get Started Free →</a>
+        <a href="/signup" class="get-started">Get Started Free →</a>
         <a href="#features" class="learn-more">Explore Features</a>
       </div>
     </div>
     <div class="hero-illustration">
       <div class="hero-visual">
-        <img src="Images/hero_section.jpg" alt="Kairo Dashboard Preview">
+        <img src="/images/hero_section.jpg" alt="Kairo Dashboard Preview">
       </div>
     </div>
   </section>
@@ -972,7 +970,7 @@
   <section class="discover" id="discover">
     <div class="discover-illustration">
       <div class="discover-visual">
-        <img id="discoverImage" src="Images/img2.jpg" alt="Kairo Features">
+        <img id="discoverImage" src="/images/img2.jpg" alt="Kairo Features">
       </div>
     </div>
     <div class="discover-content">
@@ -1071,8 +1069,8 @@
     // Image Slider with Fade Effect
     const discoverImg = document.getElementById("discoverImage");
     const images = [
-      "Images/img2.jpg",
-      "Images/img3.jpg",
+      "/images/img2.jpg",
+      "/images/img3.jpg",
     ];
     let currentImageIndex = 0;
 
@@ -1088,24 +1086,6 @@
     discoverImg.style.transition = 'opacity 0.3s ease';
     setInterval(changeImage, 3000);
 
-    // Animated Counter for Stats
-    function animateCounter(element) {
-      const target = parseInt(element.getAttribute('data-count'));
-      const duration = 2000;
-      const increment = target / (duration / 16);
-      let current = 0;
-
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          element.textContent = target.toLocaleString();
-          clearInterval(timer);
-        } else {
-          element.textContent = Math.floor(current).toLocaleString();
-        }
-      }, 16);
-    }
-
     // Intersection Observer for Animations
     const observerOptions = {
       threshold: 0.3,
@@ -1115,10 +1095,6 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          if (entry.target.classList.contains('stat-number')) {
-            animateCounter(entry.target);
-            observer.unobserve(entry.target);
-          }
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0)';
         }
@@ -1127,7 +1103,7 @@
 
     // Observe elements for scroll animations
     document.addEventListener('DOMContentLoaded', () => {
-      const animatedElements = document.querySelectorAll('.feature-card, .stat-number');
+      const animatedElements = document.querySelectorAll('.feature-card');
       animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';

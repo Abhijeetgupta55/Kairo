@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kairo. - history</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image:
+        linear-gradient(to right, #d8d8d886 1px, transparent 1px),
+        linear-gradient(to bottom, #d8d8d886 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.482) 0%, transparent 40%),
+        radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+      transition: all 0.3s;
+    }
+
+    .hamburger:hover { opacity: 0.7; }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #ffffff;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .logout-btn {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+    }
+
+    .logout-btn:hover {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ffffff93;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 3px rgba(185, 185, 185, 0.3);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 2px 0 30px rgba(0, 0, 0, 0.3);
+      transition: left 0.3s ease;
+      z-index: 999;
+      padding-top: 80px;
+    }
+
+    .sidebar.active { left: 0; }
+
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-links a {
+      padding: 1.2rem 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-links a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(232, 232, 232, 0.605);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 998;
+      backdrop-filter: blur(5px);
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 2rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    h1.page-heading {
+      font-size: 2rem;
+      font-weight: 600;
+      text-transform: lowercase;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .clear-btn {
+      padding: 0.75rem 1.5rem;
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .clear-btn:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .history-item {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .history-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .history-content {
+      flex: 1;
+    }
+
+    .history-action {
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.25rem;
+    }
+
+    .history-reference {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .history-time {
+      color: #999;
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+    }
+
+    .delete-btn {
+      padding: 0.5rem 1rem;
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .delete-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #999;
+    }
+
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      position: relative;
+      text-align: center;
+      padding: 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 3rem;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 100px 1rem 2rem;
+      }
+      .page-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <div class="hamburger" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <a href="/dashboard" class="nav-logo">kairo.</a>
+    </div>
+    <div class="nav-right">
+      <a href="/logout" class="logout-btn">logout</a>
+      <a href="/profile" class="profile-icon">{{#if user.username}}{{substring user.username 0 1}}{{else}}H{{/if}}</a>
+    </div>
+  </nav>
+
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-links">
+      <a href="/dashboard">dashboard</a>
+      <a href="/history">recents</a>
+      <a href="/notes">notes</a>
+      <a href="/favorites">favorites</a>
+      <a href="/collections">collections</a>
+      <a href="/profile">profile</a>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-heading">📜 history</h1>
+      <button class="clear-btn" onclick="clearHistory()">clear all</button>
+    </div>
+
+    <div class="history-list" id="historyList">
+      <!-- History items will be loaded here -->
+    </div>
+
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <div class="empty-state-icon">🕐</div>
+      <p>no history yet. your activity will appear here.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>©2025 kairo. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let history = [];
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.querySelector('.hamburger');
+      
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    async function loadHistory() {
+      try {
+        const response = await fetch('/history/api');
+        if (!response.ok) throw new Error('Failed to load history');
+        
+        history = await response.json();
+        renderHistory();
+      } catch (error) {
+        console.error('Error loading history:', error);
+      }
+    }
+
+    function renderHistory() {
+      const list = document.getElementById('historyList');
+      const emptyState = document.getElementById('emptyState');
+      
+      if (history.length === 0) {
+        list.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+      
+      list.style.display = 'flex';
+      emptyState.style.display = 'none';
+      
+      list.innerHTML = history.map(item => {
+        const timeAgo = getTimeAgo(new Date(item.timestamp));
+        
+        return `
+          <div class="history-item">
+            <div class="history-content">
+              <div class="history-action">${escapeHtml(item.actionType)}</div>
+              <div class="history-reference">${escapeHtml(item.itemReference || '')}</div>
+              <div class="history-time">${timeAgo}</div>
+            </div>
+            <button class="delete-btn" onclick="deleteHistoryItem('${item._id}')">delete</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function clearHistory() {
+      if (!confirm('Are you sure you want to clear all history?')) return;
+      
+      try {
+        const response = await fetch('/history/api/clear', {
+          method: 'DELETE'
+        });
+        
+        if (!response.ok) throw new Error('Failed to clear history');
+        
+        await loadHistory();
+      } catch (error) {
+        console.error('Error clearing history:', error);
+        alert('Failed to clear history. Please try again.');
+      }
+    }
+
+    async function deleteHistoryItem(id) {
+      try {
+        const response = await fetch(`/history/api/${id}`, {
+          method: 'DELETE'
+        });
+        
+        if (!response.ok) throw new Error('Failed to delete history item');
+        
+        await loadHistory();
+      } catch (error) {
+        console.error('Error deleting history item:', error);
+        alert('Failed to delete history item. Please try again.');
+      }
+    }
+
+    function getTimeAgo(date) {
+      const seconds = Math.floor((new Date() - date) / 1000);
+      
+      const intervals = {
+        year: 31536000,
+        month: 2592000,
+        week: 604800,
+        day: 86400,
+        hour: 3600,
+        minute: 60
+      };
+      
+      for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+        const interval = Math.floor(seconds / secondsInUnit);
+        if (interval >= 1) {
+          return `${interval} ${unit}${interval === 1 ? '' : 's'} ago`;
+        }
+      }
+      
+      return 'just now';
+    }
+
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    // Load history on page load
+    loadHistory();
+  </script>
+
+</body>
+</html>
