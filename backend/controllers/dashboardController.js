@@ -16,7 +16,8 @@ exports.getDashboard = async (req, res) => {
       History.find({ 
         userId: req.session.userId,
         actionType: 'link_visited' // Only show visited links in recents
-      }).sort({ timestamp: -1 }).limit(10)
+      }).sort({ timestamp: -1 }).limit(10),
+      Favorite.find({ userId: req.session.userId }).sort({ star: -1, createdAt: -1 }).limit(5)
     ]);
 
     res.render('dashboard', {
@@ -26,7 +27,8 @@ exports.getDashboard = async (req, res) => {
       favoritesCount,
       recentCollections,
       recentNotes,
-      recentHistory
+      recentHistory,
+      recentFavorites: await Favorite.find({ userId: req.session.userId }).sort({ star: -1, createdAt: -1 }).limit(5)
     });
   } catch (error) {
     console.error('Error loading dashboard:', error);
@@ -37,6 +39,7 @@ exports.getDashboard = async (req, res) => {
       favoritesCount: 0,
       recentCollections: [],
       recentNotes: [],
+      recentFavorites: [], 
       recentHistory: [],
       error: 'Failed to load dashboard data'
     });

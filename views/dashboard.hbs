@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>kairo. - dashboard</title>
+  <title>kairo. - Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
     * {
@@ -661,19 +661,19 @@
       <a href="#" class="nav-logo">kairo.</a>
     </div>
     <div class="nav-right">
-      <a href="#logoutModal" class="logout-btn">logout</a>
+      <a href="#logoutModal" class="logout-btn">Logout</a>
       <a href="/profile" class="profile-icon">{{#if user.username}}{{substring user.username 0 1}}{{else}}B{{/if}}</a>
     </div>
   </nav>
 
   <div class="sidebar" id="sidebar">
     <div class="sidebar-links">
-      <a href="/dashboard">dashboard</a>
-      <a href="/history">recents</a>
-      <a href="/notes">notes</a>
-      <a href="/favorites">favorites</a>
-      <a href="/collections">collections</a>
-      <a href="/profile">profile</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/history">Recents</a>
+      <a href="/notes">Notes</a>
+      <a href="/favorites">Favorites</a>
+      <a href="/collections">Collections</a>
+      <a href="/profile">Profile</a>
     </div>
   </div>
 
@@ -692,19 +692,24 @@
           </div>
           <p class="add-url-prompt-text">Click here to save a new link to your dashboard.</p>
         </div>
-
-        <div class="notes-box">
+<div class="notes-box">
           <div class="section-header">
             <div class="section-title">
               <span>◼️</span>
               <h3>Notes</h3>
             </div>
-            <a href="/notes" class="view-all-link">view all →</a>
+            <a href="/notes" class="view-all-link">View All →</a>
           </div>
-          <div class="items-list">
-            <div class="note-item">remember to update ui mockups before tomorrow</div>
-            <div class="note-item">new features: dark mode, shortcuts, bulk url import</div>
-            <div class="note-item">meeting notes from client call</div>
+          <div class="items-list" id="notes-list">
+            {{#if recentNotes}}
+              {{#each recentNotes}}
+                <div class="note-item">{{this.title}}</div>
+              {{/each}}
+            {{else}}
+              <div class="item" style="color: #999; text-align: center; padding: 2rem 1rem;">
+                📝 No notes yet. <a href="/notes" style="color: #4A90E2; text-decoration: none;">Create your first note</a>
+              </div>
+            {{/if}}
           </div>
         </div>
 
@@ -714,12 +719,16 @@
               <span class="icon">★</span>
               <h3>Favorites</h3>
             </div>
-            <a href="/favorites" class="view-all-link">view all →</a>
+            <a href="/favorites" class="view-all-link">View All →</a>
           </div>
-          <div class="items-list">
-            <div class="item">mdn web docs</div>
-            <div class="item">chrome devtools</div>
-            <div class="item">vs code extensions</div>
+          <div class="items-list" id="favorites-list">
+            {{#if favoritesCount}}
+              <div class="item">Loading favorites...</div>
+            {{else}}
+              <div class="item" style="color: #999; text-align: center; padding: 2rem 1rem;">
+                ⭐ No favorites yet. <a href="/favorites" style="color: #4A90E2; text-decoration: none;">Add your first favorite</a>
+              </div>
+            {{/if}}
           </div>
         </div>
 
@@ -729,15 +738,18 @@
               <span class="icon">+</span>
               <h3>Collections</h3>
             </div>
-            <a href="/collections" class="view-all-link">view all →</a>
+            <a href="/collections" class="view-all-link">View All →</a>
           </div>
-          <div class="tags-grid">
-            <div class="collection-tag">research</div>
-            <div class="collection-tag">music</div>
-            <div class="collection-tag">portfolio inspo</div>
-            <div class="collection-tag">ui ideas</div>
-            <div class="collection-tag">reading list</div>
-            <div class="collection-tag">tutorials</div>
+          <div class="tags-grid" id="collections-grid">
+            {{#if recentCollections}}
+              {{#each recentCollections}}
+                <div class="collection-tag">{{this.icon}} {{this.name}}</div>
+              {{/each}}
+            {{else}}
+              <div style="color: #999; text-align: center; padding: 2rem 1rem; grid-column: 1/-1;">
+                📚 No collections yet. <a href="/collections" style="color: #4A90E2; text-decoration: none;">Create your first collection</a>
+              </div>
+            {{/if}}
           </div>
         </div>
       </div>
@@ -750,7 +762,7 @@
               <h3>Recents</h3>
             </div>
             <div class="header-controls">
-              <a href="/history" class="view-all-link">view all →</a>
+              <a href="/history" class="view-all-link">View All →</a>
             </div>
           </div>
           <div class="items-list" id="recents-list">
@@ -784,12 +796,12 @@
           <label>Add to Collection (optional)</label>
           <select class="modal-select">
             <option value="">Select a collection...</option>
-            <option value="research">research</option>
-            <option value="music">music</option>
-            <option value="portfolio">portfolio inspo</option>
-            <option value="ui">ui ideas</option>
-            <option value="reading">reading list</option>
-            <option value="tutorials">tutorials</option>
+            <option value="research">Research</option>
+            <option value="music">Music</option>
+            <option value="portfolio">Portfolio Inspo</option>
+            <option value="ui">UI Ideas</option>
+            <option value="reading">Reading List</option>
+            <option value="tutorials">Tutorials</option>
           </select>
         </div>
 
@@ -813,10 +825,10 @@
   </div>
  
   <div id="logoutModal" class="modal">
-    <div class="modal-box">
-      <p>are you sure you want to logout?</p>
-      <a href="/logout" class="btn-primary">yes, logout</a>
-      <a href="#" class="btn-secondary" onclick="document.getElementById('logoutModal').style.display='none'; return false;">cancel</a>
+        <div class="modal-box">
+      <p>Are you sure you want to logout?</p>
+      <a href="/logout" class="btn-primary">Yes, Logout</a>
+      <a href="#" class="btn-secondary" onclick="document.getElementById('logoutModal').style.display='none'; return false;">Cancel</a>
     </div>
   </div>
 

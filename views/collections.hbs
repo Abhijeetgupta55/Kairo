@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kairo. - collections</title>
+    <title>kairo. - Collections</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -336,7 +336,7 @@
             font-weight: 700;
             cursor: pointer;
             color: #000;
-            text-transform: lowercase;
+            text-transform: none;
             display: flex;
             align-items: center;
             gap: 0.4rem;
@@ -932,7 +932,7 @@
             <a href="/" class="nav-logo">kairo.</a>
         </div>
         <div class="nav-right">
-            <a href="#" class="logout-btn" id="logoutBtn">logout</a>
+            <a href="#" class="logout-btn" id="logoutBtn">Logout</a>
             <a href="/profile" class="profile-icon">{{#if user.username}}{{substring user.username 0 1}}{{else}}B{{/if}}</a>
         </div>
     </nav>
@@ -948,12 +948,12 @@
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-links">
-            <a href="/dashboard">dashboard</a>
-            <a href="/history">recents</a>
-            <a href="/notes">notes</a>
-            <a href="/favorites">favorites</a>
-            <a href="/collections">collections</a>
-            <a href="/profile">profile</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/history">Recents</a>
+            <a href="/notes">Notes</a>
+            <a href="/favorites">Favorites</a>
+            <a href="/collections">Collections</a>
+            <a href="/profile">Profile</a>
         </div>
     </div>
 
