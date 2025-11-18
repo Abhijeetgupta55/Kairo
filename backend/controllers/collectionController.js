@@ -172,12 +172,25 @@ exports.addLink = async (req, res) => {
       });
     }
 
-    collection.items.unshift({
+    const newLink = {
       title: title.trim(),
       url: url.trim()
-    });
+    };
 
+    collection.items.unshift(newLink);
     await collection.save();
+
+    // Add to history - shows in recents
+    await History.create({
+      userId: req.session.userId,
+      actionType: 'link_visited',
+      itemReference: title.trim(),
+      details: { 
+        url: url.trim(), 
+        source: 'collection',
+        collectionName: collection.name 
+      }
+    });
 
     res.json({
       success: true,

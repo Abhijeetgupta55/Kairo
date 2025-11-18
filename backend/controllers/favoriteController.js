@@ -59,6 +59,20 @@ exports.addFavorite = async (req, res) => {
       });
     }
 
+    // Check if URL already exists in favorites
+    const existing = await Favorite.findOne({
+      userId: req.session.userId,
+      url: url.trim()
+    });
+
+    if (existing) {
+      return res.status(400).json({
+        success: false,
+        message: 'This URL is already in your favorites',
+        favorite: existing
+      });
+    }
+
     const favorite = new Favorite({
       userId: req.session.userId,
       title: title.trim(),
@@ -68,13 +82,24 @@ exports.addFavorite = async (req, res) => {
 
     await favorite.save();
 
-    // Add to history
-    await History.create({
-      userId: req.session.userId,
-      actionType: 'favorite_added',
-      itemReference: favorite.title,
-      details: { favoriteId: favorite._id, url: favorite.url }
-    });
+    // Add to history - both favorite_added and link_visited for recents
+    await History.create([
+      {
+        userId: req.session.userId,
+        actionType: 'favorite_added',
+        itemReference: favorite.title,
+        details: { favoriteId: favorite._id, url: favorite.url }
+      },
+      {
+        userId: req.session.userId,
+        actionType: 'link_visited',
+        itemReference: favorite.title,
+        details: { 
+          url: favorite.url,
+          source: 'favorites'
+        }
+      }
+    ]);
 
     res.json({
       success: true,

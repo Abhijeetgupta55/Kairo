@@ -204,6 +204,7 @@
       grid-template-columns: 2fr 1fr; /* Asymmetrical layout */
       gap: 2.5rem;
       margin-bottom: 2.5rem;
+      align-items: start;
     }
 
     /* Left Column (Main) */
@@ -213,36 +214,45 @@
       gap: 2rem;
     }
 
-    /* Right Column (Sidebar) */
+    /* Right Column (Sidebar) - Full Height */
     .sidebar-column {
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      height: 100%;
+    }
+    
+    .sidebar-column .section-box {
+      height: 100%;
     }
 
     .section-box {
-      background: rgba(255, 255, 255, 0.05);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 252, 0.95) 100%);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 18px;
+      border: 1.5px solid rgba(0, 0, 0, 0.15);
+      border-radius: 16px;
       padding: 2rem;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     .section-box:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.2);
     }
     
     /* NEW: Add URL Prompt Tile */
     .add-url-prompt-tile {
       cursor: pointer;
-      background: linear-gradient(135deg, rgba(205, 205, 205, 0.08) 0%, rgba(189, 210, 255, 0.12) 100%);
+      background: linear-gradient(135deg, rgba(0, 27, 56, 0.05) 0%, rgba(139, 92, 246, 0.08) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.2);
     }
     .add-url-prompt-tile:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
-      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(146, 146, 146, 0);
+      border-color: rgba(99, 102, 241, 0.4);
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.05)0%, rgba(139, 92, 246, 0.12) 100%);
     }
     .add-url-prompt-tile .section-title {
       border-bottom: none; 
@@ -262,7 +272,7 @@
       justify-content: space-between;
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
     }
 
     .section-title {
@@ -319,41 +329,44 @@
 
     .item {
       padding: 1rem 1.2rem;
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(0, 0, 0, 0.04);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.12);
       border-radius: 10px;
-      color: rgba(0, 0, 0, 0.8);
+      color: rgba(0, 0, 0, 0.85);
       transition: all 0.3s;
       cursor: pointer;
       font-size: 0.95rem;
     }
 
     .item:hover {
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.95);
       transform: translateX(5px);
-      border-color: rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .notes-box {
-      background: rgba(255, 255, 255, 0.05);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 252, 0.95) 100%);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 18px;
+      border: 1.5px solid rgba(0, 0, 0, 0.15);
+      border-radius: 16px;
       padding: 2rem;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     .notes-box:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.2);
     }
 
     .note-item {
       padding: 1rem 1.2rem;
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(0, 0, 0, 0.04);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.12);
       border-radius: 10px;
-      color: rgba(0, 0, 0, 0.75);
+      color: rgba(0, 0, 0, 0.85);
       transition: all 0.3s;
       cursor: pointer;
       font-size: 0.95rem;
@@ -361,24 +374,27 @@
     }
 
     .note-item:hover {
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.95);
       transform: translateX(5px);
-      border-color: rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     /* Collections Tags */
     .collections-box {
-      background: rgba(255, 255, 255, 0.05);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 252, 0.95) 100%);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 18px;
+      border: 1.5px solid rgba(0, 0, 0, 0.15);
+      border-radius: 16px;
       padding: 2rem;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     .collections-box:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.2);
     }
 
     .tags-grid {
@@ -389,20 +405,21 @@
 
     .collection-tag {
       padding: 0.7rem 1.3rem;
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.15);
       border-radius: 25px;
-      color: rgba(0, 0, 0, 0.8);
+      color: rgba(0, 0, 0, 0.85);
       font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.3s;
+      font-weight: 500;
     }
 
     .collection-tag:hover {
-      background: rgba(255, 255, 255, 0.9);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 255, 1) 100%);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-      border-color: rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      border-color: rgba(0, 0, 0, 0.25);
     }
 
     
@@ -827,76 +844,42 @@
     const modalTitleInput = document.getElementById('modalTitleInput');
     const modalUrlInput = document.getElementById('modalUrlInput');
 
-    const RECENTS_KEY = 'kairoRecents';
-    const MAX_RECENTS = 8; // Show 8 items
+    const MAX_RECENTS = 10; // Show 10 items
 
-    // Function to get recents from localStorage
-    function getRecents() {
-      const recents = localStorage.getItem(RECENTS_KEY);
-      // Pre-populate with sample data if empty
-      if (!recents || JSON.parse(recents).length === 0) {
-        return [
-          { title: 'github repository', url: '#' },
-          { title: 'react hooks guide', url: '#' },
-          { title: 'figma design system', url: '#' },
-          { title: 'mdn css grid', url: '#' },
-          { title: 'medium article', url: '#' },
-          { title: 'dribbble inspiration', url: '#' },
-          { title: 'stackoverflow thread', url: '#' },
-          { title: 'youtube tutorial', url: '#' }
-        ];
+    // Load recents from server
+    async function loadRecents() {
+      try {
+        const recents = {{{json recentHistory}}};
+        renderRecents(recents);
+      } catch (error) {
+        console.error('Error loading recents:', error);
+        recentsList.innerHTML = '<div class="item" style="color: #999;">Failed to load recent items.</div>';
       }
-      return JSON.parse(recents);
-    }
-
-    // Function to save recents to localStorage
-    function saveRecents(recents) {
-      localStorage.setItem(RECENTS_KEY, JSON.stringify(recents));
-    }
-
-    // Function to add a new item
-    function addRecentItem(title, url) {
-      let recents = getRecents();
-      
-      // Check if we're clearing sample data
-      if (recents.length === MAX_RECENTS && recents[0].title === 'github repository') {
-        recents = []; // Clear sample data on first add
-      }
-
-      // Add new item to the top of the list
-      recents.unshift({
-        title: title || url, // Use URL as title if title is empty
-        url: url,
-        timestamp: new Date().toISOString() // Good to store for later
-      });
-
-      // Keep the list to a max size
-      recents = recents.slice(0, MAX_RECENTS);
-      
-      saveRecents(recents);
     }
 
     // Function to render the list to the HTML
-    function renderRecents() {
-      const recents = getRecents();
+    function renderRecents(recents) {
       recentsList.innerHTML = ''; // Clear the list
 
-      if (recents.length === 0) {
+      if (!recents || recents.length === 0) {
         // Show a placeholder if no items
-        recentsList.innerHTML = '<div class="item" style="color: #999;">No recent items found.</div>';
+        recentsList.innerHTML = '<div class="item" style="color: #999;">No recent URLs yet. Add some links to get started!</div>';
         return;
       }
 
       recents.forEach(item => {
         const itemEl = document.createElement('div');
         itemEl.className = 'item';
-        itemEl.textContent = item.title;
-        // Optional: make the item clickable
-        itemEl.onclick = () => {
-          if(item.url !== '#') {
-            window.open(item.url, '_blank');
-          }
-        };
+        itemEl.textContent = item.itemReference || item.title || 'Untitled';
+        // Make item clickable if it has a URL
+        if (item.details && item.details.url) {
+          itemEl.style.cursor = 'pointer';
+          itemEl.onclick = () => {
+            window.open(item.details.url, '_blank');
+          };
+          // Add URL hint on hover
+          itemEl.title = item.details.url;
+        }
         recentsList.appendChild(itemEl);
       });
     }
@@ -910,19 +893,28 @@
     // });
 
     // Handle the form submission
-    addUrlForm.addEventListener('submit', (e) => {
+    addUrlForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
-      const title = modalTitleInput.value;
+      const title = modalTitleInput.value || 'Untitled';
       const url = modalUrlInput.value;
 
       if (!url) return; // Don't save if URL is empty
 
-      // Add the new item
-      addRecentItem(title, url);
-      
-      // Re-render the list to show the new item
-      renderRecents();
+      try {
+        // Add to favorites (which will automatically create history entry)
+        await fetch('/favorites/api', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, url })
+        });
+        
+        // Reload page to show updated recents
+        window.location.reload();
+      } catch (error) {
+        console.error('Error adding URL:', error);
+        alert('Failed to add URL');
+      }
 
       // Close modal and reset form
       addUrlModal.style.display = 'none';
@@ -931,7 +923,7 @@
 
     // Run on page load
     document.addEventListener('DOMContentLoaded', () => {
-      renderRecents(); // Load and display recents when the page opens
+      loadRecents(); // Load and display recents when the page opens
       
       // Set up static modal close buttons
       document.querySelectorAll('.modal-box .btn-secondary').forEach(btn => {

@@ -196,6 +196,7 @@
       margin: 0 auto;
       position: relative;
       z-index: 1;
+      min-height: calc(100vh - 200px);
     }
 
     .page-header {
@@ -334,6 +335,33 @@
       color: rgba(0, 0, 0, 0.4);
     }
 
+    .page-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .clear-history-btn {
+      background: rgba(255, 68, 68, 0.1);
+      color: #ff4444;
+      border: 1px solid rgba(255, 68, 68, 0.3);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .clear-history-btn:hover {
+      background: rgba(255, 68, 68, 0.2);
+      border-color: rgba(255, 68, 68, 0.5);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 68, 68, 0.2);
+    }
+
     .view-history {
       display: block;
       margin: 0 auto;
@@ -360,6 +388,7 @@
       padding: 3rem;
       color: rgba(0, 0, 0, 0.5);
       font-size: 1.1rem;
+      grid-column: 1 / -1;
     }
 
     footer {
@@ -395,22 +424,22 @@
         <span></span>
         <span></span>
       </div>
-      <a href="dashboard.html" class="nav-logo">kairo.</a>
+      <a href="/dashboard" class="nav-logo">kairo.</a>
     </div>
     <div class="nav-right">
-      <a href="login.html" class="logout-btn">logout</a>
-      <a href="profile.html" class="profile-icon">B</a>
+      <a href="/logout" class="logout-btn">logout</a>
+      <a href="/profile" class="profile-icon">{{substring user.username 0 1}}</a>
     </div>
   </nav>
 
   <div class="sidebar" id="sidebar">
     <div class="sidebar-links">
-      <a href="dashboard.html">dashboard</a>
-      <a href="recent.html">recents</a>
-      <a href="notes.html">notes</a>
-      <a href="favorites.html">favorites</a>
-      <a href="collections.html">collections</a>
-      <a href="profile.html">profile</a>
+      <a href="/dashboard">dashboard</a>
+      <a href="/history">recents</a>
+      <a href="/notes">notes</a>
+      <a href="/favorites">favorites</a>
+      <a href="/collections">collections</a>
+      <a href="/profile">profile</a>
     </div>
   </div>
 
@@ -418,125 +447,42 @@
 
   <div class="container">
     <div class="page-header">
-      
-      <h1><span class="icon">›</span> Recents</h1>
+      <div class="page-header-row">
+        <h1><span class="icon">›</span> Recents</h1>
+        <button class="clear-history-btn" onclick="clearHistory()">Clear History</button>
+      </div>
       <div class="search-bar">
         <input type="text" id="searchInput" placeholder="search recent items...">
       </div>
     </div>
 
     <div class="recents-grid" id="recentsGrid">
-      <div class="recent-card" data-title="github repository" data-url="https://github.com/user/awesome-project">
+      {{#each history}}
+      <div class="recent-card" data-title="{{this.itemReference}}" data-url="{{this.details.url}}" data-id="{{this._id}}" data-favorite="{{this.isFavorite}}">
         <div class="recent-header">
           <div class="recent-title-wrapper">
-            <span class="recent-emoji">📁</span>
-            <h3 class="recent-title">github repository</h3>
+            <span class="recent-emoji">🔗</span>
+            <h3 class="recent-title">{{this.itemReference}}</h3>
           </div>
-          <div class="star" onclick="toggleStar(this)">☆</div>
+          <div class="star {{#if this.isFavorite}}active{{/if}}" onclick="toggleStar(this, '{{this.details.url}}', '{{this.itemReference}}')">{{#if this.isFavorite}}★{{else}}☆{{/if}}</div>
         </div>
-        <a href="https://github.com/user/awesome-project" target="_blank" rel="noopener noreferrer"
-          class="recent-url">https://github.com/user/awesome-project</a>
-        <div class="recent-timestamp">3 minutes ago</div>
+        <a href="{{this.details.url}}" target="_blank" rel="noopener noreferrer"
+          class="recent-url">{{this.details.url}}</a>
+        <div class="recent-timestamp">{{timeAgo this.timestamp}}</div>
       </div>
-
-      <div class="recent-card" data-title="react hooks guide" data-url="https://react.dev/reference/react/hooks">
-        <div class="recent-header">
-          <div class="recent-title-wrapper">
-            <span class="recent-emoji">⚛️</span>
-            <h3 class="recent-title">react hooks guide</h3>
-          </div>
-          <div class="star" onclick="toggleStar(this)">☆</div>
-        </div>
-        <a href="https://react.dev/reference/react/hooks" target="_blank" rel="noopener noreferrer"
-          class="recent-url">https://react.dev/reference/react/hooks</a>
-        <div class="recent-timestamp">15 minutes ago</div>
-      </div>
-
-      <div class="recent-card" data-title="figma design system" data-url="https://figma.com/file/design-system">
-        <div class="recent-header">
-          <div class="recent-title-wrapper">
-            <span class="recent-emoji">🎨</span>
-            <h3 class="recent-title">figma design system</h3>
-          </div>
-          <div class="star" onclick="toggleStar(this)">☆</div>
-        </div>
-        <a href="https://figma.com/file/design-system" target="_blank" rel="noopener noreferrer"
-          class="recent-url">https://figma.com/file/design-system</a>
-        <div class="recent-timestamp">1 hour ago</div>
-      </div>
-
-      <div class="recent-card" data-title="mdn css grid" data-url="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout">
-        <div class="recent-header">
-          <div class="recent-title-wrapper">
-            <span class="recent-emoji">📚</span>
-            <h3 class="recent-title">mdn css grid</h3>
-          </div>
-          <div class="star" onclick="toggleStar(this)">☆</div>
-        </div>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout" target="_blank"
-          rel="noopener noreferrer"
-          class="recent-url">https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout</a>
-        <div class="recent-timestamp">2 hours ago</div>
-      </div>
-
-      <div class="recent-card" data-title="medium article" data-url="https://medium.com/web-design">
-        <div class="recent-header">
-          <div class="recent-title-wrapper">
-            <span class="recent-emoji">📝</span>
-            <h3 class="recent-title">medium article</h3>
-          </div>
-          <div class="star" onclick="toggleStar(this)">☆</div>
-        </div>
-        <a href="https://medium.com/web-design" target="_blank" rel="noopener noreferrer"
-          class="recent-url">https://medium.com/web-design</a>
-        <div class="recent-timestamp">3 hours ago</div>
-      </div>
-
-      <div class="recent-card" data-title="dribbble inspiration" data-url="https://dribbble.com/shots/xyz">
-        <div class="recent-header">
-          <div class="recent-title-wrapper">
-            <span class="recent-emoji">🏀</span>
-            <h3 class="recent-title">dribbble inspiration</h3>
-          </div>
-          <div class="star" onclick="toggleStar(this)">☆</div>
-        </div>
-        <a href="https://dribbble.com/shots/xyz" target="_blank" rel="noopener noreferrer"
-          class="recent-url">https://dribbble.com/shots/xyz</a>
-        <div class="recent-timestamp">4 hours ago</div>
-      </div>
-
-      <div class="recent-card" data-title="stackoverflow thread" data-url="https://stackoverflow.com/q/12345">
-        <div class="recent-header">
-          <div class="recent-title-wrapper">
-            <span class="recent-emoji">💬</span>
-            <h3 class="recent-title">stackoverflow thread</h3>
-          </div>
-          <div class="star" onclick="toggleStar(this)">☆</div>
-        </div>
-        <a href="https://stackoverflow.com/q/12345" target="_blank" rel="noopener noreferrer"
-          class="recent-url">https://stackoverflow.com/q/12345</a>
-        <div class="recent-timestamp">6 hours ago</div>
-      </div>
-
-      <div class="recent-card" data-title="youtube tutorial" data-url="https://youtube.com/watch?v=abc123">
-        <div class="recent-header">
-          <div class="recent-title-wrapper">
-            <span class="recent-emoji">▶️</span>
-            <h3 class="recent-title">youtube tutorial</h3>
-          </div>
-          <div class="star" onclick="toggleStar(this)">☆</div>
-        </div>
-        <a href="https://youtube.com/watch?v=abc123" target="_blank" rel="noopener noreferrer"
-          class="recent-url">https://youtube.com/watch?v=abc123</a>
-        <div class="recent-timestamp">8 hours ago</div>
-      </div>
+      {{/each}}
+      
     </div>
+    
+    {{#unless history}}
+    <div class="no-results">
+      no recent links yet. start adding links to collections or favorites!
+    </div>
+    {{/unless}}
 
     <div id="noResults" class="no-results" style="display: none;">
       no results found for your search
     </div>
-
-    <a href="history.html" class="view-history">view full history</a>
   </div>
 
   <footer>
@@ -554,12 +500,79 @@
       hamburger.classList.toggle('active');
     }
 
-    function toggleStar(el) {
-      el.classList.toggle('active');
-      if (el.classList.contains('active')) {
-        el.textContent = '★';
-      } else {
-        el.textContent = '☆';
+    async function toggleStar(el, url, title) {
+      const isActive = el.classList.contains('active');
+      
+      try {
+        if (!isActive) {
+          // Add to favorites
+          const response = await fetch('/favorites/api', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, url, star: true })
+          });
+          
+          const data = await response.json();
+          
+          if (response.ok) {
+            el.classList.add('active');
+            el.textContent = '★';
+            el.closest('.recent-card').dataset.favorite = 'true';
+          } else if (response.status === 400 && data.message.includes('already in your favorites')) {
+            // Already in favorites, just update UI
+            el.classList.add('active');
+            el.textContent = '★';
+            el.closest('.recent-card').dataset.favorite = 'true';
+          } else {
+            alert(data.message || 'Failed to add to favorites');
+          }
+        } else {
+          // Remove from favorites - need to find favorite by URL
+          const favResponse = await fetch('/favorites/api');
+          const favorites = await favResponse.json();
+          const favorite = favorites.find(f => f.url === url);
+          
+          if (favorite) {
+            const deleteResponse = await fetch(`/favorites/api/${favorite._id}`, {
+              method: 'DELETE'
+            });
+            
+            if (deleteResponse.ok) {
+              el.classList.remove('active');
+              el.textContent = '☆';
+              el.closest('.recent-card').dataset.favorite = 'false';
+            } else {
+              alert('Failed to remove from favorites');
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error toggling favorite:', error);
+        alert('An error occurred');
+      }
+    }
+
+    async function clearHistory() {
+      if (!confirm('Are you sure you want to clear all history? This action cannot be undone.')) {
+        return;
+      }
+
+      try {
+        const response = await fetch('/history/api', {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          // Reload page to show empty history
+          window.location.reload();
+        } else {
+          alert('Failed to clear history');
+        }
+      } catch (error) {
+        console.error('Error clearing history:', error);
+        alert('An error occurred while clearing history');
       }
     }
 
@@ -574,8 +587,8 @@
       let hasResults = false;
 
       cards.forEach(card => {
-        const title = card.dataset.title.toLowerCase();
-        const url = card.dataset.url.toLowerCase();
+        const title = (card.dataset.title || '').toLowerCase();
+        const url = (card.dataset.url || '').toLowerCase();
 
         if (title.includes(searchTerm) || url.includes(searchTerm)) {
           card.style.display = 'block';
@@ -584,6 +597,10 @@
           card.style.display = 'none';
         }
       });
+
+      if (cards.length === 0) {
+        hasResults = false;
+      }
 
       recentsGrid.style.display = hasResults ? 'grid' : 'none';
       noResults.style.display = hasResults ? 'none' : 'block';

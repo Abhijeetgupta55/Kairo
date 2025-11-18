@@ -3,13 +3,29 @@ const History = require('../models/History');
 // Get history page
 exports.getHistory = async (req, res) => {
   try {
-    const history = await History.find({ userId: req.session.userId })
+    const Favorite = require('../models/Favorite');
+    
+    // Only fetch visited links, not other history types
+    const history = await History.find({ 
+      userId: req.session.userId,
+      actionType: 'link_visited'
+    })
       .sort({ timestamp: -1 })
       .limit(100);
 
+    // Get all favorites to check star status
+    const favorites = await Favorite.find({ userId: req.session.userId });
+    const favoriteUrls = new Set(favorites.map(f => f.url));
+
+    // Add isFavorite flag to each history item
+    const historyWithFavorites = history.map(item => ({
+      ...item.toObject(),
+      isFavorite: favoriteUrls.has(item.details?.url)
+    }));
+
     res.render('history', {
       title: 'History - Kairo',
-      history
+      history: historyWithFavorites
     });
   } catch (error) {
     console.error('Error fetching history:', error);

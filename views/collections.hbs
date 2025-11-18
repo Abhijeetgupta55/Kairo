@@ -1496,6 +1496,7 @@
                 linksList.innerHTML = this.tempLinks.map((link, index) => {
                     const title = typeof link === 'string' ? link : link.title;
                     const url = typeof link === 'string' ? '' : link.url;
+                    const linkId = link._id || '';
                     
                     return `
                         <div class="link-item">
@@ -1503,13 +1504,32 @@
                                 <div class="link-item-title">${title}</div>
                                 ${url ? `<div class="link-item-url">${url}</div>` : ''}
                             </div>
-                            <button class="link-item-remove" onclick="app.removeLink(${index})">🗑️</button>
+                            <button class="link-item-remove" onclick="app.removeLink(${index}, '${linkId}')">🗑️</button>
                         </div>
                     `;
                 }).join('');
             }
 
-            removeLink(index) {
+            async removeLink(index, linkId) {
+                // If editing existing collection and link has ID, delete from server
+                if (this.editingId && linkId) {
+                    try {
+                        const response = await fetch(`/collections/api/${this.editingId}/links/${linkId}`, {
+                            method: 'DELETE'
+                        });
+                        
+                        if (!response.ok) {
+                            alert('Failed to delete link');
+                            return;
+                        }
+                    } catch (error) {
+                        console.error('Error deleting link:', error);
+                        alert('Error deleting link');
+                        return;
+                    }
+                }
+                
+                // Remove from UI
                 this.tempLinks.splice(index, 1);
                 this.renderLinks();
             }

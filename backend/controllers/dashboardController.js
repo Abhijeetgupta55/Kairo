@@ -13,7 +13,10 @@ exports.getDashboard = async (req, res) => {
       Favorite.countDocuments({ userId: req.session.userId }),
       Collection.find({ userId: req.session.userId }).sort({ createdAt: -1 }).limit(5),
       Note.find({ userId: req.session.userId }).sort({ createdAt: -1 }).limit(5),
-      History.find({ userId: req.session.userId }).sort({ timestamp: -1 }).limit(10)
+      History.find({ 
+        userId: req.session.userId,
+        actionType: 'link_visited' // Only show visited links in recents
+      }).sort({ timestamp: -1 }).limit(10)
     ]);
 
     res.render('dashboard', {
