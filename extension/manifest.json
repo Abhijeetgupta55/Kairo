@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Kairo - Save Links",
+  "version": "1.0.0",
+  "description": "Save any webpage to your Kairo dashboard with one click",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

@@ -43,8 +43,21 @@ exports.getDashboard = async (req, res) => {
 // Get profile page
 exports.getProfile = async (req, res) => {
   try {
+    const User = require('../models/User');
+    const userData = await User.findById(req.session.userId).select('-password');
+    
+    const [collectionsCount, notesCount, favoritesCount] = await Promise.all([
+      Collection.countDocuments({ userId: req.session.userId }),
+      Note.countDocuments({ userId: req.session.userId }),
+      Favorite.countDocuments({ userId: req.session.userId })
+    ]);
+    
     res.render('profile', {
-      title: 'Profile - Kairo'
+      title: 'Profile - Kairo',
+      profileUser: userData,
+      collectionsCount,
+      notesCount,
+      favoritesCount
     });
   } catch (error) {
     console.error('Error loading profile:', error);

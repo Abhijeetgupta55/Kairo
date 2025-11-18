@@ -27,6 +27,27 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: '👤'
   },
+  // Optional profile fields
+  fullName: {
+    type: String,
+    default: ''
+  },
+  title: {
+    type: String,
+    default: ''
+  },
+  dateOfBirth: {
+    type: Date,
+    default: null
+  },
+  phone: {
+    type: String,
+    default: ''
+  },
+  bio: {
+    type: String,
+    default: ''
+  },
   createdAt: {
     type: Date,
     default: Date.now

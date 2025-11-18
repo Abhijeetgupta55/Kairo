@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kairo - Save Link</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 300px;
+            padding: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #404040 0%, #4a4a4a6d 100%);
+            color: white;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 9px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+            color: #333;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid #667eea;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-save {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-cancel {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .success {
+            background: rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .error {
+            background: rgba(244, 67, 54, 0.3);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .login-prompt {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .login-prompt a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">kairo.</div>
+    </div>
+
+    <div id="message" class="message hidden"></div>
+
+    <div id="loginPrompt" class="login-prompt hidden">
+        <p>Please log in to Kairo first</p>
+        <a href="http://localhost:3000/login" target="_blank">Open Kairo Login</a>
+    </div>
+
+    <form id="saveForm" class="hidden">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" placeholder="Page title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="url">URL</label>
+            <input type="url" id="url" placeholder="https://example.com" required readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="saveLocation">Save to</label>
+            <select id="saveLocation">
+                <option value="favorites">⭐ Favorites</option>
+                <option value="history">📝 History</option>
+                <option value="collection">📁 Collection</option>
+            </select>
+        </div>
+
+        <div class="form-group hidden" id="collectionGroup">
+            <label for="collectionSelect">Select Collection</label>
+            <select id="collectionSelect">
+                <option value="">Loading collections...</option>
+            </select>
+        </div>
+
+        <div class="button-group">
+            <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+            <button type="submit" class="btn-save">Save</button>
+        </div>
+    </form>
+
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Checking session...</p>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

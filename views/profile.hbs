@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kairo. - profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MODIFICATION 1: Added Bootstrap Icons stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <style>
         * {
             margin: 0;
@@ -200,114 +205,858 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 100px 2rem 2rem;
             position: relative;
             z-index: 1;
         }
 
-        .profile-header {
-            text-align: center;
-            margin-bottom: 3rem;
+        /* --- Layout & Header Styles --- */
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
+        .profile-header {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .profile-avatar-container {
+            position: relative;
+        }
+
+        .profile-avatar-large {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 3rem;
+            color: #fff;
+            font-size: 2rem;
             font-weight: 600;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-avatar-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .edit-avatar-btn {
+            display: none;
+        }
+
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; 
+            gap: 0.75rem;
+            margin-bottom: 0.25rem;
         }
 
         .profile-name {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            color: #000;
+            margin: 0;
+        }
+        
+        /* MODIFICATION 2: Guild Tag CSS updated for icons */
+        .header-tag-badge {
+            background: rgba(74, 144, 226, 0.2);
+            color: #4A90E2;
+            padding: 0.2rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex; /* Added */
+            align-items: center; /* Added */
+            gap: 0.25rem; /* Added */
         }
 
-        .profile-email {
+        .header-tag-badge i { /* Added */
+            font-size: 0.9em;
+            line-height: 1;
+        }
+
+
+        .profile-subtitle {
+            font-size: 0.95rem;
             color: #666;
-            font-size: 1.1rem;
+            margin-top: 0.25rem;
         }
 
-        .profile-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+        .tabs {
+            display: flex;
+            gap: 1rem;
             margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
         }
 
-        .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(0, 0, 0, 0.12);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
             color: #666;
-            font-size: 0.9rem;
-            text-transform: lowercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            font-weight: 500;
         }
 
-        .profile-info {
+        .tab-btn:hover {
+            color: #000;
+        }
+
+        .tab-btn.active {
+            color: #000000;
+            border-bottom-color: #000000;
+        }
+
+        /* Main Content Sections Styling */
+        .content-area {
+            min-height: 400px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-card {
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(0, 0, 0, 0.12);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .info-item {
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 1.5rem;
         }
 
-        .info-item:last-child {
-            border-bottom: none;
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .count-badge {
+            background: rgba(0, 0, 0, 0.1);
+            color: #666;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .edit-btn {
+            background: rgba(41, 41, 41, 0.05);
+            border: 1px solid rgba(158, 158, 158, 0.1);
+            color: #e8e8e8;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+        }
+
+        .edit-btn:hover {
+            background: rgba(161, 161, 161, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .info-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         .info-label {
+            font-size: 0.75rem;
+            color: rgba(0, 0, 0, 0.6);
             font-weight: 600;
-            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .info-value {
-            color: #666;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            font-size: 1rem;
+            color: rgba(0, 0, 0, 0.8);
+            transition: all 0.3s;
         }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        input,
+        textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(248, 249, 250, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #000;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
+        }
+        
+        .modal-body input:focus, .modal-body textarea:focus, .modal-body select:focus {
+            outline: none;
+            border-color: #4A90E2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+            background: #fff;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .badge-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem 1rem;
+            background: rgba(248, 249, 250, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 10px;
+            transition: all 0.3s;
+            text-align: center;
+            cursor: pointer; 
+        }
+
+        .badge-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MODIFICATION 2: Updated .badge-icon and added color classes */
+        .badge-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem; /* This controls the icon size */
+            flex-shrink: 0;
+        }
+        .badge-icon.gold {
+            background: rgba(255, 215, 0, 0.1);
+            color: #E6B800; /* Darker gold for accessibility */
+        }
+        .badge-icon.blue {
+            background: rgba(74, 144, 226, 0.1);
+            color: #4A90E2;
+        }
+        .badge-icon.teal {
+            background: rgba(80, 201, 206, 0.1);
+            color: #50C9CE;
+        }
+        .badge-icon.purple {
+            background: rgba(107, 70, 193, 0.1);
+            color: #6B46C1;
+        }
+        .badge-icon.red {
+            background: rgba(245, 87, 108, 0.1);
+            color: #F5576C;
+        }
+        .badge-icon.pink {
+            background: rgba(250, 112, 154, 0.1);
+            color: #FA709A;
+        }
+        /* --- End of Badge Icon CSS --- */
+
+        .badge-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .badge-description {
+            font-size: 0.75rem;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* --- Settings/Security Custom Styles --- */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: background 0.2s;
+        }
+        
+        /* Style for FAQ expansion */
+        .setting-item.expandable:hover {
+            background: rgba(0, 0, 0, 0.02);
+            cursor: pointer;
+        }
+        
+        .setting-item.expanded {
+            background: rgba(74, 144, 226, 0.05);
+            border-radius: 16px 16px 0 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .faq-content {
+            padding: 1rem 2rem 2rem;
+            background: rgba(74, 144, 226, 0.05);
+            border-radius: 0 0 16px 16px;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            margin-top: -1px;
+        }
+        
+        .faq-item {
+            padding: 0.5rem 0;
+        }
+        
+        .faq-item h5 {
+            font-weight: 600;
+            color: #4A90E2;
+            margin-bottom: 0.3rem;
+        }
+        
+        .faq-item p {
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .setting-info h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #000;
+            margin: 0;
+        }
+
+        .setting-info p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0.2rem 0 0 0;
+        }
+
+        .setting-action button {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .setting-action button:hover {
+            background: rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .danger-zone-header {
+            color: #D32F2F;
+            border-bottom: 2px solid #D32F2F;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Consistent Action Button Styling (SOLID BLACK) */
+        .action-button-style {
+            background: #000;
+            color: #fff;
+            border: 1px solid #000;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+        }
+        
+        .action-button-style:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 45px;
+            height: 25px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 25px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 19px;
+            width: 19px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4A90E2;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+
+        /* --- Modal Styles (Combined) --- */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: rgba(255, 255, 255, 0.98); 
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            color: #000; 
+            padding: 2rem;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal-backdrop.active .modal {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000; 
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            color: rgba(0, 0, 0, 0.6); 
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-close-btn:hover {
+            color: #000;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Profile Editor specific styles */
+        .modal-avatar-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .modal-avatar-large {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-avatar-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-upload-btn {
+            background: #1c1c1c;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+            font: inherit;
+        }
+
+        .modal-upload-btn:hover {
+            background: #357ABD;
+        }
+
+        .modal-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .modal-form-group label {
+            font-size: 0.85rem;
+            color: rgba(0, 0, 0, 0.7); 
+            font-weight: 500;
+        }
+
+        .modal-form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        /* Custom Tag Creator */
+        .tag-creator-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: stretch;
+        }
+
+        .tag-creator-group input {
+            flex-grow: 1;
+            margin: 0;
+            padding: 0.75rem 1rem;
+        }
+
+        .tag-creator-group button {
+            flex-shrink: 0;
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 0 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        
+        .tag-creator-group button:hover {
+            background: #333;
+        }
+
+
+        /* Selectable Tags in Modal */
+        .modal-tag-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        /* MODIFICATION 2: Guild Tag CSS updated for icons */
+        .modal-tag-item {
+            background: rgba(74, 144, 226, 0.1);
+            color: #4A90E2;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            display: inline-flex; /* Added */
+            align-items: center; /* Added */
+            gap: 0.3rem; /* Added */
+        }
+
+        .modal-tag-item i { /* Added */
+            font-size: 1.1em;
+            line-height: 1;
+        }
+        
+        .modal-tag-item:hover {
+            background: rgba(74, 144, 226, 0.2);
+        }
+        
+        .modal-tag-item.selected {
+            background: #4A90E2;
+            color: #fff;
+            font-weight: 600;
+            border-color: #357ABD;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-save-btn {
+            background: #000; 
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .modal-save-btn:hover {
+            background: #333;
+        }
+
+        .modal-cancel-btn {
+            background: rgba(0, 0, 0, 0.05); 
+            color: #000;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 1.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .modal-cancel-btn:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Confirmation Modal Styling */
+        .confirmation-modal {
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        /* Action Form Modal Styling */
+        .action-form-modal {
+            max-width: 450px;
+        }
+
+
+        .confirmation-modal h3, .action-form-modal h3 {
+            margin-bottom: 1rem;
+        }
+
+        .confirmation-modal p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .confirmation-modal .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .confirmation-modal .btn-confirm {
+            background: #D32F2F;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .confirmation-modal .btn-confirm:hover {
+            background: #B71C1C;
+        }
+        
+        .confirmation-modal .btn-cancel {
+            background: rgba(0, 0, 0, 0.05); 
+            color: #000;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .confirmation-modal .btn-cancel:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Action Form Modal Buttons (Align left) */
+        .action-form-modal .modal-footer {
+            justify-content: flex-start;
+            margin-top: 2rem;
+        }
+        
+        .action-form-modal .btn-primary {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .action-form-modal .btn-primary:hover {
+            background: #333;
+        }
+
 
         footer {
             position: relative;
             text-align: center;
             padding: 2rem;
             color: rgba(255, 255, 255, 0.8);
-            margin-top: 3rem;
+            margin-top: 1.5rem; 
             z-index: 1;
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(20px);
@@ -315,13 +1064,79 @@
             box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 100px 1rem 2rem;
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .profile-layout {
+                grid-template-columns: 1fr;
             }
 
-            .profile-stats {
+            .info-row,
+            .modal-form-row {
                 grid-template-columns: 1fr;
+            }
+
+            .badges-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 100px 1.5rem 2rem;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 2rem;
+            }
+            
+            .profile-header .edit-btn {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+
+
+            .profile-name-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .tab-btn {
+                padding: 1rem;
+            }
+
+            .info-row {
+                grid-template-columns: 1fr;
+            }
+
+            .badges-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-footer, .confirmation-modal .button-group {
+                flex-direction: column;
+            }
+
+            .modal-save-btn,
+            .modal-cancel-btn,
+            .confirmation-modal .btn-confirm,
+            .confirmation-modal .btn-cancel {
+                width: 100%;
+            }
+            
+            .action-form-modal .modal-footer {
+                flex-direction: column-reverse;
             }
         }
     </style>
@@ -336,11 +1151,11 @@
                 <span></span>
                 <span></span>
             </div>
-            <a href="/dashboard" class="nav-logo">kairo.</a>
+            <a href="dashboard.html" class="nav-logo">kairo.</a>
         </div>
         <div class="nav-right">
             <a href="/logout" class="logout-btn">logout</a>
-            <a href="/profile" class="profile-icon">{{#if user.username}}{{substring user.username 0 1}}{{else}}P{{/if}}</a>
+            <a href="/profile" class="profile-icon" id="navProfileIcon">{{#if user.username}}{{substring user.username 0 1}}{{else}}B{{/if}}</a>
         </div>
     </nav>
 
@@ -358,59 +1173,1016 @@
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
     <div class="container">
-        <div class="profile-header">
-            <div class="profile-avatar">{{substring user.username 0 1}}</div>
-            <h1 class="profile-name">{{user.username}}</h1>
-            <p class="profile-email">{{user.email}}</p>
+
+        <!-- Tab Buttons -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="overview" onclick="switchTab('overview', this)">Overview</button>
+            <button class="tab-btn" data-tab="data" onclick="switchTab('data', this)">Data</button>
+            <button class="tab-btn" data-tab="security" onclick="switchTab('security', this)">Security</button>
+            <button class="tab-btn" data-tab="support" onclick="switchTab('support', this)">Support</button>
         </div>
 
-        <div class="profile-stats">
-            <div class="stat-card">
-                <div class="stat-value">{{collectionsCount}}</div>
-                <div class="stat-label">collections</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">{{notesCount}}</div>
-                <div class="stat-label">notes</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">{{favoritesCount}}</div>
-                <div class="stat-label">favorites</div>
-            </div>
-        </div>
+        <!-- Tab Content Area -->
+        <div class="content-area">
 
-        <div class="profile-info">
-            <div class="info-item">
-                <span class="info-label">Username</span>
-                <span class="info-value">{{user.username}}</span>
+            <!-- 1. OVERVIEW TAB CONTENT (Active by default) -->
+            <div id="overview-content" class="tab-content active">
+                <div class="profile-layout">
+                    
+                    <!-- Left Column: Profile Header and Contact Info -->
+                    <div class="content-section">
+                        
+                        <!-- Combined Profile Header Card -->
+                        <div class="profile-header">
+                            <div class="profile-avatar-container">
+                                <div class="profile-avatar-large">
+                                    <span id="avatarInitial">{{#if profileUser.username}}{{substring profileUser.username 0 1}}{{else}}?{{/if}}</span>
+                                    <img id="avatarImg" style="display: none;" src="" onerror="this.style.display='none'; document.getElementById('avatarInitial').style.display='block';" alt="Profile">
+                                </div>
+                                <div class="edit-avatar-btn" style="display: none;" title="Change avatar"></div>
+                            </div>
+                            <div class="profile-info">
+                                <div class="profile-name-container">
+                                    <h1 class="profile-name" id="displayName">{{#if profileUser.fullName}}{{profileUser.fullName}}{{else}}{{profileUser.username}}{{/if}}</h1>
+                                    <div id="selectedTagsContainer">
+                                        <!-- Guild tags render here -->
+                                    </div>
+                                </div>
+                                <p class="profile-subtitle" id="displayTitle">{{#if profileUser.title}}{{profileUser.title}}{{else}}Add your title{{/if}}</p>
+                            </div>
+                            <button class="edit-btn action-button-style" style="position: absolute; top: 1.5rem; right: 1.5rem;" onclick="openEditProfileModal()">✎ Edit Details</button>
+                        </div>
+
+                        <!-- Contact & Bio Card -->
+                        <div class="info-card">
+                            <div class="card-header">
+                                <h2 class="section-title">Personal Information</h2>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-field">
+                                    <div class="info-label">Email</div>
+                                    <div class="info-value" id="emailDisplay">{{profileUser.email}}</div>
+                                </div>
+
+                                <div class="info-row">
+                                    <div class="info-field">
+                                        <div class="info-label">Date of Birth</div>
+                                        <div class="info-value" id="dobDisplay">{{#if profileUser.dateOfBirth}}{{formatDate profileUser.dateOfBirth}}{{else}}Not set{{/if}}</div>
+                                    </div>
+                                    <div class="info-field">
+                                        <div class="info-label">Phone Number</div>
+                                        <div class="info-value" id="phoneDisplay">{{#if profileUser.phone}}{{profileUser.phone}}{{else}}Not set{{/if}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="info-field">
+                                    <div class="info-label">Bio</div>
+                                    <div class="info-value" id="bioDisplay">{{#if profileUser.bio}}{{profileUser.bio}}{{else}}Add your bio{{/if}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Badges (Achievement-based) -->
+                    <div class="info-card">
+                        <div class="card-header">
+                            <h2 class="section-title">Badges Earned <span class="count-badge" id="badgeCount">6</span></h2>
+                        </div>
+                        
+                        <!-- MODIFICATION 3: Updated HTML for Badges -->
+                        <div class="badges-grid" id="mainTagsGrid">
+                            <div class="badge-card" data-tag-name="Early Adopter" data-tag-icon="bi-trophy-fill" onclick="openEditProfileModal()">
+                                <div class="badge-icon gold">
+                                    <i class="bi bi-trophy-fill"></i>
+                                </div>
+                                <div class="badge-name">Early Adopter</div>
+                                <div class="badge-description">Joined in the first month</div>
+                            </div>
+                            <div class="badge-card" data-tag-name="Favorite Master" data-tag-icon="bi-star-fill" onclick="openEditProfileModal()">
+                                <div class="badge-icon blue">
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <div class="badge-name">Favorite Master</div>
+                                <div class="badge-description">Added 50+ favorites</div>
+                            </div>
+                            <div class="badge-card" data-tag-name="Collector" data-tag-icon="bi-collection-fill" onclick="openEditProfileModal()">
+                                <div class="badge-icon teal">
+                                    <i class="bi bi-collection-fill"></i>
+                                </div>
+                                <div class="badge-name">Collector</div>
+                                <div class="badge-description">Created 10+ collections</div>
+                            </div>
+                            <div class="badge-card" data-tag-name="Note Taker" data-tag-icon="bi-pencil-fill" onclick="openEditProfileModal()">
+                                <div class="badge-icon purple">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </div>
+                                <div class="badge-name">Note Taker</div>
+                                <div class="badge-description">Created 25+ notes</div>
+                            </div>
+                            <div class="badge-card" data-tag-name="Streak Master" data-tag-icon="bi-fire" onclick="openEditProfileModal()">
+                                <div class="badge-icon red">
+                                    <i class="bi bi-fire"></i>
+                                </div>
+                                <div class="badge-name">Streak Master</div>
+                                <div class="badge-description">30 day login streak</div>
+                            </div>
+                            <div class="badge-card" data-tag-name="Organizer" data-tag-icon="bi-palette-fill" onclick="openEditProfileModal()">
+                                <div class="badge-icon pink">
+                                    <i class="bi bi-palette-fill"></i>
+                                </div>
+                                <div class="badge-name">Organizer</div>
+                                <div class="badge-description">Highly organized profile</div>
+                            </div>
+                        </div>
+                        <!-- --- End of Updated HTML --- -->
+                        
+                    </div>
+                </div>
             </div>
-            <div class="info-item">
-                <span class="info-label">Email</span>
-                <span class="info-value">{{user.email}}</span>
+
+            <!-- 2. DATA TAB CONTENT -->
+            <div id="data-content" class="tab-content">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h2 class="section-title">Data Retrieval & Portability</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Request Your Data</h4>
+                                <p>Generate a complete archive of all your personal data stored on kairo.</p>
+                            </div>
+                            <div class="setting-action">
+                                <button class="action-button-style" onclick="showActionForm('requestData')">Request File</button>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Download Current Data Export</h4>
+                                <p>Download the most recently generated data file (JSON/CSV format).</p>
+                            </div>
+                            <div class="setting-action">
+                                <button class="action-button-style" onclick="console.log('Download Data clicked'); showToast('Data downloaded!', 'success')">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-header">
+                        <h2 class="section-title danger-zone-header" style="margin: 0; border-bottom: none;">Danger Zone</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="setting-item" style="border-bottom: none;">
+                            <div class="setting-info">
+                                <h4>Delete Account</h4>
+                                <p style="color: #D32F2F; font-weight: 500;">Permanently delete your account and all associated data. This action cannot be undone.</p>
+                            </div>
+                            <div class="setting-action">
+                                <button style="background: #D32F2F; color: #fff;" class="action-button-style" onclick="showConfirmation('Delete Account', 'WARNING: This action is permanent. Are you absolutely sure you want to delete your account and all data?', 'Account Deleting...', () => { localStorage.clear(); window.location.reload(); })">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="info-item">
-                <span class="info-label">Member Since</span>
-                <span class="info-value">{{formatDate user.createdAt}}</span>
+            
+            <!-- 3. SECURITY TAB CONTENT -->
+            <div id="security-content" class="tab-content">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h2 class="section-title">Account Security</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Change Password</h4>
+                                <p>Update your current password to a new one.</p>
+                            </div>
+                            <div class="setting-action">
+                                <button class="action-button-style" onclick="showActionForm('changePassword')">Update</button>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Two-Factor Authentication (2FA)</h4>
+                                <p>Add an extra layer of security with a verification code.</p>
+                            </div>
+                            <div class="setting-action">
+                                <label class="switch">
+                                    <input type="checkbox" id="2faSwitch">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Active Sessions</h4>
+                                <p>Review devices currently logged into your account.</p>
+                            </div>
+                            <div class="setting-action">
+                                <button class="action-button-style" onclick="showConfirmation('Manage Sessions', 'This will log you out of all other active sessions. Proceed?', 'Logging out devices...', () => showToast('Other sessions logged out.', 'success'))">Manage</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. SUPPORT TAB CONTENT -->
+            <div id="support-content" class="tab-content">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h2 class="section-title">Help & Resources</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="setting-item expandable" onclick="toggleFAQExpansion(this)">
+                            <div class="setting-info">
+                                <h4>Help Center / FAQ</h4>
+                                <p>Find answers to common questions and troubleshoot issues.</p>
+                            </div>
+                            <div class="setting-action">
+                                <button class="action-button-style" id="faqExpandBtn">Expand</button>
+                            </div>
+                        </div>
+                        <div class="faq-content hidden" id="faqContent">
+                            <div class="faq-item">
+                                <h5>Q: How do I change my name?</h5>
+                                <p>A: Click the 'Edit Profile Details' button on the Overview tab and update the 'Display Name' field.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h5>Q: What are Guild Tags?</h5>
+                                <p>A: Guild Tags are custom labels you can assign to yourself to show your role or status (e.g., 'Solo', 'Organizer'). You can set one via the Edit Profile modal.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h5>Q: Is my data secure?</h5>
+                                <p>A: Yes. Your profile uses local storage for persistence (in this demo) and the Security tab provides options to change passwords and manage 2FA.</p>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Contact Support</h4>
+                                <p>Submit a direct ticket to the support team for personalized help.</p>
+                            </div>
+                            <div class="setting-action">
+                                <button class="action-button-style" onclick="showActionForm('contactSupport')">Contact</button>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Report a Bug</h4>
+                                <p>Let us know if you encounter any technical problems.</p>
+                            </div>
+                            <div class="setting-action">
+                                <button class="action-button-style" onclick="showActionForm('reportBug')">Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Edit Profile Modal (Light/Themed style) -->
+    <div class="modal-backdrop" id="editProfileModalBackdrop">
+        <div class="modal" id="editProfileModal">
+            <div class="modal-header">
+                <h3>Edit Profile Details</h3>
+                <button class="modal-close-btn" onclick="closeEditProfileModal()">×</button>
+            </div>
+            <div class="modal-body">
+                
+                <h4 style="font-weight: 600; font-size: 1.1rem; color: #000; margin-bottom: 0.5rem;">Profile Information</h4>
+                <!-- Avatar and Name/Title -->
+                <div class="modal-avatar-section">
+                    <div class="modal-avatar-large">
+                        <span id="modalAvatarInitial">B</span>
+                        <img id="modalAvatarImg" style="display: none;" src="" alt="Profile">
+                    </div>
+                    <button class="modal-upload-btn" onclick="document.getElementById('modalAvatarInput').click()">Upload New Avatar</button>
+                    <input type="file" id="modalAvatarInput" accept="image/*" class="hidden">
+                </div>
+
+                <div class="modal-form-group">
+                    <label for="modalNameInput">Display Name</label>
+                    <input type="text" id="modalNameInput" value="{{#if profileUser.fullName}}{{profileUser.fullName}}{{else}}{{profileUser.username}}{{/if}}">
+                </div>
+
+                <div class="modal-form-group">
+                    <label for="modalTitleInput">Title / Status</label>
+                    <input type="text" id="modalTitleInput" value="{{profileUser.title}}" placeholder="Add your title">
+                </div>
+
+                <!-- Contact and Bio -->
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="modalEmailInput">Email</label>
+                        <input type="email" id="modalEmailInput" value="{{profileUser.email}}" readonly>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="modalDobInput">Date of Birth</label>
+                        <input type="date" id="modalDobInput" value="{{#if profileUser.dateOfBirth}}{{profileUser.dateOfBirth}}{{/if}}">
+                    </div>
+                </div>
+
+                <div class="modal-form-group">
+                    <label for="modalPhoneInput">Phone Number</label>
+                    <input type="tel" id="modalPhoneInput" value="{{profileUser.phone}}" placeholder="Enter phone number">
+                </div>
+
+                <div class="modal-form-group">
+                    <label for="modalBioInput">Bio</label>
+                    <textarea id="modalBioInput" placeholder="Tell us about yourself">{{profileUser.bio}}</textarea>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 0.5rem 0;">
+
+                <h4 style="font-weight: 600; font-size: 1.1rem; color: #000; margin-bottom: 0.5rem;">Custom Guild Tag (Max 1)</h4>
+                
+                <!-- Custom Tag Creator -->
+                <div class="modal-form-group">
+                    <label for="customTagInput">Create New Tag</label>
+                    <div class="tag-creator-group">
+                        <input type="text" id="customTagInput" placeholder="e.g., 'Toxic' or 'Solo'" maxlength="15">
+                        <button onclick="addCustomTag()">Add</button>
+                    </div>
+                </div>
+
+                <!-- Selectable Guild Tags -->
+                <div class="modal-form-group">
+                    <label>Select Your Active Guild Tag (Current Custom Tags and Defaults)</label>
+                    <div class="modal-tag-selector" id="modalSelectableTags">
+                        <!-- Tags rendered by JS -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-cancel-btn" onclick="closeEditProfileModal()">Cancel</button>
+                <button class="modal-save-btn" onclick="saveModalChanges()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Custom Confirmation Modal Structure -->
+    <div class="modal-backdrop" id="confirmationModalBackdrop">
+        <div class="modal confirmation-modal" id="confirmationModal">
+            <div class="modal-header">
+                <h3 id="confirmModalTitle">Confirm Action</h3>
+                <button class="modal-close-btn" onclick="closeConfirmationModal()">×</button>
+            </div>
+            <p id="confirmModalMessage">Are you sure you want to proceed?</p>
+            <div class="button-group">
+                <button class="btn-cancel" onclick="closeConfirmationModal()">Cancel</button>
+                <button class="btn-confirm" id="confirmActionButton">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Custom Action Form Modal Structure -->
+    <div class="modal-backdrop" id="actionFormModalBackdrop">
+        <div class="modal action-form-modal" id="actionFormModal">
+            <div class="modal-header">
+                <h3 id="actionFormModalTitle">Action Form</h3>
+                <button class="modal-close-btn" onclick="closeActionFormModal()">×</button>
+            </div>
+            <div class="modal-body" id="actionFormModalBody">
+                <!-- Dynamic Form Content will be injected here -->
+            </div>
+            <div class="modal-footer">
+                <button class="modal-cancel-btn" onclick="closeActionFormModal()">Cancel</button>
+                <button class="btn-primary" id="actionFormSaveButton">Save</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hidden Forms Template Container -->
+    <div class="hidden" id="formTemplates">
+        
+        <!-- Change Password Form -->
+        <form id="form-change-password">
+            <div class="modal-form-group">
+                <label for="cp-current-password">Current Password</label>
+                <input type="password" id="cp-current-password" placeholder="Enter current password">
+            </div>
+            <div class="modal-form-group">
+                <label for="cp-new-password">New Password</label>
+                <input type="password" id="cp-new-password" placeholder="Enter new password">
+            </div>
+            <div class="modal-form-group">
+                <label for="cp-confirm-password">Confirm New Password</label>
+                <input type="password" id="cp-confirm-password" placeholder="Confirm new password">
+            </div>
+            <p id="cp-error" style="color:#D32F2F; font-size: 0.9rem; text-align: left; margin-top: 0;"></p>
+        </form>
+
+        <!-- Request Data Form -->
+        <form id="form-request-data">
+             <p style="text-align: left; color:#666; margin-bottom: 1rem;">Select the data format you prefer for your personal archive export.</p>
+            <div class="modal-form-group">
+                <label for="data-format">Export Format</label>
+                <select id="data-format">
+                    <option value="json">JSON (Recommended)</option>
+                    <option value="csv">CSV (Spreadsheet Data)</option>
+                </select>
+            </div>
+        </form>
+        
+        <!-- Contact Support Form -->
+        <form id="form-contact-support">
+             <p style="text-align: left; color:#666; margin-bottom: 1rem;">Please provide a clear subject and detailed description of your issue.</p>
+            <div class="modal-form-group">
+                <label for="contact-subject">Subject</label>
+                <input type="text" id="contact-subject" placeholder="e.g., Billing inquiry, Account access issue">
+            </div>
+            <div class="modal-form-group">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" placeholder="Describe your issue in detail"></textarea>
+            </div>
+            <p id="contact-error" style="color:#D32F2F; font-size: 0.9rem; text-align: left; margin-top: 0;"></p>
+        </form>
+
+        <!-- Report Bug Form -->
+        <form id="form-report-bug">
+             <p style="text-align: left; color:#666; margin-bottom: 1rem;">Help us fix bugs faster by including clear steps to reproduce the issue.</p>
+            <div class="modal-form-group">
+                <label for="bug-steps">Steps to Reproduce</label>
+                <textarea id="bug-steps" placeholder="1. Go to... 2. Click... 3. See error..."></textarea>
+            </div>
+            <div class="modal-form-group">
+                <label for="bug-expectation">Expected Result</label>
+                <input type="text" id="bug-expectation" placeholder="What should have happened?">
+            </div>
+             <p style="text-align: left; font-size: 0.85rem; color:#444; margin: 1rem 0 0.5rem;">Technical Data (Included automatically):</p>
+             <pre id="bug-tech-data" style="background: #f0f0f0; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem; overflow-x: auto; color: #333;"></pre>
+            <p id="bug-error" style="color:#D32F2F; font-size: 0.9rem; text-align: left; margin-top: 0;"></p>
+        </form>
+
+    </div>
+
+
     <footer>
-        <p>©2025 kairo. All rights reserved.</p>
+        &copy; 2024 kairo. All rights reserved.
     </footer>
-
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const hamburger = document.querySelector('.hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const avatarImg = document.getElementById('avatarImg');
+        const avatarInitial = document.getElementById('avatarInitial');
+        const navProfileIcon = document.getElementById('navProfileIcon');
 
+        const modalAvatarInput = document.getElementById('modalAvatarInput');
+        const modalAvatarImg = document.getElementById('modalAvatarImg');
+        const modalAvatarInitial = document.getElementById('modalAvatarInitial');
+        const modalSelectableTagsContainer = document.getElementById('modalSelectableTags');
+        const customTagInput = document.getElementById('customTagInput');
+        
+        const confirmationModalBackdrop = document.getElementById('confirmationModalBackdrop');
+        const confirmModalTitle = document.getElementById('confirmModalTitle');
+        const confirmModalMessage = document.getElementById('confirmModalMessage');
+        const confirmActionButton = document.getElementById('confirmActionButton');
+
+        const actionFormModalBackdrop = document.getElementById('actionFormModalBackdrop');
+        const actionFormModalTitle = document.getElementById('actionFormModalTitle');
+        const actionFormModalBody = document.getElementById('actionFormModalBody');
+        const actionFormSaveButton = document.getElementById('actionFormSaveButton');
+        
+        const formTemplates = document.getElementById('formTemplates');
+        
+        const faqExpandBtn = document.getElementById('faqExpandBtn');
+        const faqContent = document.getElementById('faqContent');
+
+
+        /* MODIFICATION 4: Updated DEFAULT_TAGS to use Bootstrap Icons */
+        const DEFAULT_TAGS = [
+            { id: 'solo', icon: 'bi bi-person-fill', name: 'Solo', custom: false },
+            { id: 'organizer', icon: 'bi bi-calendar-check-fill', name: 'Organizer', custom: false },
+            { id: 'toxic', icon: 'bi bi-radioactive', name: 'Toxic', custom: false },
+        ];
+        
+        let allTags = [...DEFAULT_TAGS];
+        let selectedTags = []; // Max 1 tag ID
+        let MOCK_PASSWORD = "securepassword123"; // MOCK for local storage validation
+
+        // --- Data Functions ---
+        function loadData() {
+            try {
+                // Data is already loaded from server via Handlebars
+                // Just set the avatar initial
+                setAvatarInitial(document.getElementById('displayName').textContent.charAt(0).toUpperCase());
+                renderHeaderTags();
+            } catch (e) {
+                console.error("Error loading data:", e);
+            }
+        }
+
+        async function saveData() {
+            try {
+                const dataToSave = {
+                    fullName: document.getElementById('displayName').textContent,
+                    title: document.getElementById('displayTitle').textContent,
+                    dateOfBirth: document.getElementById('modalDobInput').value || null,
+                    phone: document.getElementById('phoneDisplay').textContent === 'Not set' ? '' : document.getElementById('phoneDisplay').textContent,
+                    bio: document.getElementById('bioDisplay').textContent === 'Add your bio' ? '' : document.getElementById('bioDisplay').textContent
+                };
+                
+                const response = await fetch('/profile/api', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataToSave)
+                });
+                
+                if (response.ok) {
+                    showToast('Profile saved!', 'success');
+                } else {
+                    showToast('Failed to save profile', 'error');
+                }
+            } catch (error) {
+                console.error('Error saving profile:', error);
+                showToast('Error saving profile', 'error');
+            }
+        }
+
+        // --- Avatar Utility ---
+        function setAvatar(src) {
+            avatarImg.src = src;
+            avatarImg.style.display = 'block';
+            avatarInitial.style.display = 'none';
+
+            navProfileIcon.innerHTML = `<img src="${src}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" alt="P">`;
+        }
+        
+        function setAvatarInitial(initial) {
+            avatarInitial.textContent = initial;
+            avatarInitial.style.display = 'block';
+            avatarImg.style.display = 'none';
+
+            navProfileIcon.textContent = initial;
+            navProfileIcon.innerHTML = navProfileIcon.textContent;
+        }
+
+        // --- Sidebar Logic ---
+        function toggleSidebar() {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
-            hamburger.classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
         }
-    </script>
 
+        // --- Tab Switching Logic ---
+        function switchTab(tabId, clickedButton) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Collapse FAQ when switching away from Support tab
+            const faqParent = document.querySelector('.setting-item.expandable');
+            if(tabId !== 'support' && faqParent.classList.contains('expanded')) {
+                toggleFAQExpansion(faqParent, true); 
+            }
+
+            clickedButton.classList.add('active');
+            document.getElementById(tabId + '-content').classList.add('active');
+        }
+        
+        // --- FAQ Expansion Logic ---
+        function toggleFAQExpansion(element, forceCollapse = false) {
+            element.classList.toggle('expanded', !forceCollapse);
+            faqContent.classList.toggle('hidden', forceCollapse || !element.classList.contains('expanded'));
+            faqExpandBtn.textContent = element.classList.contains('expanded') ? 'Collapse' : 'Expand';
+        }
+
+        // --- Tag Management Functions ---
+        
+        /* MODIFICATION 4: Updated renderHeaderTags to use <i> icons */
+        function renderHeaderTags() {
+            const container = document.getElementById('selectedTagsContainer');
+            container.innerHTML = '';
+            
+            selectedTags.forEach(tagId => {
+                const tagData = allTags.find(t => t.id === tagId);
+                if (tagData) {
+                    const tagSpan = document.createElement('span');
+                    tagSpan.className = 'header-tag-badge';
+                    
+                    // NEW: Create icon and text nodes
+                    const icon = document.createElement('i');
+                    icon.className = tagData.icon; // e.g., "bi bi-person-fill"
+                    
+                    const text = document.createTextNode(` ${tagData.name}`); // Add space
+                    
+                    tagSpan.appendChild(icon);
+                    tagSpan.appendChild(text);
+                    
+                    container.appendChild(tagSpan);
+                }
+            });
+        }
+        
+        /* MODIFICATION 4: Updated renderModalTags to use <i> icons */
+        function renderModalTags() {
+            modalSelectableTagsContainer.innerHTML = '';
+
+            allTags.forEach(tag => {
+                const tagSpan = document.createElement('span');
+                tagSpan.className = 'modal-tag-item';
+                tagSpan.dataset.tagId = tag.id;
+                
+                // NEW: Create icon and text
+                const icon = document.createElement('i');
+                icon.className = tag.icon;
+                
+                const text = document.createTextNode(` ${tag.name}`);
+                
+                tagSpan.appendChild(icon);
+                tagSpan.appendChild(text);
+                
+                tagSpan.classList.toggle('selected', selectedTags.includes(tag.id));
+                tagSpan.onclick = () => toggleTagSelection(tag.id, tagSpan);
+                modalSelectableTagsContainer.appendChild(tagSpan);
+            });
+        }
+
+        function toggleTagSelection(tagId, element) {
+            const index = selectedTags.indexOf(tagId);
+            
+            if (index > -1) {
+                // Remove tag if already selected (since max is 1, this clears it)
+                selectedTags = [];
+                element.classList.remove('selected');
+            } else {
+                // Select new tag (replaces any existing one due to MAX_TAGS = 1)
+                selectedTags = [tagId];
+                
+                // Manually remove 'selected' class from all other tags
+                document.querySelectorAll('.modal-tag-item.selected').forEach(el => {
+                    if (el !== element) {
+                        el.classList.remove('selected');
+                    }
+                });
+                element.classList.add('selected');
+            }
+        }
+        
+        /* MODIFICATION 4: Updated addCustomTag to assign a default icon */
+        function addCustomTag() {
+            let tagName = customTagInput.value.trim();
+            if (!tagName) return;
+
+            if (tagName.length > 15) {
+                tagName = tagName.substring(0, 15);
+            }
+            
+            const existingTag = allTags.find(t => t.name.toLowerCase() === tagName.toLowerCase());
+            if (existingTag) {
+                const existingElement = document.querySelector(`[data-tag-id="${existingTag.id}"]`);
+                if(existingElement) {
+                    toggleTagSelection(existingTag.id, existingElement);
+                }
+                customTagInput.value = '';
+                return;
+            }
+
+            const newId = 'custom-' + Date.now();
+            const newTag = { 
+                id: newId, 
+                icon: 'bi bi-tag-fill', // NEW: Default icon for custom tags
+                name: tagName, 
+                custom: true 
+            };
+            
+            allTags.push(newTag);
+            
+            // Auto-select and refresh modal to show new tag
+            selectedTags = [newId];
+            renderModalTags();
+            customTagInput.value = ''; // Clear input
+        }
+
+        customTagInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); 
+                addCustomTag();
+            }
+        });
+
+        // --- Edit Profile Modal Logic ---
+        const editProfileModalBackdrop = document.getElementById('editProfileModalBackdrop');
+
+        function openEditProfileModal() {
+            renderModalTags();
+            
+            // Populate modal with current displayed values
+            document.getElementById('modalNameInput').value = document.getElementById('displayName').textContent;
+            document.getElementById('modalTitleInput').value = document.getElementById('displayTitle').textContent;
+            document.getElementById('modalEmailInput').value = document.getElementById('emailDisplay').textContent;
+            
+            // Convert display date to input format (YYYY-MM-DD)
+            const dobText = document.getElementById('dobDisplay').textContent;
+            try {
+                // Handle "11 November 2000" format by parsing it
+                const dateObj = new Date(dobText);
+                if (!isNaN(dateObj)) { // Check if date is valid
+                    const formattedDate = dateObj.getFullYear() + '-' + 
+                                        ('0' + (dateObj.getMonth() + 1)).slice(-2) + '-' + 
+                                        ('0' + dateObj.getDate()).slice(-2);
+                    document.getElementById('modalDobInput').value = formattedDate;
+                } else {
+                     document.getElementById('modalDobInput').value = '2000-11-11'; // Fallback
+                }
+            } catch (e) {
+                document.getElementById('modalDobInput').value = ''; // Clear on error
+            }
+
+            document.getElementById('modalPhoneInput').value = document.getElementById('phoneDisplay').textContent;
+            document.getElementById('modalBioInput').value = document.getElementById('bioDisplay').textContent;
+
+            // Set modal avatar (copy current avatar state)
+            if (avatarImg.style.display === 'block') {
+                modalAvatarImg.src = avatarImg.src;
+                modalAvatarImg.style.display = 'block';
+                modalAvatarInitial.style.display = 'none';
+            } else {
+                modalAvatarInitial.textContent = avatarInitial.textContent;
+                modalAvatarInitial.style.display = 'block';
+                modalAvatarImg.style.display = 'none';
+            }
+
+            editProfileModalBackdrop.classList.add('active');
+        }
+
+        function closeEditProfileModal() {
+            editProfileModalBackdrop.classList.remove('active');
+        }
+
+        modalAvatarInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const newAvatarSrc = e.target.result;
+                    
+                    // Update Modal Preview
+                    modalAvatarImg.src = newAvatarSrc;
+                    modalAvatarImg.style.display = 'block';
+                    modalAvatarInitial.style.display = 'none';
+
+                    // Update Main Profile Avatar and Nav Icon
+                    setAvatar(newAvatarSrc);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+
+        function saveModalChanges() {
+            // 1. Update Profile Header Details
+            const newName = document.getElementById('modalNameInput').value.trim();
+            const newTitle = document.getElementById('modalTitleInput').value.trim();
+            
+            if (newName) {
+                document.getElementById('displayName').textContent = newName;
+                if (avatarImg.style.display !== 'block') {
+                    setAvatarInitial(newName.charAt(0).toUpperCase());
+                }
+            }
+            if (newTitle) {
+                document.getElementById('displayTitle').textContent = newTitle;
+            }
+
+            // 2. Update Personal Information Details
+            document.getElementById('emailDisplay').textContent = document.getElementById('modalEmailInput').value;
+            
+            const newDob = document.getElementById('modalDobInput').value;
+            if (newDob) {
+                const dateToDisplay = new Date(newDob);
+                // Adjust for timezone offset to display the selected date correctly
+                const userTimezoneOffset = dateToDisplay.getTimezoneOffset() * 60000;
+                const correctedDate = new Date(dateToDisplay.getTime() + userTimezoneOffset);
+                
+                document.getElementById('dobDisplay').textContent = correctedDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+            }
+            
+            document.getElementById('phoneDisplay').textContent = document.getElementById('modalPhoneInput').value;
+            document.getElementById('bioDisplay').textContent = document.getElementById('modalBioInput').value;
+            
+            // 3. Update Header Tags and Save
+            renderHeaderTags();
+            saveData();
+
+            // 4. Close Modal
+            closeEditProfileModal();
+        }
+        
+        // --- Confirmation Modal Functions ---
+        function showConfirmation(title, message, loadingText, actionCallback) {
+            confirmModalTitle.textContent = title;
+            confirmModalMessage.textContent = message;
+            
+            // Remove previous listeners
+            confirmActionButton.onclick = null;
+
+            // Set up new action listener
+            confirmActionButton.onclick = () => {
+                // Optional: Show loading state temporarily
+                const originalText = confirmActionButton.textContent;
+                confirmActionButton.textContent = loadingText;
+                confirmActionButton.disabled = true;
+
+                // Simulate processing time
+                setTimeout(() => {
+                    actionCallback();
+                    closeConfirmationModal();
+                    confirmActionButton.textContent = originalText;
+                    confirmActionButton.disabled = false;
+                }, 800);
+            };
+
+            confirmationModalBackdrop.classList.add('active');
+        }
+
+        function closeConfirmationModal() {
+            confirmationModalBackdrop.classList.remove('active');
+        }
+        
+        // --- Action Form Modal Functions ---
+        function showActionForm(actionType) {
+            actionFormModalBody.innerHTML = '';
+            let formTemplate, title, saveHandler;
+
+            if (actionType === 'changePassword') {
+                title = 'Change Account Password';
+                formTemplate = formTemplates.querySelector('#form-change-password').cloneNode(true);
+                saveHandler = saveChangePassword;
+            } else if (actionType === 'requestData') {
+                title = 'Request Data Export';
+                formTemplate = formTemplates.querySelector('#form-request-data').cloneNode(true);
+                saveHandler = saveRequestData;
+            } else if (actionType === 'contactSupport') {
+                title = 'Submit Support Ticket';
+                formTemplate = formTemplates.querySelector('#form-contact-support').cloneNode(true);
+                saveHandler = saveContactSupport;
+            } else if (actionType === 'reportBug') {
+                title = 'Report a Technical Bug';
+                formTemplate = formTemplates.querySelector('#form-report-bug').cloneNode(true);
+                saveHandler = saveReportBug;
+                
+                // Populate tech data for bug report
+                const techDataElement = formTemplate.querySelector('#bug-tech-data');
+                techDataElement.textContent = `
+User Agent: ${navigator.userAgent}
+Language: ${navigator.language}
+Screen Size: ${window.screen.width}x${window.screen.height}
+Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}
+Current Time: ${new Date().toISOString()}
+                `.trim();
+            } else {
+                return; // Unknown action
+            }
+
+            actionFormModalTitle.textContent = title;
+            actionFormModalBody.appendChild(formTemplate);
+            actionFormModalBackdrop.classList.add('active');
+            
+            // Set up save button handler
+            actionFormSaveButton.onclick = saveHandler;
+        }
+        
+        function closeActionFormModal() {
+            actionFormModalBackdrop.classList.remove('active');
+            actionFormModalBody.innerHTML = ''; // Clear content
+        }
+        
+        // --- Specific Save Handlers ---
+        
+        function saveChangePassword() {
+            const current = actionFormModalBody.querySelector('#cp-current-password').value;
+            const newPass = actionFormModalBody.querySelector('#cp-new-password').value;
+            const confirmPass = actionFormModalBody.querySelector('#cp-confirm-password').value;
+            const errorElement = actionFormModalBody.querySelector('#cp-error');
+            errorElement.textContent = '';
+
+            if (!current || !newPass || !confirmPass) {
+                errorElement.textContent = 'All fields must be filled.';
+                return;
+            }
+            
+            if (newPass !== confirmPass) {
+                errorElement.textContent = 'New password and confirmation do not match.';
+                return;
+            }
+            
+            if (newPass.length < 8) {
+                errorElement.textContent = 'New password must be at least 8 characters long.';
+                return;
+            }
+
+            if (current !== MOCK_PASSWORD) {
+                errorElement.textContent = 'Current password is incorrect (Mock: ' + MOCK_PASSWORD + ')';
+                return;
+            }
+
+            // Mock saving the new password
+            MOCK_PASSWORD = newPass;
+            saveData(); // Save new password to localStorage
+            
+            closeActionFormModal();
+            showToast('Password updated successfully!', 'success');
+        }
+        
+        function saveRequestData() {
+            const format = actionFormModalBody.querySelector('#data-format').value;
+
+            // Mock request process
+            closeActionFormModal();
+            showToast(`Data export requested in ${format.toUpperCase()} format. You will be notified when it is ready.`, 'info');
+        }
+        
+        function saveContactSupport() {
+            const subject = actionFormModalBody.querySelector('#contact-subject').value.trim();
+            const message = actionFormModalBody.querySelector('#contact-message').value.trim();
+            const errorElement = actionFormModalBody.querySelector('#contact-error');
+            errorElement.textContent = '';
+            
+            if (!subject || !message) {
+                errorElement.textContent = 'Subject and Message fields cannot be empty.';
+                return;
+            }
+            
+            // Mock submission
+            closeActionFormModal();
+            showToast(`Ticket '${subject}' submitted successfully!`, 'success');
+        }
+        
+        function saveReportBug() {
+            const steps = actionFormModalBody.querySelector('#bug-steps').value.trim();
+            const expectation = actionFormModalBody.querySelector('#bug-expectation').value.trim();
+            const errorElement = actionFormModalBody.querySelector('#bug-error');
+            errorElement.textContent = '';
+            
+            if (!steps || !expectation) {
+                errorElement.textContent = 'Steps to Reproduce and Expected Result must be filled.';
+                return;
+            }
+            
+            // Mock submission
+            closeActionFormModal();
+            showToast(`Bug report received! Thank you for the detailed information.`, 'success');
+        }
+
+
+        // --- Toast/Notification Functions ---
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.addEventListener('transitionend', () => toast.remove());
+            }, 3000);
+        }
+        
+        // Add minimal toast styling for feedback
+        const style = document.createElement('style');
+        style.textContent = `
+            .toast {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #333;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+                z-index: 2000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+            .toast.show {
+                opacity: 1;
+                visibility: visible;
+            }
+            .toast.success { background-color: #4CAF50; }
+            .toast.error { background-color: #F44336; }
+            .toast.info { background-color: #2196F3; }
+        `;
+        document.head.appendChild(style);
+        
+        // --- 2FA Toggle Persistence ---
+        document.getElementById('2faSwitch').addEventListener('change', saveData);
+
+        // Initial setup and load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            // Ensure only the Overview tab is active on load
+            switchTab('overview', document.querySelector('.tab-btn[data-tab="overview"]'));
+        });
+
+    </script>
 </body>
 
 </html>

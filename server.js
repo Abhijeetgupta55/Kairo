@@ -104,6 +104,18 @@ const collectionRoutes = require('./backend/routes/collections');
 const noteRoutes = require('./backend/routes/notes');
 const favoriteRoutes = require('./backend/routes/favorites');
 const historyRoutes = require('./backend/routes/history');
+const profileRoutes = require('./backend/routes/profile');
+const { requireAuth } = require('./backend/middleware/auth');
+const dashboardController = require('./backend/controllers/dashboardController');
+
+// Session check endpoint for browser extension
+app.get('/api/session-check', (req, res) => {
+  if (req.session && req.session.userId) {
+    res.json({ loggedIn: true });
+  } else {
+    res.status(401).json({ loggedIn: false });
+  }
+});
 
 // Landing page (public)
 app.get('/', (req, res) => {
@@ -123,6 +135,8 @@ app.use('/collections', collectionRoutes);
 app.use('/notes', noteRoutes);
 app.use('/favorites', favoriteRoutes);
 app.use('/history', historyRoutes);
+app.use('/profile', profileRoutes);
+app.get('/profile', requireAuth, dashboardController.getProfile);
 
 // 404 handler
 app.use((req, res) => {

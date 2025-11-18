@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>kairo. - history</title>
+  <title>kairo. - recents</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -188,112 +191,175 @@
     }
 
     .container {
-      max-width: 1200px;
+      padding: 100px 3rem 3rem;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 100px 2rem 2rem;
       position: relative;
       z-index: 1;
     }
 
     .page-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       margin-bottom: 2rem;
     }
 
-    h1.page-heading {
+    .page-header h1 {
       font-size: 2rem;
+      color: #000;
+      margin-bottom: 1rem;
       font-weight: 600;
-      text-transform: lowercase;
       display: flex;
       align-items: center;
-      gap: .5rem;
+      gap: 0.5rem;
     }
 
-    .clear-btn {
-      padding: 0.75rem 1.5rem;
-      background: #ef4444;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
+    .search-bar {
+      position: relative;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      color: #000;
+      font-size: 0.95rem;
       transition: all 0.3s;
     }
 
-    .clear-btn:hover {
-      background: #dc2626;
-      transform: translateY(-2px);
+    .search-bar input:focus {
+      outline: none;
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      background: #fff;
+    }
+    .search-bar::before {
+      content: '';
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
     }
 
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+    .recents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
     }
 
-    .history-item {
+    .recent-card {
       background: rgba(255, 255, 255, 0.95);
       border: 1px solid rgba(0, 0, 0, 0.12);
       border-radius: 12px;
       padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .recent-card:hover {
+      background: linear-gradient(135deg, rgba(173, 216, 230, 0.3) 0%, rgba(135, 206, 235, 0.2) 100%);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(135, 206, 235, 0.3);
+      border-color: rgba(135, 206, 235, 0.4);
+    }
+
+    .recent-header {
       display: flex;
+      align-items: flex-start;
       justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .recent-title-wrapper {
+      display: flex;
       align-items: center;
-    }
-
-    .history-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .history-content {
+      gap: 0.5rem;
       flex: 1;
     }
 
-    .history-action {
-      font-weight: 600;
-      color: #1a1a1a;
-      margin-bottom: 0.25rem;
+    .recent-emoji {
+      font-size: 1.2rem;
+      flex-shrink: 0;
     }
 
-    .history-reference {
-      color: #666;
-      font-size: 0.9rem;
+    .recent-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #000;
+      margin-bottom: 0.3rem;
+      flex: 1;
     }
 
-    .history-time {
-      color: #999;
-      font-size: 0.85rem;
-      margin-top: 0.25rem;
-    }
-
-    .delete-btn {
-      padding: 0.5rem 1rem;
-      background: rgba(239, 68, 68, 0.1);
-      color: #ef4444;
-      border: none;
-      border-radius: 6px;
+    .star {
       cursor: pointer;
+      font-size: 1.2rem;
+      color: rgba(0, 0, 0, 0.3);
+      transition: all 0.3s;
+      flex-shrink: 0;
+      margin-left: 0.5rem;
+    }
+
+    .star:hover {
+      color: gold;
+      transform: scale(1.2);
+    }
+
+    .star.active {
+      color: gold;
+    }
+
+    .recent-url {
+      font-size: 0.85rem;
+      color: rgba(0, 0, 0, 0.5);
+      text-decoration: none;
+      word-break: break-all;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .recent-url:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    .recent-timestamp {
+      font-size: 0.8rem;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .view-history {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.95);
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      width: max-content;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
       transition: all 0.3s;
     }
 
-    .delete-btn:hover {
-      background: rgba(239, 68, 68, 0.2);
+    .view-history:hover {
+      background: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
-    .empty-state {
+    .no-results {
       text-align: center;
-      padding: 3rem 1rem;
-      color: #999;
-    }
-
-    .empty-state-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      padding: 3rem;
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 1.1rem;
     }
 
     footer {
@@ -311,18 +377,17 @@
 
     @media (max-width: 768px) {
       .container {
-        padding: 100px 1rem 2rem;
+        padding: 100px 1.5rem 2rem;
       }
-      .page-header {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: stretch;
+
+      .recents-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
-<body>
 
+<body>
   <nav>
     <div class="nav-left">
       <div class="hamburger" onclick="toggleSidebar()">
@@ -330,22 +395,22 @@
         <span></span>
         <span></span>
       </div>
-      <a href="/dashboard" class="nav-logo">kairo.</a>
+      <a href="dashboard.html" class="nav-logo">kairo.</a>
     </div>
     <div class="nav-right">
-      <a href="/logout" class="logout-btn">logout</a>
-      <a href="/profile" class="profile-icon">{{#if user.username}}{{substring user.username 0 1}}{{else}}H{{/if}}</a>
+      <a href="login.html" class="logout-btn">logout</a>
+      <a href="profile.html" class="profile-icon">B</a>
     </div>
   </nav>
 
   <div class="sidebar" id="sidebar">
     <div class="sidebar-links">
-      <a href="/dashboard">dashboard</a>
-      <a href="/history">recents</a>
-      <a href="/notes">notes</a>
-      <a href="/favorites">favorites</a>
-      <a href="/collections">collections</a>
-      <a href="/profile">profile</a>
+      <a href="dashboard.html">dashboard</a>
+      <a href="recent.html">recents</a>
+      <a href="notes.html">notes</a>
+      <a href="favorites.html">favorites</a>
+      <a href="collections.html">collections</a>
+      <a href="profile.html">profile</a>
     </div>
   </div>
 
@@ -353,18 +418,125 @@
 
   <div class="container">
     <div class="page-header">
-      <h1 class="page-heading">📜 history</h1>
-      <button class="clear-btn" onclick="clearHistory()">clear all</button>
+      
+      <h1><span class="icon">›</span> Recents</h1>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="search recent items...">
+      </div>
     </div>
 
-    <div class="history-list" id="historyList">
-      <!-- History items will be loaded here -->
+    <div class="recents-grid" id="recentsGrid">
+      <div class="recent-card" data-title="github repository" data-url="https://github.com/user/awesome-project">
+        <div class="recent-header">
+          <div class="recent-title-wrapper">
+            <span class="recent-emoji">📁</span>
+            <h3 class="recent-title">github repository</h3>
+          </div>
+          <div class="star" onclick="toggleStar(this)">☆</div>
+        </div>
+        <a href="https://github.com/user/awesome-project" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://github.com/user/awesome-project</a>
+        <div class="recent-timestamp">3 minutes ago</div>
+      </div>
+
+      <div class="recent-card" data-title="react hooks guide" data-url="https://react.dev/reference/react/hooks">
+        <div class="recent-header">
+          <div class="recent-title-wrapper">
+            <span class="recent-emoji">⚛️</span>
+            <h3 class="recent-title">react hooks guide</h3>
+          </div>
+          <div class="star" onclick="toggleStar(this)">☆</div>
+        </div>
+        <a href="https://react.dev/reference/react/hooks" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://react.dev/reference/react/hooks</a>
+        <div class="recent-timestamp">15 minutes ago</div>
+      </div>
+
+      <div class="recent-card" data-title="figma design system" data-url="https://figma.com/file/design-system">
+        <div class="recent-header">
+          <div class="recent-title-wrapper">
+            <span class="recent-emoji">🎨</span>
+            <h3 class="recent-title">figma design system</h3>
+          </div>
+          <div class="star" onclick="toggleStar(this)">☆</div>
+        </div>
+        <a href="https://figma.com/file/design-system" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://figma.com/file/design-system</a>
+        <div class="recent-timestamp">1 hour ago</div>
+      </div>
+
+      <div class="recent-card" data-title="mdn css grid" data-url="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout">
+        <div class="recent-header">
+          <div class="recent-title-wrapper">
+            <span class="recent-emoji">📚</span>
+            <h3 class="recent-title">mdn css grid</h3>
+          </div>
+          <div class="star" onclick="toggleStar(this)">☆</div>
+        </div>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout" target="_blank"
+          rel="noopener noreferrer"
+          class="recent-url">https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout</a>
+        <div class="recent-timestamp">2 hours ago</div>
+      </div>
+
+      <div class="recent-card" data-title="medium article" data-url="https://medium.com/web-design">
+        <div class="recent-header">
+          <div class="recent-title-wrapper">
+            <span class="recent-emoji">📝</span>
+            <h3 class="recent-title">medium article</h3>
+          </div>
+          <div class="star" onclick="toggleStar(this)">☆</div>
+        </div>
+        <a href="https://medium.com/web-design" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://medium.com/web-design</a>
+        <div class="recent-timestamp">3 hours ago</div>
+      </div>
+
+      <div class="recent-card" data-title="dribbble inspiration" data-url="https://dribbble.com/shots/xyz">
+        <div class="recent-header">
+          <div class="recent-title-wrapper">
+            <span class="recent-emoji">🏀</span>
+            <h3 class="recent-title">dribbble inspiration</h3>
+          </div>
+          <div class="star" onclick="toggleStar(this)">☆</div>
+        </div>
+        <a href="https://dribbble.com/shots/xyz" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://dribbble.com/shots/xyz</a>
+        <div class="recent-timestamp">4 hours ago</div>
+      </div>
+
+      <div class="recent-card" data-title="stackoverflow thread" data-url="https://stackoverflow.com/q/12345">
+        <div class="recent-header">
+          <div class="recent-title-wrapper">
+            <span class="recent-emoji">💬</span>
+            <h3 class="recent-title">stackoverflow thread</h3>
+          </div>
+          <div class="star" onclick="toggleStar(this)">☆</div>
+        </div>
+        <a href="https://stackoverflow.com/q/12345" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://stackoverflow.com/q/12345</a>
+        <div class="recent-timestamp">6 hours ago</div>
+      </div>
+
+      <div class="recent-card" data-title="youtube tutorial" data-url="https://youtube.com/watch?v=abc123">
+        <div class="recent-header">
+          <div class="recent-title-wrapper">
+            <span class="recent-emoji">▶️</span>
+            <h3 class="recent-title">youtube tutorial</h3>
+          </div>
+          <div class="star" onclick="toggleStar(this)">☆</div>
+        </div>
+        <a href="https://youtube.com/watch?v=abc123" target="_blank" rel="noopener noreferrer"
+          class="recent-url">https://youtube.com/watch?v=abc123</a>
+        <div class="recent-timestamp">8 hours ago</div>
+      </div>
     </div>
 
-    <div class="empty-state" id="emptyState" style="display: none;">
-      <div class="empty-state-icon">🕐</div>
-      <p>no history yet. your activity will appear here.</p>
+    <div id="noResults" class="no-results" style="display: none;">
+      no results found for your search
     </div>
+
+    <a href="history.html" class="view-history">view full history</a>
   </div>
 
   <footer>
@@ -372,8 +544,6 @@
   </footer>
 
   <script>
-    let history = [];
-
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       const overlay = document.getElementById('overlay');
@@ -384,115 +554,41 @@
       hamburger.classList.toggle('active');
     }
 
-    async function loadHistory() {
-      try {
-        const response = await fetch('/history/api');
-        if (!response.ok) throw new Error('Failed to load history');
-        
-        history = await response.json();
-        renderHistory();
-      } catch (error) {
-        console.error('Error loading history:', error);
+    function toggleStar(el) {
+      el.classList.toggle('active');
+      if (el.classList.contains('active')) {
+        el.textContent = '★';
+      } else {
+        el.textContent = '☆';
       }
     }
 
-    function renderHistory() {
-      const list = document.getElementById('historyList');
-      const emptyState = document.getElementById('emptyState');
-      
-      if (history.length === 0) {
-        list.style.display = 'none';
-        emptyState.style.display = 'block';
-        return;
-      }
-      
-      list.style.display = 'flex';
-      emptyState.style.display = 'none';
-      
-      list.innerHTML = history.map(item => {
-        const timeAgo = getTimeAgo(new Date(item.timestamp));
-        
-        return `
-          <div class="history-item">
-            <div class="history-content">
-              <div class="history-action">${escapeHtml(item.actionType)}</div>
-              <div class="history-reference">${escapeHtml(item.itemReference || '')}</div>
-              <div class="history-time">${timeAgo}</div>
-            </div>
-            <button class="delete-btn" onclick="deleteHistoryItem('${item._id}')">delete</button>
-          </div>
-        `;
-      }).join('');
-    }
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const recentsGrid = document.getElementById('recentsGrid');
+    const noResults = document.getElementById('noResults');
 
-    async function clearHistory() {
-      if (!confirm('Are you sure you want to clear all history?')) return;
-      
-      try {
-        const response = await fetch('/history/api/clear', {
-          method: 'DELETE'
-        });
-        
-        if (!response.ok) throw new Error('Failed to clear history');
-        
-        await loadHistory();
-      } catch (error) {
-        console.error('Error clearing history:', error);
-        alert('Failed to clear history. Please try again.');
-      }
-    }
+    searchInput.addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const cards = recentsGrid.querySelectorAll('.recent-card');
+      let hasResults = false;
 
-    async function deleteHistoryItem(id) {
-      try {
-        const response = await fetch(`/history/api/${id}`, {
-          method: 'DELETE'
-        });
-        
-        if (!response.ok) throw new Error('Failed to delete history item');
-        
-        await loadHistory();
-      } catch (error) {
-        console.error('Error deleting history item:', error);
-        alert('Failed to delete history item. Please try again.');
-      }
-    }
+      cards.forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        const url = card.dataset.url.toLowerCase();
 
-    function getTimeAgo(date) {
-      const seconds = Math.floor((new Date() - date) / 1000);
-      
-      const intervals = {
-        year: 31536000,
-        month: 2592000,
-        week: 604800,
-        day: 86400,
-        hour: 3600,
-        minute: 60
-      };
-      
-      for (const [unit, secondsInUnit] of Object.entries(intervals)) {
-        const interval = Math.floor(seconds / secondsInUnit);
-        if (interval >= 1) {
-          return `${interval} ${unit}${interval === 1 ? '' : 's'} ago`;
+        if (title.includes(searchTerm) || url.includes(searchTerm)) {
+          card.style.display = 'block';
+          hasResults = true;
+        } else {
+          card.style.display = 'none';
         }
-      }
-      
-      return 'just now';
-    }
+      });
 
-    function escapeHtml(text) {
-      const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-      };
-      return text.replace(/[&<>"']/g, m => map[m]);
-    }
-
-    // Load history on page load
-    loadHistory();
+      recentsGrid.style.display = hasResults ? 'grid' : 'none';
+      noResults.style.display = hasResults ? 'none' : 'block';
+    });
   </script>
-
 </body>
+
 </html>
